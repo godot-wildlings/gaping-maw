@@ -1,8 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Levels/Level.gd" type="Script" id=1]
-[ext_resource path="res://Levels/BlackHole.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Levels/Level.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
+
+
+
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
