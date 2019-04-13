@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
+export var max_velocity : float = 1.5
 var velocity : Vector2
-var max_velocity : float = 1.5
 var accel_radius : float
 
 func _ready() -> void:

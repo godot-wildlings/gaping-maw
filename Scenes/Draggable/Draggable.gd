@@ -2,12 +2,23 @@ extends RigidBody2D
 
 export var mouse_drag_speed : float = 4
 export var max_linear_velocity : float = 500
-
+var gravity_radius : float
 var is_picked : bool = false
 
 func _ready() -> void:
 	#warning-ignore:return_value_discarded
 	connect("input_event", self, "on_Draggable_input_event")
+	call_deferred("deferred_ready")
+
+func deferred_ready() -> void:
+	if game.black_hole:
+		gravity_radius = game.black_hole.gravity_radius
+
+func _integrate_forces(state : Physics2DDirectBodyState):
+	if game.black_hole:
+		var distance : float = global_position.distance_to(game.black_hole.global_position)
+		if distance < gravity_radius:
+			applied_force = (game.black_hole.global_position - global_position).normalized()
 
 #warning-ignore:unused_argument
 func _physics_process(delta : float) -> void:
