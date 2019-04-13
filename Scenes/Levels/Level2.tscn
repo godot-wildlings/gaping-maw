@@ -17,3 +17,18 @@ position = Vector2( 512, 80 )
 [node name="Draggable" parent="." instance=ExtResource( 4 )]
 position = Vector2( 797.381, 373.819 )
 
+[node name="Draggable2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 302.975, 409.995 )
+
+[node name="Draggable3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 129.631, 512.494 )
+
+[node name="Draggable5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 322.57, 518.523 )
+
+[node name="Draggable6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 892.343, 491.391 )
+
+[node name="Draggable4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 149.226, 251.725 )
+

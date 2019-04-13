@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func deferred_ready() -> void:
 	if game.black_hole:
-		accel_radius = game.black_hole.gravity_radius
+		accel_radius = game.black_hole.accel_radius
 
 #warning-ignore:unused_argument
 func _process(delta) -> void:

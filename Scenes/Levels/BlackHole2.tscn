@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/blackholeImage.jpg" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 275.0
+radius = 500.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 30.0
@@ -18,7 +18,10 @@ script = ExtResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="Gravity" type="CollisionShape2D" parent="."]
+[node name="AccelerationRadius" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="GravityRadius" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="area" type="Area2D" parent="."]
