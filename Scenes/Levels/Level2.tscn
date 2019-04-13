@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player2/Player2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Levels/BlackHole2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=4]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,4 +13,7 @@ position = Vector2( 512, 550 )
 
 [node name="BlackHole2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 80 )
+
+[node name="Draggable" parent="." instance=ExtResource( 4 )]
+position = Vector2( 797.381, 373.819 )
 
