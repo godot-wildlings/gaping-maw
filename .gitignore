@@ -5,3 +5,6 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
+
+# Work in Progress large files, reference photos, etc.
+WIP/

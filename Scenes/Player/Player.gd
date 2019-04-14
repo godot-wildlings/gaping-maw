@@ -19,4 +19,5 @@ func _process(delta) -> void:
 			velocity = (game.black_hole.global_position - global_position).normalized() * max_velocity
 		else:
 			velocity = (game.black_hole.global_position - global_position).normalized() * max_velocity * 0.25
-		position = position + velocity
+		# position = position + velocity
+		# ^^ disabled temporarily for debugging

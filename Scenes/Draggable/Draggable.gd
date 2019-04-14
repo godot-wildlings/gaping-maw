@@ -29,10 +29,11 @@ func _integrate_forces(state : Physics2DDirectBodyState) -> void:
 
 #warning-ignore:unused_argument
 func _physics_process(delta : float) -> void:
-	if is_picked:
-		linear_velocity = get_global_mouse_position() - global_position
-		linear_velocity *= mouse_drag_speed
-		linear_velocity = linear_velocity.clamped(max_linear_velocity)
+#	if is_picked:
+#		linear_velocity = get_global_mouse_position() - global_position
+#		linear_velocity *= mouse_drag_speed
+#		linear_velocity = linear_velocity.clamped(max_linear_velocity)
+	pass # allow the physics engine to handle this with a point gravity on the blackhole area2D
 
 func _input(event : InputEvent) -> void:
 	if _event_is_left_button(event) and not event.pressed:

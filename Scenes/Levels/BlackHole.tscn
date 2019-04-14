@@ -10,6 +10,9 @@ radius = 500.0
 radius = 30.0
 
 [node name="BlackHole" type="Area2D"]
+space_override = 3
+gravity_point = true
+gravity_vec = Vector2( 0, 0 )
 collision_layer = 2
 collision_mask = 7
 script = ExtResource( 1 )
