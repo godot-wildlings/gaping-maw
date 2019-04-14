@@ -11,14 +11,20 @@ func _ready() -> void:
 	call_deferred("deferred_ready")
 
 func deferred_ready() -> void:
+	randomize()
 	if game.black_hole:
 		gravity_radius = game.black_hole.gravity_radius
+
+	choose_random_image()
+	
+
 
 func _integrate_forces(state : Physics2DDirectBodyState):
 	if game.black_hole:
 		var distance : float = global_position.distance_to(game.black_hole.global_position)
 		if distance < gravity_radius:
 			applied_force = (game.black_hole.global_position - global_position).normalized() * 50000 / distance
+
 
 #warning-ignore:unused_argument
 func _physics_process(delta : float) -> void:
@@ -30,6 +36,14 @@ func _physics_process(delta : float) -> void:
 func _input(event : InputEvent) -> void:
 	if _event_is_left_button(event) and not event.pressed:
 		is_picked = false
+
+
+func choose_random_image() -> void:
+	var images = $images.get_children()
+	for sprite in images:
+		sprite.set_visible(false)
+	var randImageNum = randi()%images.size()
+	images[randImageNum].set_visible(true)
 
 #warning-ignore:unused_argument
 #warning-ignore:unused_argument
