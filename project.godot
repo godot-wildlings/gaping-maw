@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "BlackHole",
+"language": "GDScript",
+"path": "res://Scenes/Levels/BlackHole.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Draggable",
+"language": "GDScript",
+"path": "res://Scenes/Draggable/Draggable.gd"
+}, {
+"base": "Control",
+"class": "UI",
+"language": "GDScript",
+"path": "res://Scenes/UI/UI.gd"
+} ]
 _global_script_class_icons={
-
+"BlackHole": "",
+"Draggable": "",
+"UI": ""
 }
 
 [application]

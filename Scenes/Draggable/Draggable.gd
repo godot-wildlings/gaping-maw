@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Draggable
 
 export var mouse_drag_speed : float = 4
 export var max_linear_velocity : float = 500
@@ -18,8 +19,8 @@ func deferred_ready() -> void:
 	choose_random_image()
 	
 
-
-func _integrate_forces(state : Physics2DDirectBodyState):
+#warning-ignore:unused_argument
+func _integrate_forces(state : Physics2DDirectBodyState) -> void:
 	if game.black_hole:
 		var distance : float = global_position.distance_to(game.black_hole.global_position)
 		if distance < gravity_radius:
@@ -39,10 +40,10 @@ func _input(event : InputEvent) -> void:
 
 
 func choose_random_image() -> void:
-	var images = $images.get_children()
+	var images : Array = $images.get_children()
 	for sprite in images:
 		sprite.set_visible(false)
-	var randImageNum = randi()%images.size()
+	var randImageNum : int = randi() % images.size()
 	images[randImageNum].set_visible(true)
 
 #warning-ignore:unused_argument

@@ -1,21 +1,15 @@
 extends Control
+class_name UI
 
-var progressValue : int
-
-onready var progressBar = $ProgressBar
+onready var progress_bar : ProgressBar = $ProgressBar
+var progress_value : int
 
 signal progression
 
-func _ready():
-	
-	progressValue = progressBar.value
-	
+func _ready() -> void:
+	game.UI = self
+	progress_value = progress_bar.value
 #	self.connect("progression", get_tree().get_root().get_node("/root/game"), "on_Object_Enter")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func on_draggable_entered():
-	
-	progressValue -= 10
+func on_draggable_entered() -> void:
+	progress_value -= 10
