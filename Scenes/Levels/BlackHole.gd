@@ -3,6 +3,7 @@ class_name BlackHole
 
 var gravity_radius : float
 var accel_radius : float
+onready var EventHorizon = $EventHorizon
 
 signal draggable_entered
 
@@ -15,13 +16,25 @@ func _ready() -> void:
 func deferred_ready() -> void:
 
 	#warning-ignore:return_value_discarded
-	$area.connect("body_entered", self, "on_area_body_entered")
+	EventHorizon.connect("body_entered", self, "_on_EventHorizon_body_entered")
 	#warning-ignore:return_value_discarded
-	self.connect("draggable_entered", game.UI, "on_draggable_entered")
+	self.connect("draggable_entered", game.UI, "_on_draggable_entered")
 
-func on_area_body_entered(body : PhysicsBody2D) -> void:
-	if body.is_in_group("Player"):
-		get_tree().quit()
 	
+
+
+
+
+func _on_EventHorizon_body_entered(body):
+	# we could do some progress stuff here if we like.
+		# if the black hole is supposed to be destroyable.
 	if body.is_in_group("draggable"):
 		emit_signal("draggable_entered")
+	elif body.is_in_group("Player"):
+		get_tree().quit()
+
+	
+	if body.has_method("die"):
+		body.die()
+	else:
+		body.call_deferred("queue_free")

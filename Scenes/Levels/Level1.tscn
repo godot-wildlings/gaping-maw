@@ -1,53 +1,49 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/asteroid1.png" type="Texture" id=4]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 62.326
+[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Obstacles/Asteroid.tscn" type="PackedScene" id=5]
 
 [node name="Level1" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 550 )
 
-[node name="BlackHole" parent="." instance=ExtResource( 2 )]
+[node name="Cursor" parent="." instance=ExtResource( 2 )]
+
+[node name="BlackHole" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 80 )
 gravity = 500.0
 linear_damp = 0.0
 
-[node name="Draggable" parent="." instance=ExtResource( 3 )]
+[node name="Draggable" parent="." instance=ExtResource( 4 )]
 position = Vector2( 797.381, 373.819 )
 
-[node name="Draggable2" parent="." instance=ExtResource( 3 )]
+[node name="Draggable2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 302.975, 409.995 )
 
-[node name="Draggable3" parent="." instance=ExtResource( 3 )]
+[node name="Draggable3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 129.631, 512.494 )
 
-[node name="Draggable5" parent="." instance=ExtResource( 3 )]
+[node name="Draggable5" parent="." instance=ExtResource( 4 )]
 position = Vector2( 322.57, 518.523 )
 
-[node name="Draggable6" parent="." instance=ExtResource( 3 )]
+[node name="Draggable6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 892.343, 491.391 )
 
-[node name="Draggable4" parent="." instance=ExtResource( 3 )]
+[node name="Draggable4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 149.226, 251.725 )
 
 [node name="non-draggables" type="Node2D" parent="."]
 
-[node name="Asteroid" type="RigidBody2D" parent="non-draggables"]
-position = Vector2( 585.631, 322.895 )
-collision_layer = 2
-collision_mask = 7
-can_sleep = false
+[node name="Asteroid" parent="non-draggables" instance=ExtResource( 5 )]
+position = Vector2( 635.968, 358.499 )
 
-[node name="Sprite" type="Sprite" parent="non-draggables/Asteroid"]
-scale = Vector2( 0.66, 0.66 )
-texture = ExtResource( 4 )
+[node name="Asteroid2" parent="non-draggables" instance=ExtResource( 5 )]
+position = Vector2( 139.962, 99.4467 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="non-draggables/Asteroid"]
-shape = SubResource( 1 )
+[node name="Asteroid3" parent="non-draggables" instance=ExtResource( 5 )]
+position = Vector2( 820.129, -67.5257 )
 
