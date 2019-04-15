@@ -43,16 +43,17 @@ shape = SubResource( 1 )
 [node name="images" type="Node2D" parent="."]
 
 [node name="cow" type="Sprite" parent="images"]
+rotation = 1.5708
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 2 )
 
 [node name="house" type="Sprite" parent="images"]
-visible = false
+rotation = 1.5708
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 3 )
 
 [node name="tree" type="Sprite" parent="images"]
-visible = false
+rotation = 1.5708
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 4 )
 
