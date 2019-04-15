@@ -22,9 +22,12 @@ func _input(event):
 		if mouse_over_node.has_method("pickup"):
 			mouse_over_node.pickup()
 	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:
-		if mouse_over_node.has_method("drop"):
-			mouse_over_node.drop()
-			mouse_over_node = null
+		if is_instance_valid(mouse_over_node):
+			if mouse_over_node.has_method("drop"):
+				mouse_over_node.drop()
+				mouse_over_node = null
+		else:
+			mouse_over_node = null # probably eaten by the black hole
 
 func _on_Cursor_body_entered(body):
 	if body.is_in_group("draggable"):

@@ -1,8 +1,8 @@
 extends RigidBody2D
 
-export var max_velocity : float = 1.5
-var velocity : Vector2
-var accel_radius : float
+#export var max_velocity : float = 1.5
+#var velocity : Vector2
+#var accel_radius : float
 
 func _init():
 	game.player = self
