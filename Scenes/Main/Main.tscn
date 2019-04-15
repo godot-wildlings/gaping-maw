@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Main/QuitButton.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Main/RestartButton.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Main/StartButton.gd" type="Script" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -12,13 +13,16 @@ script = ExtResource( 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="EndScreen"]
 
 [node name="PopupPanel" type="PopupPanel" parent="EndScreen/CanvasLayer"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="MarginContainer" type="MarginContainer" parent="EndScreen/CanvasLayer/PopupPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 custom_constants/margin_right = 40
 custom_constants/margin_top = 40
 custom_constants/margin_left = 40
@@ -27,45 +31,117 @@ custom_constants/margin_bottom = 40
 [node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer"]
 margin_left = 40.0
 margin_top = 40.0
-margin_right = 984.0
-margin_bottom = 560.0
+margin_right = 976.0
+margin_bottom = 552.0
 
 [node name="CenterContainer" type="CenterContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
-margin_right = 944.0
-margin_bottom = 496.0
+margin_right = 936.0
+margin_bottom = 488.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/CenterContainer"]
-margin_left = 366.0
-margin_top = 232.0
-margin_right = 577.0
-margin_bottom = 263.0
+margin_left = 362.0
+margin_top = 228.0
+margin_right = 573.0
+margin_bottom = 259.0
 text = "You Lose!
 (or maybe you won. I don't know)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
-margin_top = 500.0
-margin_right = 944.0
-margin_bottom = 520.0
+margin_top = 492.0
+margin_right = 936.0
+margin_bottom = 512.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="QuitButton" type="Button" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 421.0
-margin_right = 461.0
+margin_left = 417.0
+margin_right = 457.0
 margin_bottom = 20.0
 text = "Quit"
 script = ExtResource( 2 )
 
 [node name="RestartButton" type="Button" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 465.0
-margin_right = 522.0
+margin_left = 461.0
+margin_right = 518.0
 margin_bottom = 20.0
 text = "Restart"
 script = ExtResource( 3 )
 
 [node name="Levels" type="Node2D" parent="."]
 
+[node name="IntroScreen" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="IntroScreen"]
+
+[node name="PopupPanel" type="PopupPanel" parent="IntroScreen/CanvasLayer"]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="IntroScreen/CanvasLayer/PopupPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="IntroScreen/CanvasLayer/PopupPanel/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="IntroDialog" type="RichTextLabel" parent="IntroScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
+margin_right = 944.0
+margin_bottom = 246.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "Those danged sceintists finally did it. They destroyed the universe... or at least, that's what's happening now. They untethered a black hole and it's moving through the galaxy, consuming everything in it's path.
+
+Here I am, adrift with nothing but my \"Carbon Attractor Gun\".
+
+Did I mention the black hole is spitting out extra-dimensional lovecraft-entities? Great.
+"
+text = "Those danged sceintists finally did it. They destroyed the universe... or at least, that's what's happening now. They untethered a black hole and it's moving through the galaxy, consuming everything in it's path.
+
+Here I am, adrift with nothing but my \"Carbon Attractor Gun\".
+
+Did I mention the black hole is spitting out extra-dimensional lovecraft-entities? Great.
+"
+
+[node name="Instructions" type="RichTextLabel" parent="IntroScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
+margin_top = 250.0
+margin_right = 944.0
+margin_bottom = 496.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "Use the mouse to move your targeting reticle.
+
+Click and drag any organic object (cow, house, tree). Release the mouse-button to fling the object.
+
+Try and fling objects into the black hole or into the cthulhu creatures coming after you.
+
+When you fling an object, you'll receive a little push in the opposite direction. Stay away from the black hole and the creatures."
+text = "Use the mouse to move your targeting reticle.
+
+Click and drag any organic object (cow, house, tree). Release the mouse-button to fling the object.
+
+Try and fling objects into the black hole or into the cthulhu creatures coming after you.
+
+When you fling an object, you'll receive a little push in the opposite direction. Stay away from the black hole and the creatures."
+
+[node name="StartButton" type="Button" parent="IntroScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
+margin_top = 500.0
+margin_right = 944.0
+margin_bottom = 520.0
+text = "Start Game"
+script = ExtResource( 4 )
+
 [connection signal="pressed" from="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="IntroScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/StartButton" to="IntroScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/StartButton" method="_on_StartButton_pressed"]
