@@ -13,7 +13,7 @@ func _process(delta):
 	var mousePos = get_global_mouse_position()
 	set_global_position(lerp(myPos, mousePos, 0.8))
 
-	update()
+	update() # calls _draw()
 
 
 #warning-ignore:unused_argument
@@ -34,14 +34,16 @@ func _input(event):
 			mouse_over_node = null # probably eaten by the black hole
 
 func _on_Cursor_body_entered(body):
-	if body.is_in_group("draggable"):
-		mouse_over_node = body
+	if mouse_over_node == null:
+		if body.is_in_group("draggable"):
+			mouse_over_node = body
 
 func _on_Cursor_body_exited(body):
 	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
 		mouse_over_node = null
 
 func _draw():
+	# draw a line between the player and the targeting reticle
 	if mouse_over_node != null and Input.is_action_pressed("BUTTON_LEFT"):
 		var myPos = to_local(get_global_position())
 		var playerPos = to_local(game.player.get_global_position())
