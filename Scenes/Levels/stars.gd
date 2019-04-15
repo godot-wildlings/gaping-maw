@@ -13,6 +13,8 @@ func spawn_stars():
 	var width = 1500
 	var height = 1500
 	randomize()
+	
+	#warning-ignore:unused_variable
 	for i in range(250):
 		var new_stars = star_scene.instance()
 		new_stars.set_global_position(Vector2(rand_range(-width, width), rand_range(-height, height)))

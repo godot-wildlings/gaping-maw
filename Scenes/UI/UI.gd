@@ -4,6 +4,7 @@ class_name UI
 onready var progress_bar : ProgressBar = $ProgressBar
 var progress_value : float
 
+#warning-ignore:unused_signal
 signal progression
 
 func _ready() -> void:

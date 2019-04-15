@@ -7,6 +7,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#warning-ignore:unused_argument
 func _process(delta):
 	var myPos = get_global_position()
 	var mousePos = get_global_mouse_position()
@@ -17,6 +18,7 @@ func _on_Cursor_body_entered(body):
 	if body.is_in_group("draggable"):
 		mouse_over_node = body
 
+#warning-ignore:unused_argument
 func _input(event):
 	if Input.is_action_just_pressed("BUTTON_LEFT") and mouse_over_node != null:
 		if mouse_over_node.has_method("pickup"):

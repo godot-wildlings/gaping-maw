@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=7]
 [ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=10]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -72,4 +73,7 @@ script = ExtResource( 8 )
 
 [node name="stars" type="Node2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 script = ExtResource( 9 )
+
+[node name="Planets" type="Node2D" parent="."]
+script = ExtResource( 10 )
 
