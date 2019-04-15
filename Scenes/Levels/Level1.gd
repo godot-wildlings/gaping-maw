@@ -5,6 +5,7 @@ Spawn planets and asteroids at some frequency.
 
 extends Node2D
 
+var max_spawned_objects : int = 15
 
 func spawn_random_object():
 	var asteroid = load("res://Scenes/Obstacles/Asteroid.tscn")
@@ -23,5 +24,9 @@ func spawn_random_object():
 	new_object.set_global_position(rand_location)
 	$SpawnedObjects.add_child(new_object)
 
+func spawned_object_count():
+	return $SpawnedObjects.get_child_count()
+
 func _on_NewObjectSpawnTimer_timeout():
-	spawn_random_object()
+	if spawned_object_count() < max_spawned_objects:
+		spawn_random_object()

@@ -1,7 +1,7 @@
 extends Control
 class_name UI
 
-onready var progress_bar : ProgressBar = $ProgressBar
+onready var progress_bar : ProgressBar = $Panel/GridContainer/ProgressBar
 var progress_value : float
 
 #warning-ignore:unused_signal

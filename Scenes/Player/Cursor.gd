@@ -18,6 +18,10 @@ func _process(delta):
 
 #warning-ignore:unused_argument
 func _input(event):
+	if is_instance_valid(mouse_over_node) == false:
+		mouse_over_node = null
+		return
+	
 	if Input.is_action_just_pressed("BUTTON_LEFT") and mouse_over_node != null:
 		if mouse_over_node.has_method("pickup"):
 			mouse_over_node.pickup()

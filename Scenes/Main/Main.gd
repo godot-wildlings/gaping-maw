@@ -1,8 +1,21 @@
 extends Node
 
-#var game_ui : PackedScene = preload("res://Scenes/UI/UI.tscn") as PackedScene
+onready var Level1 = load("res://Scenes/Levels/Level1.tscn")
 
+func _init():
+	game.main = self
+	
 func _ready() -> void:
-	pass # added the UI in the inspector on Player.tscn
-#	var add_game_ui = game_ui.instance()
-#	add_child(add_game_ui)
+	var new_level = Level1.instance()
+	$Levels.add_child(new_level)
+
+func remove_levels():
+	for level in $Levels.get_children():
+		if level.has_method("die"):
+			level.die()
+		else:
+			level.call_deferred("queue_free")
+
+func lose():
+	remove_levels()
+	$EndScreen/CanvasLayer/PopupPanel.show()

@@ -1,21 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Obstacles/Asteroid.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=7]
-[ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=9]
-[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=5]
+[ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=8]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 512, 550 )
+position = Vector2( 503.191, 1140.2 )
 
 [node name="Cursor" parent="." instance=ExtResource( 3 )]
 
@@ -27,37 +25,10 @@ linear_damp = 0.0
 
 [node name="non-draggables" type="Node2D" parent="."]
 
-[node name="Asteroid" parent="non-draggables" instance=ExtResource( 5 )]
-position = Vector2( 635.968, 358.499 )
-
-[node name="Asteroid2" parent="non-draggables" instance=ExtResource( 5 )]
-position = Vector2( 139.962, 99.4467 )
-
-[node name="Asteroid3" parent="non-draggables" instance=ExtResource( 5 )]
-position = Vector2( 820.129, -67.5257 )
-
 [node name="draggables" type="Node2D" parent="."]
-editor/display_folded = true
-
-[node name="Draggable" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 797.381, 373.819 )
-
-[node name="Draggable2" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 302.975, 409.995 )
-
-[node name="Draggable3" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 129.631, 512.494 )
-
-[node name="Draggable5" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 322.57, 518.523 )
-
-[node name="Draggable6" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 892.343, 491.391 )
-
-[node name="Draggable4" parent="draggables" instance=ExtResource( 6 )]
-position = Vector2( 149.226, 251.725 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 
@@ -66,17 +37,17 @@ position = Vector2( 149.226, 251.725 )
 [node name="starfield" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 self_modulate = Color( 1, 1, 1, 0.498039 )
 scale = Vector2( 5, 5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 905, 814 )
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="stars" type="Node2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 visible = false
-script = ExtResource( 9 )
+script = ExtResource( 7 )
 
 [node name="Planets" type="Node2D" parent="."]
-script = ExtResource( 10 )
+script = ExtResource( 8 )
 
 [node name="NewObjectSpawnTimer" type="Timer" parent="."]
 autostart = true

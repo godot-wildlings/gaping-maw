@@ -34,3 +34,8 @@ func spawn_surface_objects():
 
 		$surface_objects.add_child(new_object)
 		new_object.linear_velocity = get_linear_velocity()
+
+func die():
+	# update the score, then disappear
+	game.planets_destroyed += 1
+	call_deferred("queue_free")

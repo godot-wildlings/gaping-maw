@@ -28,7 +28,7 @@ func _process(delta) -> void:
 
 func die():
 	# change this to spawn the lose screen
-	get_tree().quit()
+	game.main.lose()
 		
 func _on_draggable_dropped(velocity):
 	linear_velocity += -velocity/4.0
