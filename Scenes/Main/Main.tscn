@@ -17,12 +17,16 @@ anchor_bottom = 1.0
 [node name="CenterContainer" type="CenterContainer" parent="EndScreen/CanvasLayer/PopupPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="Label" type="Label" parent="EndScreen/CanvasLayer/PopupPanel/CenterContainer"]
-margin_left = 406.0
-margin_top = 284.0
-margin_right = 617.0
-margin_bottom = 315.0
+margin_left = 402.0
+margin_top = 280.0
+margin_right = 613.0
+margin_bottom = 311.0
 text = "You Lose!
 (or maybe you won. I don't know)"
 
