@@ -13,7 +13,7 @@ func _process(delta):
 	var mousePos = get_global_mouse_position()
 	set_global_position(lerp(myPos, mousePos, 0.8))
 
-
+	update()
 
 
 #warning-ignore:unused_argument
@@ -37,3 +37,10 @@ func _on_Cursor_body_exited(body):
 	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
 		mouse_over_node = null
 
+func _draw():
+	if mouse_over_node != null and Input.is_action_pressed("BUTTON_LEFT"):
+		var myPos = to_local(get_global_position())
+		var playerPos = to_local(game.player.get_global_position())
+		var width = 3.0
+		var antialias = true
+		draw_line(myPos, playerPos, Color.antiquewhite, width, antialias)
