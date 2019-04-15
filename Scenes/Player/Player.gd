@@ -25,6 +25,10 @@ func _process(delta) -> void:
 #		else:
 #			velocity = (game.black_hole.global_position - global_position).normalized() * max_velocity * 0.25
 #		position = position + velocity
+
+func die():
+	# change this to spawn the lose screen
+	get_tree().quit()
 		
 func _on_draggable_dropped(velocity):
 	linear_velocity += -velocity/4.0

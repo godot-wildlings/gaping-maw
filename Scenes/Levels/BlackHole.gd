@@ -30,11 +30,17 @@ func _on_EventHorizon_body_entered(body):
 		# if the black hole is supposed to be destroyable.
 	if body.is_in_group("draggable"):
 		emit_signal("draggable_entered")
-	elif body.is_in_group("Player"):
-		get_tree().quit()
-
 	
 	if body.has_method("die"):
 		body.die()
 	else:
 		body.call_deferred("queue_free")
+
+func spawn_creature():
+	var creature_scene = load("res://Scenes/Creatures/Creature.tscn")
+	var new_creature = creature_scene.instance()
+	$Creatures.add_child(new_creature)
+	new_creature.set_global_position(get_global_position())
+	
+func _on_CreatureSpawnTimer_timeout():
+	spawn_creature()

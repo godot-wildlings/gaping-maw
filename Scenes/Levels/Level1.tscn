@@ -79,7 +79,6 @@ script = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="NewObjectSpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="SpawnedObjects" type="Node2D" parent="."]

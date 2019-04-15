@@ -33,3 +33,10 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EventHorizon"]
 shape = SubResource( 2 )
 
+[node name="CreatureSpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Creatures" type="Node2D" parent="."]
+
+[connection signal="timeout" from="CreatureSpawnTimer" to="." method="_on_CreatureSpawnTimer_timeout"]
