@@ -10,7 +10,7 @@ extends RigidBody2D
 export var speed : float = 200.0
 
 func _ready() -> void:
-	var vector_to_black_hole = game.black_hole.get_global_position() - get_global_position()
+	var vector_to_black_hole : Vector2 = game.black_hole.get_global_position() - get_global_position()
 	linear_velocity = vector_to_black_hole.normalized() * speed
 	spawn_surface_objects()
 
@@ -20,7 +20,7 @@ func spawn_surface_objects() -> void:
 	var surface_object_scene : PackedScene = load("res://Scenes/Draggable/Draggable.tscn")
 	#warning-ignore:unused_variable
 	for i in range(randi() % (2 * deviation) - deviation + num_objects):
-		var new_object = surface_object_scene.instance()
+		var new_object : Object = surface_object_scene.instance()
 		
 		var rand_angle = randf() * 2 * PI #radians
 		var radius : float = 50.0
@@ -33,7 +33,7 @@ func spawn_surface_objects() -> void:
 		$surface_objects.add_child(new_object)
 		new_object.linear_velocity = get_linear_velocity()
 
-func die():
+func die() -> void:
 	# update the score, then disappear
 	game.planets_destroyed += 1
 	call_deferred("queue_free")

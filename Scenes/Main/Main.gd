@@ -1,6 +1,6 @@
 extends Node
 
-onready var Level1 = load("res://Scenes/Levels/Level1.tscn")
+onready var level_1 : PackedScene = load("res://Scenes/Levels/Level1.tscn")
 
 func _init() -> void:
 	game.main = self
@@ -9,7 +9,7 @@ func _ready() -> void:
 	$IntroScreen/CanvasLayer/PopupPanel.show()
 
 func next_level() -> void:
-	var new_level = Level1.instance()
+	var new_level = level_1.instance()
 	$Levels.add_child(new_level)
 	
 

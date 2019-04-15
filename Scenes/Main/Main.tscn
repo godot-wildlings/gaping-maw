@@ -12,6 +12,7 @@ script = ExtResource( 1 )
 editor/display_folded = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="EndScreen"]
+editor/display_folded = true
 
 [node name="PopupPanel" type="PopupPanel" parent="EndScreen/CanvasLayer"]
 anchor_right = 1.0

@@ -11,7 +11,7 @@ func _process(delta : float) -> void:
 	update() # calls _draw()
 
 #warning-ignore:unused_argument
-func _input(event) -> void:
+func _input(event : InputEvent) -> void:
 	if is_instance_valid(mouse_over_node) == false:
 		mouse_over_node = null
 		return

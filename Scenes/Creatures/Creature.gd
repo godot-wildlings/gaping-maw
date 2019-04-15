@@ -7,30 +7,23 @@ Die after eating something
 
 extends Area2D
 
-var speed = 60.0
+export var speed : float = 60.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta : float) -> void:
 	fly_toward_player(delta)
 	
-
-func fly_toward_player(delta):
-	
-	var playerPos = game.player.get_global_position()
-	var myPos = get_global_position()
-	var vector_to_player = playerPos - myPos
+func fly_toward_player(delta : float) -> void:
+	var player_pos : Vector2 = game.player.get_global_position()
+	var my_pos : Vector2 = get_global_position()
+	var vector_to_player : Vector2 = player_pos - my_pos
 	
 	set_global_position(get_global_position() + vector_to_player.normalized() * speed * delta) 
 
-func die():
+func die() -> void:
 	# needs a noise an animation
 	call_deferred("queue_free")
 
-func _on_Creature_body_entered(body):
+func _on_Creature_body_entered(body : PhysicsBody2D) -> void:
 	if body.is_in_group("draggable"):
 		if body.has_method("die"):
 			body.die()

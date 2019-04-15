@@ -2,30 +2,22 @@ extends Area2D
 class_name BlackHole
 
 var gravity_radius : float
-#var accel_radius : float
 onready var EventHorizon = $EventHorizon
 
 signal draggable_entered
 
 func _ready() -> void:
 	gravity_radius = $GravityRadius.shape.radius
-	#accel_radius = $AccelerationRadius.shape.radius
 	game.black_hole = self
 	call_deferred("deferred_ready")
 
 func deferred_ready() -> void:
-
 	#warning-ignore:return_value_discarded
 	EventHorizon.connect("body_entered", self, "_on_EventHorizon_body_entered")
 	#warning-ignore:return_value_discarded
 	self.connect("draggable_entered", game.UI, "_on_draggable_entered")
 
-	
-
-
-
-
-func _on_EventHorizon_body_entered(body):
+func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 	# we could do some progress stuff here if we like.
 		# if the black hole is supposed to be destroyable.
 	if body.is_in_group("draggable"):
@@ -36,11 +28,11 @@ func _on_EventHorizon_body_entered(body):
 	else:
 		body.call_deferred("queue_free")
 
-func spawn_creature():
-	var creature_scene = load("res://Scenes/Creatures/Creature.tscn")
-	var new_creature = creature_scene.instance()
+func spawn_creature() -> void:
+	var creature_scene : PackedScene = load("res://Scenes/Creatures/Creature.tscn")
+	var new_creature : Object = creature_scene.instance()
 	$Creatures.add_child(new_creature)
 	new_creature.set_global_position(get_global_position())
 	
-func _on_CreatureSpawnTimer_timeout():
+func _on_CreatureSpawnTimer_timeout() -> void:
 	spawn_creature()
