@@ -2,22 +2,16 @@ extends Area2D
 
 var mouse_over_node : RigidBody2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 #warning-ignore:unused_argument
-func _process(delta):
-	var myPos = get_global_position()
-	var mousePos = get_global_mouse_position()
-	set_global_position(lerp(myPos, mousePos, 0.8))
+func _process(delta : float) -> void:
+	var my_pos : Vector2 = get_global_position()
+	var mouse_pos : Vector2 = get_global_mouse_position()
+	set_global_position(lerp(my_pos, mouse_pos, 0.8))
 
 	update() # calls _draw()
 
-
 #warning-ignore:unused_argument
-func _input(event):
+func _input(event) -> void:
 	if is_instance_valid(mouse_over_node) == false:
 		mouse_over_node = null
 		return
@@ -33,20 +27,20 @@ func _input(event):
 		else:
 			mouse_over_node = null # probably eaten by the black hole
 
-func _on_Cursor_body_entered(body):
+func _on_Cursor_body_entered(body) -> void:
 	if mouse_over_node == null:
 		if body.is_in_group("draggable"):
 			mouse_over_node = body
 
-func _on_Cursor_body_exited(body):
+func _on_Cursor_body_exited(body) -> void:
 	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
 		mouse_over_node = null
 
-func _draw():
+func _draw() -> void:
 	# draw a line between the player and the targeting reticle
 	if mouse_over_node != null and Input.is_action_pressed("BUTTON_LEFT"):
-		var myPos = to_local(get_global_position())
-		var playerPos = to_local(game.player.get_global_position())
-		var width = 3.0
-		var antialias = true
+		var myPos : Vector2 = to_local(get_global_position())
+		var playerPos : Vector2 = to_local(game.player.get_global_position())
+		var width : float = 3.0
+		var antialias : bool = true
 		draw_line(myPos, playerPos, Color.antiquewhite, width, antialias)

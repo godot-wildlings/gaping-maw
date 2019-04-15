@@ -7,25 +7,23 @@ Question: How do we get rigid bodies to 'stick' to the planet and wait for playe
 
 extends RigidBody2D
 
-var speed = 200.0
+export var speed : float = 200.0
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	var vector_to_black_hole = game.black_hole.get_global_position() - get_global_position()
 	linear_velocity = vector_to_black_hole.normalized() * speed
 	spawn_surface_objects()
 
-func spawn_surface_objects():
-	var num_objects = 7
-	var deviation = 3
-	var surface_object_scene = load("res://Scenes/Draggable/Draggable.tscn")
+func spawn_surface_objects() -> void:
+	var num_objects : int = 7
+	var deviation : int = 3
+	var surface_object_scene : PackedScene = load("res://Scenes/Draggable/Draggable.tscn")
 	#warning-ignore:unused_variable
-	for i in range(randi()%(2*deviation) - deviation + num_objects):
+	for i in range(randi() % (2 * deviation) - deviation + num_objects):
 		var new_object = surface_object_scene.instance()
 		
-		var rand_angle = randf()*2*PI #radians
-		var radius = 50.0
+		var rand_angle = randf() * 2 * PI #radians
+		var radius : float = 50.0
 		
 		new_object.set_as_toplevel(true)
 		
