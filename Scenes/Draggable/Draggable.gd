@@ -79,17 +79,20 @@ func choose_random_image() -> void:
 func pickup() -> void:
 	# follow the mouse (remember to use physics transforms, not set_position)
 	is_picked = true
+	$SquishNoise.play()
+	$AnimationPlayer.play("bounce")
 
 func drop() -> void:
 	# stop following the mouse
 	linear_velocity = drag_velocity * mouse_drag_speed
 	is_picked = false
+	$WooshNoise.play()
 	
 	#warning-ignore:return_value_discarded
 	connect("dropped", game.player, "_on_draggable_dropped")
 	emit_signal("dropped", linear_velocity)
 	disconnect("dropped", game.player, "_on_draggable_dropped")
-
+	
 
 #warning-ignore:unused_argument
 #warning-ignore:unused_argument

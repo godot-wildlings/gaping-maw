@@ -1,15 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Draggable/Draggable.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/cow.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/house.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/tree.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Draggable/whistle.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Draggable/whoosh.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 45.8258, 42.382 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "bounce"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("images:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Draggable" type="RigidBody2D" groups=[
 "draggable",
@@ -42,6 +60,19 @@ texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pick_area"]
 shape = SubResource( 2 )
+
+[node name="SquishNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -9.0
+bus = "SFX"
+
+[node name="WooshNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -9.0
+bus = "SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bounce = SubResource( 3 )
 
 [connection signal="mouse_entered" from="pick_area" to="." method="_on_pick_area_mouse_entered"]
 [connection signal="mouse_exited" from="pick_area" to="." method="_on_pick_area_mouse_exited"]
