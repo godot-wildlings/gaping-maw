@@ -8,6 +8,9 @@ Question: How do we get rigid bodies to 'stick' to the planet and wait for playe
 extends RigidBody2D
 
 export var speed : float = 200.0
+export var max_health : int = 30
+var health : int = max_health
+
 
 func _ready() -> void:
 	var vector_to_black_hole : Vector2 = game.black_hole.get_global_position() - get_global_position()
@@ -37,3 +40,8 @@ func die() -> void:
 	# update the score, then disappear
 	game.planets_destroyed += 1
 	call_deferred("queue_free")
+
+func _on_hit(damage) -> void:
+	health -= damage
+	if health <= 0:
+		die()

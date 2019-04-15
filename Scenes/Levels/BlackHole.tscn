@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Levels/BlackHole.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/blackholeImage.png" type="Texture" id=2]
@@ -8,6 +8,23 @@ radius = 12959.1
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 260.102
+
+[sub_resource type="Animation" id=3]
+resource_name = "pulse"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9, 1.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5, 5 ), Vector2( 5, 5 ), Vector2( 5.5, 5.5 ), Vector2( 4, 4 ), Vector2( 5, 5 ) ]
+}
 
 [node name="BlackHole" type="Area2D"]
 input_pickable = false
@@ -39,5 +56,9 @@ wait_time = 3.0
 autostart = true
 
 [node name="Creatures" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "pulse"
+anims/pulse = SubResource( 3 )
 
 [connection signal="timeout" from="CreatureSpawnTimer" to="." method="_on_CreatureSpawnTimer_timeout"]

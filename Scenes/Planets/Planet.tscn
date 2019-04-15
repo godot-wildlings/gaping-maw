@@ -9,7 +9,9 @@ radius = 103.311
 [sub_resource type="CircleShape2D" id=2]
 radius = 181.641
 
-[node name="Planet" type="RigidBody2D"]
+[node name="Planet" type="RigidBody2D" groups=[
+"planets",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

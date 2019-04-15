@@ -2,13 +2,17 @@ extends Area2D
 class_name BlackHole
 
 var gravity_radius : float
+export var speed : float = 20.0
+
 onready var EventHorizon = $EventHorizon
 
 signal draggable_entered
 
+func _init():
+	game.black_hole = self
+
 func _ready() -> void:
 	gravity_radius = $GravityRadius.shape.radius
-	game.black_hole = self
 	call_deferred("deferred_ready")
 
 func deferred_ready() -> void:
@@ -16,6 +20,15 @@ func deferred_ready() -> void:
 	EventHorizon.connect("body_entered", self, "_on_EventHorizon_body_entered")
 	#warning-ignore:return_value_discarded
 	self.connect("draggable_entered", game.UI, "_on_draggable_entered")
+
+func move_toward_player(delta) -> void:
+	var my_pos = get_global_position()
+	var player_pos = game.player.get_global_position()
+	var vector_to_player = (player_pos - my_pos).normalized() * speed
+	position += vector_to_player * delta
+
+func _process(delta) -> void:
+	move_toward_player(delta)
 
 func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 	# we could do some progress stuff here if we like.

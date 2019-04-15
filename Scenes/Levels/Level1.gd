@@ -7,6 +7,9 @@ extends Node2D
 
 var max_spawned_objects : int = 15
 
+func _init():
+	game.level = self
+
 func spawn_random_object():
 	var asteroid = load("res://Scenes/Obstacles/Asteroid.tscn")
 	var planet = load("res://Scenes/Planets/Planet.tscn")
@@ -26,6 +29,7 @@ func spawn_random_object():
 
 func spawned_object_count():
 	return $SpawnedObjects.get_child_count()
+
 
 func _on_NewObjectSpawnTimer_timeout():
 	if spawned_object_count() < max_spawned_objects:

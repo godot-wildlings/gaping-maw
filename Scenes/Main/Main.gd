@@ -1,12 +1,14 @@
 extends Node
 
 onready var level_1 : PackedScene = load("res://Scenes/Levels/Level1.tscn")
+onready var IntroScreen = $CanvasLayer/IntroScreen
+onready var EndScreen = $CanvasLayer/EndScreen
 
 func _init() -> void:
 	game.main = self
 
 func _ready() -> void:
-	$IntroScreen/CanvasLayer/PopupPanel.show()
+	IntroScreen.show()
 
 func next_level() -> void:
 	var new_level = level_1.instance()
@@ -22,9 +24,9 @@ func remove_levels() -> void:
 
 func lose() -> void:
 	remove_levels()
-	$EndScreen/CanvasLayer/PopupPanel.show()
+	EndScreen.show()
 
 func restart() -> void:
-	$EndScreen/CanvasLayer/PopupPanel.hide()
-	$IntroScreen/CanvasLayer/PopupPanel.hide()
+	EndScreen.hide()
+	IntroScreen.hide()
 	next_level()
