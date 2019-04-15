@@ -25,7 +25,6 @@ gravity = 500.0
 linear_damp = 0.0
 
 [node name="non-draggables" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Asteroid" parent="non-draggables" instance=ExtResource( 5 )]
 position = Vector2( 635.968, 358.499 )
@@ -72,8 +71,16 @@ region_rect = Rect2( 0, 0, 905, 814 )
 script = ExtResource( 8 )
 
 [node name="stars" type="Node2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+visible = false
 script = ExtResource( 9 )
 
 [node name="Planets" type="Node2D" parent="."]
 script = ExtResource( 10 )
 
+[node name="NewObjectSpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="SpawnedObjects" type="Node2D" parent="."]
+
+[connection signal="timeout" from="NewObjectSpawnTimer" to="." method="_on_NewObjectSpawnTimer_timeout"]

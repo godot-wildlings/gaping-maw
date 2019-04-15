@@ -1,9 +1,12 @@
-extends KinematicBody2D
+extends RigidBody2D
 
 export var max_velocity : float = 1.5
 var velocity : Vector2
 var accel_radius : float
 
+func _init():
+	game.player = self
+	
 func _ready() -> void:
 	call_deferred("deferred_ready")
 
@@ -21,3 +24,6 @@ func _process(delta) -> void:
 			velocity = (game.black_hole.global_position - global_position).normalized() * max_velocity * 0.25
 		# position = position + velocity
 		# ^^ disabled temporarily for debugging
+		
+func _on_draggable_dropped(velocity):
+	linear_velocity += -velocity/4.0

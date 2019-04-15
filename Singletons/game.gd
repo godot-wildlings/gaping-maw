@@ -4,3 +4,6 @@ extends Node
 var black_hole : BlackHole
 #warning-ignore:unused_class_variable
 var UI : UI
+var player
+var cursor
+

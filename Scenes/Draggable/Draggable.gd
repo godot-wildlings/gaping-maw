@@ -9,6 +9,7 @@ var drag_velocity : Vector2 = Vector2(0,0)
 
 #var mouse_over : bool = false
 
+signal dropped(velocity)
 
 func _ready() -> void:
 	#warning-ignore:return_value_discarded
@@ -83,6 +84,10 @@ func drop() -> void:
 	# stop following the mouse
 	linear_velocity = drag_velocity * mouse_drag_speed
 	is_picked = false
+	
+	connect("dropped", game.player, "_on_draggable_dropped")
+	emit_signal("dropped", linear_velocity)
+	disconnect("dropped", game.player, "_on_draggable_dropped")
 
 
 #warning-ignore:unused_argument

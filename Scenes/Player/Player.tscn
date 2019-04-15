@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Player" type="KinematicBody2D" groups=[
+[node name="Player" type="RigidBody2D" groups=[
 "Player",
 ]]
 collision_mask = 6

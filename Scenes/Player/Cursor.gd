@@ -14,9 +14,7 @@ func _process(delta):
 	set_global_position(lerp(myPos, mousePos, 0.8))
 
 
-func _on_Cursor_body_entered(body):
-	if body.is_in_group("draggable"):
-		mouse_over_node = body
+
 
 #warning-ignore:unused_argument
 func _input(event):
@@ -26,9 +24,13 @@ func _input(event):
 	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:
 		if mouse_over_node.has_method("drop"):
 			mouse_over_node.drop()
+			mouse_over_node = null
 
+func _on_Cursor_body_entered(body):
+	if body.is_in_group("draggable"):
+		mouse_over_node = body
 
 func _on_Cursor_body_exited(body):
-	if body == mouse_over_node:
+	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
 		mouse_over_node = null
 
