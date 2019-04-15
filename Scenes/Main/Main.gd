@@ -6,8 +6,12 @@ func _init():
 	game.main = self
 	
 func _ready() -> void:
+	next_level()
+
+func next_level():
 	var new_level = Level1.instance()
 	$Levels.add_child(new_level)
+	
 
 func remove_levels():
 	for level in $Levels.get_children():
@@ -19,3 +23,7 @@ func remove_levels():
 func lose():
 	remove_levels()
 	$EndScreen/CanvasLayer/PopupPanel.show()
+	
+func restart():
+	$EndScreen/CanvasLayer/PopupPanel.hide()
+	next_level()

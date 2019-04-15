@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Main/Main.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Main/QuitButton.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Main/RestartButton.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -14,21 +16,56 @@ visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="EndScreen/CanvasLayer/PopupPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="EndScreen/CanvasLayer/PopupPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
 
-[node name="Label" type="Label" parent="EndScreen/CanvasLayer/PopupPanel/CenterContainer"]
-margin_left = 402.0
-margin_top = 280.0
-margin_right = 613.0
-margin_bottom = 311.0
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="CenterContainer" type="CenterContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
+margin_right = 944.0
+margin_bottom = 496.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 366.0
+margin_top = 232.0
+margin_right = 577.0
+margin_bottom = 263.0
 text = "You Lose!
 (or maybe you won. I don't know)"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer"]
+margin_top = 500.0
+margin_right = 944.0
+margin_bottom = 520.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 421.0
+margin_right = 461.0
+margin_bottom = 20.0
+text = "Quit"
+script = ExtResource( 2 )
+
+[node name="RestartButton" type="Button" parent="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 465.0
+margin_right = 522.0
+margin_bottom = 20.0
+text = "Restart"
+script = ExtResource( 3 )
+
 [node name="Levels" type="Node2D" parent="."]
 
+[connection signal="pressed" from="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="EndScreen/CanvasLayer/PopupPanel/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" method="_on_RestartButton_pressed"]
