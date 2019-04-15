@@ -13,7 +13,7 @@ func _ready() -> void:
 func deferred_ready() -> void:
 #	if game.black_hole:
 #		accel_radius = game.black_hole.accel_radius
-	pass
+	$CanvasLayer/UI.show()
 
 #warning-ignore:unused_argument
 func _process(delta) -> void:

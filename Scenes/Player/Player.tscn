@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/compass.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -28,4 +30,13 @@ script = ExtResource( 3 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+
+[node name="compass" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="compass"]
+position = Vector2( 48.5292, 0 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 6 )
 
