@@ -21,7 +21,8 @@ position = Vector2( 512, 550 )
 
 [node name="BlackHole" parent="." instance=ExtResource( 4 )]
 position = Vector2( 512, 80 )
-gravity = 500.0
+gravity_distance_scale = 0.01
+gravity = 750.0
 linear_damp = 0.0
 
 [node name="non-draggables" type="Node2D" parent="."]

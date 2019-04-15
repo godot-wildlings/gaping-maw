@@ -85,6 +85,7 @@ func drop() -> void:
 	linear_velocity = drag_velocity * mouse_drag_speed
 	is_picked = false
 	
+	#warning-ignore:unused_return_value
 	connect("dropped", game.player, "_on_draggable_dropped")
 	emit_signal("dropped", linear_velocity)
 	disconnect("dropped", game.player, "_on_draggable_dropped")

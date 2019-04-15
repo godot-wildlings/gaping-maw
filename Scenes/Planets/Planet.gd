@@ -12,11 +12,9 @@ var speed = 200.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var vector_to_black_hole = game.black_hole.get_global_position() - get_global_position()
+	linear_velocity = vector_to_black_hole.normalized() * speed
 	spawn_surface_objects()
-
-	linear_velocity = Vector2.UP * speed
-	
-	
 
 func spawn_surface_objects():
 	var num_objects = 7
@@ -35,4 +33,4 @@ func spawn_surface_objects():
 		new_object.set_rotation(rand_angle)
 
 		$surface_objects.add_child(new_object)
-		new_object.linear_velocity = Vector2.UP * speed
+		new_object.linear_velocity = get_linear_velocity()

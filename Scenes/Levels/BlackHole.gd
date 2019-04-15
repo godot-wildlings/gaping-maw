@@ -2,14 +2,14 @@ extends Area2D
 class_name BlackHole
 
 var gravity_radius : float
-var accel_radius : float
+#var accel_radius : float
 onready var EventHorizon = $EventHorizon
 
 signal draggable_entered
 
 func _ready() -> void:
 	gravity_radius = $GravityRadius.shape.radius
-	accel_radius = $AccelerationRadius.shape.radius
+	#accel_radius = $AccelerationRadius.shape.radius
 	game.black_hole = self
 	call_deferred("deferred_ready")
 
