@@ -21,12 +21,12 @@ func spawn_surface_objects() -> void:
 	#warning-ignore:unused_variable
 	for i in range(randi() % (2 * deviation) - deviation + num_objects):
 		var new_object : Object = surface_object_scene.instance()
-		
+
 		var rand_angle = randf() * 2 * PI #radians
 		var radius : float = 50.0
-		
+
 		new_object.set_as_toplevel(true)
-		
+
 		new_object.set_global_position(get_global_position() + Vector2.RIGHT.rotated(rand_angle) * radius)
 		new_object.set_rotation(rand_angle)
 

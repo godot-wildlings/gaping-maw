@@ -14,8 +14,8 @@ func _ready():
 func _process(delta):
 	texture_shift_y += 1 * speed_factor * delta
 	texture_shift_y = wrapf(texture_shift_y, 0, base_rect.size.y)
-	
+
 	var new_rect = base_rect
 	new_rect.position.y = texture_shift_y
-	
+
 	set_region_rect(new_rect)

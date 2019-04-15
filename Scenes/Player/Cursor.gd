@@ -1,6 +1,6 @@
 extends Area2D
 
-var mouse_over_node : RigidBody2D
+var mouse_over_node : Node2D
 
 #warning-ignore:unused_argument
 func _process(delta : float) -> void:
@@ -15,7 +15,7 @@ func _input(event : InputEvent) -> void:
 	if is_instance_valid(mouse_over_node) == false:
 		mouse_over_node = null
 		return
-	
+
 	if Input.is_action_just_pressed("BUTTON_LEFT") and mouse_over_node != null:
 		if mouse_over_node.has_method("pickup"):
 			mouse_over_node.pickup()
@@ -32,9 +32,17 @@ func _on_Cursor_body_entered(body) -> void:
 		if body.is_in_group("draggable"):
 			mouse_over_node = body
 
-func _on_Cursor_body_exited(body) -> void:
-	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
-		mouse_over_node = null
+# VVV== not necessary: mouse_over_node discarded in _input() ==VVV
+#func _on_Cursor_body_exited(body) -> void:
+#	if body == mouse_over_node and Input.is_action_pressed("BUTTON_LEFT") == false:
+#		mouse_over_node = null
+
+func _on_Cursor_area_entered(area) -> void:
+	if mouse_over_node == null:
+		if area.is_in_group("creatures"):
+			mouse_over_node = area
+
+
 
 func _draw() -> void:
 	# draw a line between the player and the targeting reticle

@@ -6,14 +6,14 @@ var extents : Vector2 = Vector2(1000, 1000)
 
 func _ready():
 	spawn_stars()
-	
+
 func spawn_stars():
 	var stars_container = self
 	var star_scene = load("res://Scenes/Scenery/BGStars.tscn")
 	var width = 1500
 	var height = 1500
 	randomize()
-	
+
 	#warning-ignore:unused_variable
 	for i in range(250):
 		var new_stars = star_scene.instance()

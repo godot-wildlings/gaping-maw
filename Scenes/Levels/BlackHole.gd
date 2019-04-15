@@ -22,7 +22,7 @@ func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 		# if the black hole is supposed to be destroyable.
 	if body.is_in_group("draggable"):
 		emit_signal("draggable_entered")
-	
+
 	if body.has_method("die"):
 		body.die()
 	else:
@@ -33,6 +33,6 @@ func spawn_creature() -> void:
 	var new_creature : Object = creature_scene.instance()
 	$Creatures.add_child(new_creature)
 	new_creature.set_global_position(get_global_position())
-	
+
 func _on_CreatureSpawnTimer_timeout() -> void:
 	spawn_creature()

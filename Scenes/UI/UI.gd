@@ -14,4 +14,4 @@ func _ready() -> void:
 
 func _on_draggable_entered() -> void:
 	progress_value -= 10
-	
+

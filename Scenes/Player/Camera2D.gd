@@ -11,26 +11,26 @@ var MaxZoom = 25.0
 
 func _ready():
 	DesiredZoom = zoom
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	Ticks += 1
-	
+
 #	update()
 #
 #	if target != null:
 #		position = target.position
 #	else:
 #		target = global.getPlayerShip()
-		
-	
+
+
 	zoom = lerp(zoom, DesiredZoom, 0.2 * delta * 60)
 	#print("zoom: ", str(zoom))
 
 func _draw():
 	#draw_string(global.BaseFont, Vector2(0, 20), "zoom: " + str(zoom), Color.antiquewhite )
 	pass
-	
+
 func _input(event):
 	if event is InputEventMouseButton and event.is_action("zoom_in"):
 		DesiredZoom = zoom * 0.8
