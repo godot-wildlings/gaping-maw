@@ -29,7 +29,10 @@ func spawn_surface_objects():
 		var rand_angle = randf()*2*PI #radians
 		var radius = 50.0
 		
-		new_object.set_position(Vector2.RIGHT.rotated(rand_angle) * radius)
+		new_object.set_as_toplevel(true)
+		
+		new_object.set_global_position(get_global_position() + Vector2.RIGHT.rotated(rand_angle) * radius)
 		new_object.set_rotation(rand_angle)
 
 		$surface_objects.add_child(new_object)
+		new_object.linear_velocity = Vector2.UP * speed
