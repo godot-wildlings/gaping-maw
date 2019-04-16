@@ -19,7 +19,7 @@ func deferred_ready() -> void:
 	#warning-ignore:return_value_discarded
 	EventHorizon.connect("body_entered", self, "_on_EventHorizon_body_entered")
 	#warning-ignore:return_value_discarded
-	self.connect("draggable_entered", game.UI, "_on_draggable_entered")
+	#self.connect("draggable_entered", game.UI, "_on_draggable_entered")
 
 func move_toward_player(delta) -> void:
 	var my_pos = get_global_position()

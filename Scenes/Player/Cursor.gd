@@ -32,17 +32,15 @@ func _input(event : InputEvent) -> void:
 		if mouse_over_node.is_in_group("draggable"):
 			if mouse_over_node.has_method("pickup"):
 				mouse_over_node.pickup()
-		else: # probably a creature on the line.. they don't care about your button presses
-			pass
+		elif mouse_over_node.is_in_group("creatures"):
+			pass # creature is already on the line.. they don't wait for your left click
+
 	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:
 		if is_instance_valid(mouse_over_node):
-			if mouse_over_node.is_in_group("draggable"):
+			if mouse_over_node.is_in_group("draggable") or mouse_over_node.is_in_group("creatures"):
 				if mouse_over_node.has_method("drop"):
 					mouse_over_node.drop()
 					mouse_over_node = null
-			else: #probably a creature on the line. Can't drop it
-				pass
-
 		else:
 			mouse_over_node = null # probably eaten by the black hole
 
@@ -72,3 +70,7 @@ func _draw() -> void:
 		var width : float = 3.0
 		var antialias : bool = true
 		draw_line(myPos, playerPos, Color.antiquewhite, width, antialias)
+
+func _on_creature_escaped():
+	mouse_over_node = null
+

@@ -19,9 +19,9 @@ export var max_speed : float = 500.0
 export var turn_speed : float = PI/4 #radians per second
 
 export var DPS : float = 10
-#export var mouse_drag_speed : float = 4
+export var mouse_drag_speed : float = 4
 
-enum states { FLYING, EATING, TETHERED, DEAD }
+enum states { FLYING, EATING, TETHERED, CRAWLING, DEAD }
 #warning-ignore:unused_class_variable
 var state = states.FLYING
 
@@ -49,11 +49,12 @@ func _process(delta : float) -> void:
 	if is_instance_valid(target) == false:
 		choose_random_target()
 
-	if not is_picked:
+	if state == states.FLYING:
 		turn_toward_target(delta)
 		fly_forward(delta)
-	else: # creature on the hook. beware!
-		#follow_cursor(delta)
+	elif state == states.TETHERED: # creature on the hook. Player has limited time to fling/drop them
+		follow_cursor(delta)
+	elif state == states.CRAWLING: # creature is crawling the line. player can't drop them anymore
 		crawl_toward_player(delta)
 
 	if game.debug:
@@ -117,21 +118,26 @@ func munch(body) -> void:
 
 func pickup() -> void:
 	# should also play a noise and animation
-	is_picked = true
+	if state == states.FLYING:
+		state = states.TETHERED
+		$EscapeHookTimer.start()
+
+	#is_picked = true
 
 	# spawn a pathfollow2d and start following it's offset toward the player.
 	var grapple_line_scene = load("res://Scenes/Creatures/CreatureCrawlLine.tscn")
 	var new_grapple = grapple_line_scene.instance()
 	add_child(new_grapple)
 	grapple_line = new_grapple
-	print("Creature.gd spawned a new CreatureCrawlLine")
+
 
 
 func drop() -> void:
-	# Nope. You can't drop a creature.. once hooked, they stay on the line.
-	#is_picked = false
-	#velocity = drag_velocity * mouse_drag_speed
-	pass
+	# player has a limited time to fling a creature.
+	if state == states.TETHERED:
+		state = states.FLYING
+		velocity = drag_velocity * mouse_drag_speed
+
 
 func _on_Creature_body_entered(body : PhysicsBody2D) -> void:
 	if body.is_in_group("draggable"):
@@ -157,3 +163,10 @@ func _draw():
 	#draw_line(Vector2.ZERO, velocity * 5.0, Color.purple, true)
 	#draw_line(Vector2.ZERO, Vector2.RIGHT.rotated(rotation) * 10, Color.red, true)
 	pass
+
+
+func _on_EscapeHookTimer_timeout():
+	# should play a happy noise.. the creature got free. it's now approaching the player
+	if state == states.TETHERED:
+		state = states.CRAWLING
+	game.cursor._on_creature_escaped()

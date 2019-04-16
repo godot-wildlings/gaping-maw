@@ -8,7 +8,7 @@ extends ProgressBar
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+#warning-ignore:unused_argument
 func _process(delta):
 	if is_instance_valid(game.player):
 		set_value(game.player.oxygen_remaining)

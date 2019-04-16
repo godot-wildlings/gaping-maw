@@ -68,5 +68,8 @@ volume_db = -9.0
 
 [node name="MunchTimer" type="Timer" parent="."]
 
+[node name="EscapeHookTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_Creature_body_entered"]
 [connection signal="timeout" from="MunchTimer" to="." method="_on_MunchTimer_timeout"]
+[connection signal="timeout" from="EscapeHookTimer" to="." method="_on_EscapeHookTimer_timeout"]

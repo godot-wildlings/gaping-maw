@@ -27,20 +27,20 @@ custom_constants/hseparation = 25
 columns = 6
 
 [node name="PlanetsDestroyed" type="Label" parent="Panel/GridContainer"]
-margin_right = 125.0
+margin_right = 86.0
 margin_bottom = 14.0
 text = "Planets Lost: "
 script = ExtResource( 2 )
 
 [node name="SuitIntegrityLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 150.0
-margin_right = 284.0
+margin_left = 111.0
+margin_right = 201.0
 margin_bottom = 14.0
 text = "Suit Integrity: "
 
 [node name="SuitIntegrity" type="ProgressBar" parent="Panel/GridContainer"]
-margin_left = 309.0
-margin_right = 384.0
+margin_left = 226.0
+margin_right = 301.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 75, 0 )
 step = 1.0
@@ -48,14 +48,14 @@ value = 100.0
 script = ExtResource( 3 )
 
 [node name="OxygenLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 409.0
-margin_right = 536.0
+margin_left = 326.0
+margin_right = 453.0
 margin_bottom = 14.0
 text = "Oxygen Remaining: "
 
 [node name="OxygenRemaining" type="ProgressBar" parent="Panel/GridContainer"]
-margin_left = 561.0
-margin_right = 636.0
+margin_left = 478.0
+margin_right = 553.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 75, 0 )
 step = 1.0

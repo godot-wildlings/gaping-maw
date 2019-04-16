@@ -2,7 +2,7 @@ extends Path2D
 
 var my_curve : Curve2D
 #var creature_hooked : bool = false
-export var crawl_speed : float = 0.25
+export var crawl_speed : float = 0.18
 
 onready var line_offset_setter = $PathFollow2D
 onready var line_offset_getter = $PathFollow2D/Position2D

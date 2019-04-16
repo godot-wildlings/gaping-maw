@@ -2,10 +2,10 @@ extends RigidBody2D
 
 export var max_speed : float = 400.0
 
-export var max_health : int = 100
+export var max_health : float = 100.0
 var health : int = max_health
 
-var oxygen_remaining : int = 100
+var oxygen_remaining : float = 100.0
 var in_atmosphere : bool = false
 
 func _init():
