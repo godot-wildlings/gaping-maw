@@ -42,12 +42,12 @@ func clamp_linear_velocity() -> void:
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
 
-func on_hit(damage):
-	health -= damage
+func on_hit(damage : float) -> void:
+	health -= int(damage)
 	if health <= 0:
 		die()
 
-func _on_OxygenTimer_timeout():
+func _on_OxygenTimer_timeout() -> void:
 	# remove 1 oxygen unless you're on a planet, then add 10
 	if in_atmosphere:
 		oxygen_remaining = clamp(oxygen_remaining + 10, 0, 100)
@@ -59,8 +59,8 @@ func _on_OxygenTimer_timeout():
 		die()
 
 
-func _on_atmosphere_entered():
+func _on_atmosphere_entered() -> void:
 	in_atmosphere = true
 
-func _on_atmosphere_left():
+func _on_atmosphere_left() -> void:
 	in_atmosphere = false

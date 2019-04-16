@@ -1,15 +1,15 @@
 extends Area2D
 class_name BlackHole
 
-var gravity_radius : float
-export var base_speed : float = 20.0
-var speed : float = base_speed
-
 onready var EventHorizon = $EventHorizon
+export var base_speed : float = 20.0
+
+var gravity_radius : float
+var speed : float = base_speed
 
 signal draggable_entered
 
-func _init():
+func _init() -> void:
 	game.black_hole = self
 
 func _ready() -> void:
@@ -34,7 +34,7 @@ func move_toward_player(delta) -> void:
 	var vector_to_player = (player_pos - my_pos).normalized() * speed
 	position += vector_to_player * delta
 
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	move_toward_player(delta)
 
 func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
