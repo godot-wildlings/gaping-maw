@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/creature1.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Creatures/munch.wav" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/Creatures/scream.wav" type="AudioStream" id=4]
-[ext_resource path="res://Scenes/Creatures/stretch-pop.wav" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/Creatures/stretch-pop2.wav" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/explodingCreature.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/PinkMist.png" type="Texture" id=7]
 
@@ -165,6 +165,8 @@ bus = "SFX"
 
 [node name="StretchPopNoise" type="AudioStreamPlayer2D" parent="explode"]
 stream = ExtResource( 5 )
+volume_db = -9.0
+bus = "SFX"
 
 [node name="Gibs" type="Sprite" parent="explode"]
 visible = false

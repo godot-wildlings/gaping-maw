@@ -121,6 +121,9 @@ func munch(body) -> void:
 	$MunchTimer.start()
 
 func pickup() -> void:
+	if game.options["Creatures_Grabbable"] == false:
+		return
+
 	# should also play a noise and animation
 	if state == states.FLYING:
 		state = states.TETHERED
@@ -176,6 +179,11 @@ func _draw():
 
 func _on_EscapeHookTimer_timeout():
 	# should play a happy noise.. the creature got free. it's now approaching the player
+
+
 	if state == states.TETHERED:
-		state = states.CRAWLING
-	game.cursor._on_creature_escaped()
+
+		if game.options["Creatures_Walk_The_Line"]:
+			state = states.CRAWLING
+
+			game.cursor._on_creature_escaped()

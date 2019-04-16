@@ -33,7 +33,10 @@ func _input(event : InputEvent) -> void:
 			if mouse_over_node.has_method("pickup"):
 				mouse_over_node.pickup()
 		elif mouse_over_node.is_in_group("creatures"):
-			pass # creature is already on the line.. they don't wait for your left click
+			if game.options["Creatures_Autograb_Hook"] == false:
+				if mouse_over_node.has_method("pickup"):
+					mouse_over_node.pickup()
+
 
 	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:
 		if is_instance_valid(mouse_over_node):
@@ -52,13 +55,15 @@ func _on_Cursor_body_entered(body) -> void:
 
 
 func _on_Cursor_area_entered(area) -> void:
-	# Note: creatures don't care if you're pressing the mouse button or not
-	if mouse_over_node == null:
-		if area.is_in_group("creatures"):
-			mouse_over_node = area
+	if game.options["Creatures_Grabbable"] == false:
+		return
+
+	if mouse_over_node == null and area.is_in_group("creatures"):
+		mouse_over_node = area
+
+		if game.options["Creatures_Autograb_Hook"] == true:
 			if area.has_method("pickup"):
-				# tell the creature to follow the position2d node
-				area.pickup()
+				area.pickup() # tell the creature to follow the position2d node
 
 
 

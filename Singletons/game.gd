@@ -16,3 +16,12 @@ var main : Node
 var level : Node2D
 #warning-ignore:unused_class_variable
 var debug : bool = true
+
+
+var options : Dictionary = {
+	"Creatures_Grabbable" : true,
+	"Creatures_Walk_The_Line" : false,
+	"Creatures_Autograb_Hook" : false
+
+
+}
