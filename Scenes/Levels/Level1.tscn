@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=5]
-[ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=7]
+[ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+font_data = ExtResource( 5 )
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,7 +35,23 @@ linear_damp = 0.0
 [node name="draggables" type="Node2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
+
+[node name="WarningLabel" type="Label" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.996078 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -272.5
+margin_top = -47.0
+margin_right = 272.5
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.870588, 0.458824, 0.0588235, 0.94902 )
+text = "Save Yourself!"
+script = ExtResource( 6 )
+
+[node name="Tween" type="Tween" parent="CanvasLayer/WarningLabel"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
 
@@ -38,25 +60,25 @@ editor/display_folded = true
 [node name="starfield" type="Sprite" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 self_modulate = Color( 1, 1, 1, 0.498039 )
 scale = Vector2( 5, 5 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 905, 814 )
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 
 [node name="stars" type="Node2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
 visible = false
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 
 [node name="Planets" type="Node2D" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
-[node name="Planet" parent="Planets" instance=ExtResource( 9 )]
+[node name="Planet" parent="Planets" instance=ExtResource( 11 )]
 position = Vector2( 198.94, 2006.04 )
 
-[node name="Planet2" parent="Planets" instance=ExtResource( 9 )]
+[node name="Planet2" parent="Planets" instance=ExtResource( 11 )]
 position = Vector2( -142.994, 2695.37 )
 
-[node name="Planet3" parent="Planets" instance=ExtResource( 9 )]
+[node name="Planet3" parent="Planets" instance=ExtResource( 11 )]
 position = Vector2( 1152.38, 2234.55 )
 
 [node name="NewObjectSpawnTimer" type="Timer" parent="."]

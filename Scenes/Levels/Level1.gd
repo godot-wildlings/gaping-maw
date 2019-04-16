@@ -7,8 +7,7 @@ extends Node2D
 
 export var max_spawned_objects : int = 25
 
-func _init():
-	game.level = self
+
 
 func spawn_random_object() -> void:
 	var asteroid : PackedScene = load("res://Scenes/Obstacles/Asteroid.tscn")

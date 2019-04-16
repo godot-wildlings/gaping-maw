@@ -9,7 +9,8 @@ Creatures which latch onto the line can follow the PathFollow2D node.
 
 extends Area2D
 
-var mouse_over_node : Node2D
+var mouse_over_node : Node2D = null
+export var max_range : float = 1000.0
 
 func _init():
 	game.cursor = self
@@ -18,7 +19,14 @@ func _init():
 func _process(delta : float) -> void:
 	var my_pos : Vector2 = get_global_position()
 	var mouse_pos : Vector2 = get_global_mouse_position()
-	set_global_position(lerp(my_pos, mouse_pos, 0.8))
+	var player_pos : Vector2 = game.player.get_global_position()
+
+	if player_pos.distance_squared_to(mouse_pos) <= max_range * max_range:
+		set_global_position(lerp(my_pos, mouse_pos, 0.8))
+	else:
+		var vector_to_cursor = (mouse_pos - player_pos).normalized() * max_range
+		set_global_position(lerp(my_pos, player_pos + vector_to_cursor, 0.8))
+
 	update() # calls _draw()
 
 
@@ -28,14 +36,18 @@ func _input(event : InputEvent) -> void:
 		mouse_over_node = null
 		return
 
-	if Input.is_action_just_pressed("BUTTON_LEFT") and mouse_over_node != null:
-		if mouse_over_node.is_in_group("draggable"):
-			if mouse_over_node.has_method("pickup"):
-				mouse_over_node.pickup()
-		elif mouse_over_node.is_in_group("creatures"):
-			if game.options["Creatures_Autograb_Hook"] == false:
+
+
+	if Input.is_action_just_pressed("BUTTON_LEFT"):
+		if mouse_over_node != null:
+
+			if mouse_over_node.is_in_group("draggable"):
 				if mouse_over_node.has_method("pickup"):
 					mouse_over_node.pickup()
+			elif mouse_over_node.is_in_group("creatures"):
+				if game.options["Creatures_Autograb_Hook"] == false:
+					if mouse_over_node.has_method("pickup"):
+						mouse_over_node.pickup()
 
 
 	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:

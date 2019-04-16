@@ -2,7 +2,7 @@ extends RigidBody2D
 class_name Draggable
 
 export var mouse_drag_speed : float = 4
-var gravity_radius : float
+#var gravity_radius : float
 var is_picked : bool = false
 var drag_velocity : Vector2 = Vector2(0,0)
 
@@ -14,8 +14,8 @@ func _ready() -> void:
 
 func deferred_ready() -> void:
 	randomize()
-	if game.black_hole:
-		gravity_radius = game.black_hole.gravity_radius
+#	if game.black_hole and is_instance_valid(game.black_hole):
+#		gravity_radius = game.black_hole.gravity_radius
 
 	choose_random_image()
 
