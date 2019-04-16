@@ -52,6 +52,7 @@ func _on_OxygenTimer_timeout():
 	# remove 1 oxygen unless you're on a planet, then add 10
 	if in_atmosphere:
 		oxygen_remaining = clamp(oxygen_remaining + 10, 0, 100)
+		$DeepBreathNoise.play()
 	else:
 		oxygen_remaining = clamp(oxygen_remaining - 1, 0, 100)
 

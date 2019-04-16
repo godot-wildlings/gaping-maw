@@ -18,9 +18,9 @@ func spawn_random_object():
 	var rand_object = object_scenes[randi()%object_scenes.size()]
 
 	var vector_to_black_hole = game.black_hole.get_global_position() - game.player.get_global_position()
-	var spawn_distance = 1500
+	var spawn_distance = 2500
 	var base_location = game.player.get_global_position() - vector_to_black_hole.normalized() * spawn_distance
-	var deviation = 1500
+	var deviation = 1250
 	var rand_location = base_location + Vector2(rand_range(-deviation, deviation), rand_range(-deviation, deviation))
 
 	var new_object = rand_object.instance()

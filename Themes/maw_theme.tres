@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://Themes/stylebox_purple.tres" type="StyleBox" id=1]
+[ext_resource path="res://Themes/Fonts/TarzanFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 18
+font_data = ExtResource( 4 )
+
+[resource]
+Panel/styles/panel = ExtResource( 1 )
+Panel/styles/panelf = null
+Panel/styles/panelnc = null
+PopupPanel/styles/panel = ExtResource( 1 )
+RichTextLabel/colors/default_color = Color( 1, 0.52549, 0.211765, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0.490196, 0.490196, 0.490196, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.1, 0.1, 1, 0.8 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = ExtResource( 2 )
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = SubResource( 1 )
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = SubResource( 2 )
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
+
