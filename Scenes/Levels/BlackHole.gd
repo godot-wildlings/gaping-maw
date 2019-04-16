@@ -2,7 +2,8 @@ extends Area2D
 class_name BlackHole
 
 var gravity_radius : float
-export var speed : float = 20.0
+export var base_speed : float = 20.0
+var speed : float = base_speed
 
 onready var EventHorizon = $EventHorizon
 
@@ -24,6 +25,12 @@ func deferred_ready() -> void:
 func move_toward_player(delta) -> void:
 	var my_pos = get_global_position()
 	var player_pos = game.player.get_global_position()
+	var dist_sq_to_player = (player_pos - my_pos).length_squared()
+
+	# move faster if you're far away from player
+	var radius_increment : float  = 750.0
+	speed = base_speed * dist_sq_to_player / (radius_increment * radius_increment)
+
 	var vector_to_player = (player_pos - my_pos).normalized() * speed
 	position += vector_to_player * delta
 

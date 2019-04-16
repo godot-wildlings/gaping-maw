@@ -10,8 +10,8 @@ The only way to get rid of it then will be to feed it something else.
 extends Area2D
 
 #export var speed : float = 60.0
-export var acceleration : float = 2500.0
-export var max_speed : float = 500.0
+export var acceleration : float = 2500.0 # per second.. will be reduced by delta
+export var max_speed : float = 400.0
 
 
 #export var crawl_speed : float = 200.0
@@ -32,6 +32,8 @@ var velocity : Vector2
 var target : Node2D
 
 var grapple_line : Path2D
+
+signal dropped(vel)
 
 func _ready():
 	choose_random_target()
@@ -137,6 +139,11 @@ func drop() -> void:
 	if state == states.TETHERED:
 		state = states.FLYING
 		velocity = drag_velocity * mouse_drag_speed
+
+	#warning-ignore:return_value_discarded
+	connect("dropped", game.player, "_on_creature_dropped")
+	emit_signal("dropped", velocity)
+	disconnect("dropped", game.player, "_on_creature_dropped")
 
 
 func _on_Creature_body_entered(body : PhysicsBody2D) -> void:

@@ -39,6 +39,10 @@ func _on_draggable_dropped(velocity):
 	linear_velocity += -velocity/4.0
 	clamp_linear_velocity()
 
+func _on_creature_dropped(velocity):
+	linear_velocity += -velocity/4.0
+	clamp_linear_velocity()
+
 func clamp_linear_velocity():
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
