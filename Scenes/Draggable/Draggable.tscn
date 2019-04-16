@@ -75,5 +75,3 @@ bus = "SFX"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bounce = SubResource( 3 )
 
-[connection signal="mouse_entered" from="pick_area" to="." method="_on_pick_area_mouse_entered"]
-[connection signal="mouse_exited" from="pick_area" to="." method="_on_pick_area_mouse_exited"]
