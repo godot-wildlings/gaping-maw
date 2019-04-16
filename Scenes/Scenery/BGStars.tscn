@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Scenery/BGStars.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Scenery/BGStar1.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Scenery/BGStar2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Scenery/BGStar3.png" type="Texture" id=4]
+
+[node name="BGStars" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="BGStar1" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.517647 )
+position = Vector2( -7.79429, -12.1411 )
+texture = ExtResource( 2 )
+
+[node name="BGStar2" type="Sprite" parent="."]
+position = Vector2( 19.6356, 15.7385 )
+scale = Vector2( 1.21547, 1.21547 )
+texture = ExtResource( 3 )
+
+[node name="BGStar3" type="Sprite" parent="."]
+position = Vector2( -1.4989, 5.84572 )
+scale = Vector2( 1.4403, 1.4403 )
+texture = ExtResource( 4 )
+
