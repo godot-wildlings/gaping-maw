@@ -113,8 +113,8 @@ func die() -> void:
 
 func munch(body) -> void:
 	# nom nom nom
-	if body.has_method("_on_hit"):
-		body._on_hit(DPS)
+	if body.has_method("on_hit"):
+		body.on_hit(DPS)
 	$MunchNoise.play()
 	$MunchTimer.start()
 

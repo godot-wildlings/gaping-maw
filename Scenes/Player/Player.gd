@@ -1,20 +1,17 @@
 extends RigidBody2D
 
 export var max_speed : float = 400.0
-
 export var max_health : float = 100.0
-var health : int = max_health
 
+var health : int = max_health
 var oxygen_remaining : float = 100.0
 var in_atmosphere : bool = false
 
-func _init():
+func _init() -> void:
 	game.player = self
 
 func _ready() -> void:
 	call_deferred("deferred_ready")
-
-
 
 func deferred_ready() -> void:
 #	if game.black_hole:
@@ -23,42 +20,31 @@ func deferred_ready() -> void:
 	initialize_variables()
 
 
-func initialize_variables():
+func initialize_variables() -> void:
 	oxygen_remaining = 100
 
-#warning-ignore:unused_argument
-func _process(delta) -> void:
-	pass # physics moved into bullet engine
-
-
-func die():
+func die() -> void:
 	# change this to spawn the lose screen
-	
 	$Camera2D/Tween._run_death_cam()
 	yield(get_node("Camera2D/Tween"),"tween_completed")
 	
 	game.main.lose()
 
-func _on_draggable_dropped(velocity):
-	linear_velocity += -velocity/4.0
+func _on_draggable_dropped(velocity : Vector2) -> void:
+	linear_velocity += -velocity / 4.0
 	clamp_linear_velocity()
 
-func _on_creature_dropped(velocity):
-	linear_velocity += -velocity/4.0
+func _on_creature_dropped(velocity : Vector2) -> void:
+	linear_velocity += -velocity / 4.0
 	clamp_linear_velocity()
 
-func clamp_linear_velocity():
+func clamp_linear_velocity() -> void:
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
 
-func _on_hit(damage):
+func on_hit(damage):
 	health -= damage
 	if health <= 0:
-		
-		#zoom camera in on player, then die
-		
-		#camera.zoom = Vector2(0.3,0.3)
-		
 		die()
 
 func _on_OxygenTimer_timeout():
