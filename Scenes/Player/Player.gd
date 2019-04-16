@@ -33,6 +33,10 @@ func _process(delta) -> void:
 
 func die():
 	# change this to spawn the lose screen
+	
+	$Camera2D/Tween._run_death_cam()
+	yield(get_node("Camera2D/Tween"),"tween_completed")
+	
 	game.main.lose()
 
 func _on_draggable_dropped(velocity):
@@ -50,6 +54,11 @@ func clamp_linear_velocity():
 func _on_hit(damage):
 	health -= damage
 	if health <= 0:
+		
+		#zoom camera in on player, then die
+		
+		#camera.zoom = Vector2(0.3,0.3)
+		
 		die()
 
 func _on_OxygenTimer_timeout():

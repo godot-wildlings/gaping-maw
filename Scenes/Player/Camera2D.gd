@@ -40,3 +40,8 @@ func _input(event):
 	DesiredZoom.x = clamp(DesiredZoom.x, MinZoom, MaxZoom)
 	DesiredZoom.y = clamp(DesiredZoom.y, MinZoom, MaxZoom)
 
+#func _run_death_cam():
+#
+#	tween.interpolate_property(self, "zoom",Vector2(), Vector2(0.3,0.3), 1,Tween.TRANS_LINEAR, Tween.EASE_OUT)
+#
+#	tween.start()

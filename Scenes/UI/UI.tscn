@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/HSlider.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/CheckButton.gd" type="Script" id=6]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -61,3 +63,24 @@ rect_min_size = Vector2( 75, 0 )
 step = 1.0
 script = ExtResource( 4 )
 
+[node name="HSlider" type="HSlider" parent="Panel"]
+margin_left = 886.0
+margin_top = 4.0
+margin_right = 1019.0
+margin_bottom = 20.0
+max_value = 1.0
+step = 0.0
+value = 1.0
+tick_count = 10
+script = ExtResource( 5 )
+
+[node name="CheckButton" type="CheckButton" parent="Panel"]
+margin_left = 2.6817
+margin_top = -7.41606
+margin_right = 148.682
+margin_bottom = 32.5839
+text = "Fullscreen"
+script = ExtResource( 6 )
+
+[connection signal="value_changed" from="Panel/HSlider" to="Panel/HSlider" method="_on_HSlider_value_changed"]
+[connection signal="toggled" from="Panel/CheckButton" to="Panel/CheckButton" method="_on_CheckButton_toggled"]
