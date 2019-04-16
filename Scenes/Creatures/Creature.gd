@@ -109,6 +109,8 @@ func follow_cursor(delta : float) -> void:
 
 func die() -> void:
 	# needs a noise an animation
+	$AnimationPlayer.play("pop")
+	yield($AnimationPlayer, "animation_finished")
 	call_deferred("queue_free")
 
 func munch(body) -> void:

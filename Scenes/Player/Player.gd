@@ -27,7 +27,7 @@ func die() -> void:
 	# change this to spawn the lose screen
 	$Camera2D/Tween._run_death_cam()
 	yield(get_node("Camera2D/Tween"),"tween_completed")
-	
+
 	game.main.lose()
 
 func _on_draggable_dropped(velocity : Vector2) -> void:

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/stretch-pop.wav-02ffbd6f34a22904240fbe4e40a5f0bd.sample"
+
+[deps]
+
+source_file="res://Scenes/Creatures/stretch-pop.wav"
+dest_files=[ "res://.import/stretch-pop.wav-02ffbd6f34a22904240fbe4e40a5f0bd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

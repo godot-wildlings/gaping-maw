@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Scenery/ShiftingBackground.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=9]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,6 +49,15 @@ script = ExtResource( 7 )
 
 [node name="Planets" type="Node2D" parent="."]
 script = ExtResource( 8 )
+
+[node name="Planet" parent="Planets" instance=ExtResource( 9 )]
+position = Vector2( 198.94, 2006.04 )
+
+[node name="Planet2" parent="Planets" instance=ExtResource( 9 )]
+position = Vector2( -142.994, 2695.37 )
+
+[node name="Planet3" parent="Planets" instance=ExtResource( 9 )]
+position = Vector2( 1152.38, 2234.55 )
 
 [node name="NewObjectSpawnTimer" type="Timer" parent="."]
 autostart = true
