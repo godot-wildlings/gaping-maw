@@ -141,18 +141,18 @@ size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "[b]Instructions[/b]
 
-Use the mouse to move your targeting reticle.
+Use the mouse to move your crosshair.
 
-Click and drag any organic object (cow, house, tree). Release the mouse-button to fling the object.
+Click and drag any object (cow, house, tree). Release the mouse-button to fling the object.
 
 Try and fling objects into the black hole or into the cthulhu creatures coming after you.
 
 When you fling an object, you'll receive a little push in the opposite direction. Stay away from the black hole and the creatures."
 text = "Instructions
 
-Use the mouse to move your targeting reticle.
+Use the mouse to move your crosshair.
 
-Click and drag any organic object (cow, house, tree). Release the mouse-button to fling the object.
+Click and drag any object (cow, house, tree). Release the mouse-button to fling the object.
 
 Try and fling objects into the black hole or into the cthulhu creatures coming after you.
 
