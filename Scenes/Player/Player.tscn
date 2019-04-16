@@ -40,3 +40,7 @@ position = Vector2( 48.5292, 0 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 6 )
 
+[node name="OxygenTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="OxygenTimer" to="." method="_on_OxygenTimer_timeout"]

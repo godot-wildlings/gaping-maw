@@ -32,3 +32,5 @@ gravity_vec = Vector2( 0, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityWell"]
 shape = SubResource( 2 )
 
+[connection signal="body_entered" from="GravityWell" to="." method="_on_GravityWell_body_entered"]
+[connection signal="body_exited" from="GravityWell" to="." method="_on_GravityWell_body_exited"]

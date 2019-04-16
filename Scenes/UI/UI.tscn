@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=4]
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -22,24 +24,40 @@ margin_top = -7.5
 margin_right = 192.0
 margin_bottom = 27.5
 custom_constants/hseparation = 25
-columns = 3
+columns = 6
 
 [node name="PlanetsDestroyed" type="Label" parent="Panel/GridContainer"]
 margin_right = 125.0
 margin_bottom = 14.0
-text = "Planets Destroyed: "
+text = "Planets Lost: "
 script = ExtResource( 2 )
 
-[node name="BlackHoleIntegrity" type="Label" parent="Panel/GridContainer"]
+[node name="SuitIntegrityLabel" type="Label" parent="Panel/GridContainer"]
 margin_left = 150.0
 margin_right = 284.0
 margin_bottom = 14.0
-text = "Black Hole Integrity: "
+text = "Suit Integrity: "
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/GridContainer"]
+[node name="SuitIntegrity" type="ProgressBar" parent="Panel/GridContainer"]
 margin_left = 309.0
 margin_right = 384.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 75, 0 )
+step = 1.0
 value = 100.0
+script = ExtResource( 3 )
+
+[node name="OxygenLabel" type="Label" parent="Panel/GridContainer"]
+margin_left = 409.0
+margin_right = 536.0
+margin_bottom = 14.0
+text = "Oxygen Remaining: "
+
+[node name="OxygenRemaining" type="ProgressBar" parent="Panel/GridContainer"]
+margin_left = 561.0
+margin_right = 636.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 75, 0 )
+step = 1.0
+script = ExtResource( 4 )
 

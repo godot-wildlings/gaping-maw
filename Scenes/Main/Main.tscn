@@ -101,9 +101,7 @@ bbcode_enabled = true
 bbcode_text = "[b]Description[/b]
 [i]\"Gaping Maw\"[/i] is a \"fling-em-up\" game. Fling objects into the black hole to save yourself."
 text = "Description
-\"Gaping Maw\" is a \"fling-em-up\" game. Fling objects into the black hole to save yourself.
-
-Do NOT let an interdimensional space alien touch your line."
+\"Gaping Maw\" is a \"fling-em-up\" game. Fling objects into the black hole to save yourself."
 
 [node name="IntroDialog" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VBoxContainer"]
 margin_top = 164.0

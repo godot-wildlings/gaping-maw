@@ -5,6 +5,8 @@ export var max_speed : float = 400.0
 export var max_health : int = 100
 var health : int = max_health
 
+var oxygen_remaining : int = 100
+var in_atmosphere : bool = false
 
 func _init():
 	game.player = self
@@ -12,10 +14,17 @@ func _init():
 func _ready() -> void:
 	call_deferred("deferred_ready")
 
+
+
 func deferred_ready() -> void:
 #	if game.black_hole:
 #		accel_radius = game.black_hole.accel_radius
 	$CanvasLayer/UI.show()
+	initialize_variables()
+
+
+func initialize_variables():
+	oxygen_remaining = 100
 
 #warning-ignore:unused_argument
 func _process(delta) -> void:
@@ -38,3 +47,20 @@ func _on_hit(damage):
 	health -= damage
 	if health <= 0:
 		die()
+
+func _on_OxygenTimer_timeout():
+	# remove 1 oxygen unless you're on a planet, then add 10
+	if in_atmosphere:
+		oxygen_remaining = clamp(oxygen_remaining + 10, 0, 100)
+	else:
+		oxygen_remaining = clamp(oxygen_remaining - 1, 0, 100)
+
+	if oxygen_remaining == 0:
+		die()
+
+
+func _on_atmosphere_entered():
+	in_atmosphere = true
+
+func _on_atmosphere_left():
+	in_atmosphere = false

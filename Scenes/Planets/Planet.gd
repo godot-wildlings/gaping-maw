@@ -45,3 +45,17 @@ func _on_hit(damage) -> void:
 	health -= damage
 	if health <= 0:
 		die()
+
+func _on_GravityWell_body_entered(body):
+	if body == game.player:
+		if body.has_method("_on_atmosphere_entered"):
+			body._on_atmosphere_entered()
+
+
+
+
+func _on_GravityWell_body_exited(body):
+	if body == game.player:
+		if body.has_method("_on_atmosphere_left"):
+			body._on_atmosphere_left()
+
