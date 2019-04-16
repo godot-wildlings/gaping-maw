@@ -24,8 +24,7 @@ func spawn_surface_objects() -> void:
 	#warning-ignore:unused_variable
 	for i in range(randi() % (2 * deviation) - deviation + num_objects):
 		var new_object : Object = surface_object_scene.instance()
-
-		var rand_angle = randf() * 2 * PI #radians
+		var rand_angle : float = randf() * 2 * PI #radians
 		var radius : float = 50.0
 
 		new_object.set_as_toplevel(true)
@@ -41,21 +40,17 @@ func die() -> void:
 	game.planets_destroyed += 1
 	call_deferred("queue_free")
 
-func _on_hit(damage) -> void:
-	health -= damage
+func on_hit(damage : float) -> void:
+	health -= int(damage)
 	if health <= 0:
 		die()
 
-func _on_GravityWell_body_entered(body):
+func _on_GravityWell_body_entered(body : PhysicsBody2D) -> void:
 	if body == game.player:
 		if body.has_method("_on_atmosphere_entered"):
 			body._on_atmosphere_entered()
 
-
-
-
-func _on_GravityWell_body_exited(body):
+func _on_GravityWell_body_exited(body : PhysicsBody2D) -> void:
 	if body == game.player:
 		if body.has_method("_on_atmosphere_left"):
 			body._on_atmosphere_left()
-
