@@ -18,6 +18,9 @@ func _ready() -> void:
 	IntroScreen.show()
 
 func next_level() -> void:
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.stop()
+
 	remove_previous_level()
 
 	level_idx = wrapi(level_idx + 1, 0, level_scenes.size())
@@ -28,6 +31,7 @@ func next_level() -> void:
 	game.level = new_level
 
 func remove_previous_level():
+
 	if game.level != null and is_instance_valid(game.level):
 		game.level.call_deferred("queue_free")
 
@@ -41,8 +45,11 @@ func remove_all_levels() -> void:
 func lose() -> void:
 	remove_all_levels()
 	EndScreen.show()
+	$AudioStreamPlayer.play()
 
 func restart() -> void:
 	EndScreen.hide()
 	IntroScreen.hide()
 	next_level()
+	$AudioStreamPlayer.stop()
+

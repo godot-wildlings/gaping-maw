@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/aftermath.ogg-52b1fce27bd0a9747bd438b28a7c00a4.oggstr"
+
+[deps]
+
+source_file="res://BGMusic/aftermath.ogg"
+dest_files=[ "res://.import/aftermath.ogg-52b1fce27bd0a9747bd438b28a7c00a4.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

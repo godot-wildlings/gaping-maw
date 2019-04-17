@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Levels/stars.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=11]
+[ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
@@ -85,5 +86,11 @@ position = Vector2( 1152.38, 2234.55 )
 autostart = true
 
 [node name="SpawnedObjects" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -9.0
+autoplay = true
+bus = "Music"
 
 [connection signal="timeout" from="NewObjectSpawnTimer" to="." method="_on_NewObjectSpawnTimer_timeout"]
