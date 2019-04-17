@@ -52,7 +52,7 @@ autostart = true
 
 [node name="DeepBreathNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
-volume_db = -22.0
+volume_db = -9.0
 bus = "SFX"
 
 [node name="death" type="Node2D" parent="."]

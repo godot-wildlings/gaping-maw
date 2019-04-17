@@ -1,52 +1,18 @@
 [gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://Themes/Fonts/TarzanFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Themes/stylebox_purple.tres" type="StyleBox" id=2]
-[ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.192157, 0.113725, 0.282353, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.745098, 0.415686, 0.894118, 1 )
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 4.0
-expand_margin_right = 4.0
-expand_margin_top = 4.0
-expand_margin_bottom = 4.0
-shadow_color = Color( 0.690196, 0.0666667, 0.803922, 0.807843 )
-shadow_size = 12
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.192157, 0.113725, 0.282353, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.745098, 0.415686, 0.894118, 1 )
-border_blend = true
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-expand_margin_left = 4.0
-expand_margin_right = 4.0
-expand_margin_top = 4.0
-expand_margin_bottom = 4.0
+[ext_resource path="res://Themes/purple_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://Themes/purple_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://Themes/stylebox_purple.tres" type="StyleBox" id=4]
+[ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 3 )
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 18
-font_data = ExtResource( 4 )
+font_data = ExtResource( 6 )
 
 [resource]
 Button/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
@@ -57,9 +23,25 @@ Button/constants/hseparation = 2
 Button/fonts/font = ExtResource( 1 )
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = SubResource( 1 )
-Button/styles/normal = SubResource( 2 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckButton/colors/font_color_hover = Color( 1, 1, 1, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckButton/colors/font_color_pressed = Color( 1, 0.52549, 0.211765, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/fonts/font = null
+CheckButton/icons/off = null
+CheckButton/icons/on = null
+CheckButton/styles/disabled = ExtResource( 3 )
+CheckButton/styles/focus = ExtResource( 3 )
+CheckButton/styles/hover = ExtResource( 2 )
+CheckButton/styles/hover_pressed = ExtResource( 2 )
+CheckButton/styles/normal = ExtResource( 3 )
+CheckButton/styles/pressed = ExtResource( 3 )
 Label/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -69,10 +51,10 @@ Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/fonts/font = ExtResource( 1 )
 Label/styles/normal = null
-Panel/styles/panel = ExtResource( 2 )
+Panel/styles/panel = ExtResource( 4 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
-PopupPanel/styles/panel = ExtResource( 2 )
+PopupPanel/styles/panel = ExtResource( 4 )
 RichTextLabel/colors/default_color = Color( 1, 0.52549, 0.211765, 1 )
 RichTextLabel/colors/font_color_selected = Color( 0.490196, 0.490196, 0.490196, 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
