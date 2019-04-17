@@ -30,6 +30,21 @@ func next_level() -> void:
 	$Levels.call_deferred("add_child", new_level)
 	game.level = new_level
 
+func goto_level(level_num) -> void:
+	if $AudioStreamPlayer.is_playing():
+		$AudioStreamPlayer.stop()
+
+	remove_previous_level()
+
+	var new_level_scene = load(level_scenes[level_num])
+	var new_level = new_level_scene.instance()
+
+	$Levels.call_deferred("add_child", new_level)
+	game.level = new_level
+	level_idx = level_num
+
+
+
 func remove_previous_level():
 
 	if game.level != null and is_instance_valid(game.level):
@@ -66,4 +81,5 @@ func restart() -> void:
 	level_idx = -1
 	next_level()
 
-
+func skip_tutorial() -> void:
+	goto_level(2)
