@@ -102,8 +102,13 @@ func _on_creature_escaped():
 	mouse_over_node = null
 
 
-
-func _on_Cursor_body_exited(body):
+#warning-ignore:unused_argument
+func _on_Cursor_body_exited(body): # draggables
 	if state == states.IDLE:
 		mouse_over_node = null
 
+
+#warning-ignore:unused_argument
+func _on_Cursor_area_exited(area): # creatures
+	if state == states.IDLE:
+		mouse_over_node = null

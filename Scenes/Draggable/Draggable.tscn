@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Draggable/Draggable.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/cow.png" type="Texture" id=2]
@@ -9,9 +9,6 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 45.8258, 42.382 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "bounce"
@@ -56,11 +53,6 @@ texture = ExtResource( 3 )
 rotation = 1.5708
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 4 )
-
-[node name="pick_area" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pick_area"]
-shape = SubResource( 2 )
 
 [node name="SquishNoise" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )

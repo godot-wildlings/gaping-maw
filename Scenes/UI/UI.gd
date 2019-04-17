@@ -25,6 +25,7 @@ func _on_OptionsButton_pressed():
 	options_panel.show()
 	get_tree().paused = true
 
+#warning-ignore:unused_argument
 func _input(event):
 	if Input.is_action_just_pressed("options"):
 		if options_panel.visible == false:
