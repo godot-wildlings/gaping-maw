@@ -59,10 +59,14 @@ func unhook_freed_nodes():
 func _input(event : InputEvent) -> void:
 
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
-		var potential_objects = get_overlapping_bodies()
 		if state == states.IDLE:
-			if potential_objects.size() > 0:
-				grab(potential_objects)
+			var potential_bodies = get_overlapping_bodies()
+			if potential_bodies.size() > 0:
+				grab(potential_bodies)
+			else:
+				var potential_areas = get_overlapping_areas()
+				if potential_areas.size() > 0:
+					grab(potential_areas)
 
 	elif Input.is_action_just_released("BUTTON_LEFT"):
 		if state == states.HOOKED and object_hooked != null:
