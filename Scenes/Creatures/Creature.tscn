@@ -12,7 +12,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 72.2502
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "drag"
 length = 0.1
 tracks/0/type = "value"
@@ -52,8 +52,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 20, 100 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=3]
 length = 3.4
 loop = true
 tracks/0/type = "value"
@@ -146,8 +145,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "pop"
+[sub_resource type="Animation" id=5]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -263,10 +261,10 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
-anims/drag = SubResource( 5 )
-anims/idle = SubResource( 2 )
+anims/drag = SubResource( 2 )
+anims/idle = SubResource( 3 )
 anims/munch = SubResource( 4 )
-anims/pop = SubResource( 3 )
+anims/pop = SubResource( 5 )
 
 [node name="MunchTimer" type="Timer" parent="."]
 

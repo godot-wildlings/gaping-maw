@@ -115,12 +115,20 @@ func follow_cursor(delta : float) -> void:
 
 	var drag_speed = drag_velocity.length()
 	var drag_rot = Vector2.UP.angle_to(drag_velocity)
-	rotation = lerp(rotation, drag_rot, 0.3)
+	rotation = lerp_angle(rotation, drag_rot, 0.1)
 	#look_at(my_pos + drag_velocity)
 
 	var stretch_reduction_factor = 50
 	$Sprite.scale.y = min(1 + drag_speed/stretch_reduction_factor, 1.5)
 	$Sprite.scale.x = max(1 - drag_speed/stretch_reduction_factor, 0.3)
+
+func lerp_angle(from, to, weight) -> float:
+    return from + short_angle_dist(from, to) * weight
+
+func short_angle_dist(from, to) -> float:
+    var max_angle = PI * 2
+    var difference = fmod(to - from, max_angle)
+    return fmod(2 * difference, max_angle) - difference
 
 
 func die() -> void:
