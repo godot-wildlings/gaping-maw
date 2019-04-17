@@ -17,17 +17,24 @@ func spawn_random_object() -> void:
 
 	var asteroid : PackedScene = load("res://Scenes/Obstacles/Asteroid.tscn")
 	var planet : PackedScene = load("res://Scenes/Planets/Planet.tscn")
-	var object_scenes : Array = [asteroid, planet] # 50/50 chance right now
+	#var object_scenes : Array = [asteroid, planet] # 50/50 chance right now
 
-	var rand_object : PackedScene= object_scenes[randi() % object_scenes.size()]
+	var rand_object : PackedScene
+	if randf()<0.66:
+		rand_object = asteroid
+	else:
+		rand_object = planet
 
 	var black_hole_pos = game.black_hole.get_global_position()
 	var player_pos = game.player.get_global_position()
 	var vector_to_player : Vector2 = player_pos - black_hole_pos
-	var rotation_deviation = rand_range(-PI/8, PI/8) # 45 deg
-	var distance_deviation = rand_range(1.25, 2.5)
+	var distance_to_player : float = vector_to_player.length()
+	var direction_vector : Vector2 = vector_to_player.normalized()
 
-	var spawn_location = black_hole_pos + (vector_to_player * distance_deviation).rotated(rotation_deviation)
+	var rotation_deviation = rand_range(-PI/8, PI/8) # 45 deg
+	var distance = distance_to_player + rand_range(2000, 4000)
+
+	var spawn_location = black_hole_pos + direction_vector.rotated(rotation_deviation) * distance
 
 
 	var new_object : Object = rand_object.instance()

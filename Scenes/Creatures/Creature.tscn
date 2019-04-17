@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Creatures/Creature.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/creature1.png" type="Texture" id=2]
@@ -8,13 +8,14 @@
 [ext_resource path="res://Sprites/explodingCreature.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/PinkMist.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/CreatureMouth.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Creatures/hooked.wav" type="AudioStream" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 72.2502
 
 [sub_resource type="Animation" id=2]
 resource_name = "drag"
-length = 0.1
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
 tracks/0/interp = 1
@@ -50,6 +51,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 20, 100 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("drag/HookScream:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -305,6 +318,13 @@ visible = false
 position = Vector2( -5.01881, -2.8679 )
 texture = ExtResource( 8 )
 hframes = 2
+
+[node name="drag" type="Node2D" parent="."]
+
+[node name="HookScream" type="AudioStreamPlayer2D" parent="drag"]
+stream = ExtResource( 9 )
+volume_db = 0.9
+pitch_scale = 0.6
 
 [connection signal="body_entered" from="." to="." method="_on_Creature_body_entered"]
 [connection signal="timeout" from="MunchTimer" to="." method="_on_MunchTimer_timeout"]
