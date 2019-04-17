@@ -111,14 +111,14 @@ size_flags_vertical = 3
 
 [node name="Description" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_right = 466.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 120 )
 size_flags_horizontal = 3
 bbcode_enabled = true
 bbcode_text = "[b]Description[/b]
-[i]\"Gaping Maw\"[/i] is a \"fling-em-up\" game. Fling objects into the black hole to save yourself."
+[i]\"Gaping Maw\"[/i] is a \"fling-em-up\" / \"endless-flinger\" game. Fling objects to propel yourself and escape the black hole."
 text = "Description
-\"Gaping Maw\" is a \"fling-em-up\" game. Fling objects into the black hole to save yourself."
+\"Gaping Maw\" is a \"fling-em-up\" / \"endless-flinger\" game. Fling objects to propel yourself and escape the black hole."
 
 [node name="IntroDialog" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 visible = false
@@ -144,7 +144,7 @@ Here I am, adrift with nothing but my Carbon-Attractor-Gun\".
 Did I mention the black hole is spitting out extra-dimensional lovecraft-entities? Great."
 
 [node name="Instructions" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
-margin_top = 104.0
+margin_top = 124.0
 margin_right = 466.0
 margin_bottom = 472.0
 size_flags_horizontal = 3

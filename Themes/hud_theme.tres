@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=16 format=2]
 
 [ext_resource path="res://Themes/Fonts/TarzanFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Themes/Fonts/Tarzan16.tres" type="DynamicFont" id=2]
@@ -42,9 +42,17 @@ expand_margin_right = 4.0
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
 [sub_resource type="StyleBoxEmpty" id=3]
 
+[sub_resource type="StyleBoxEmpty" id=9]
+
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 4 )
@@ -75,12 +83,12 @@ CheckButton/constants/hseparation = 4
 CheckButton/fonts/font = null
 CheckButton/icons/off = null
 CheckButton/icons/on = null
-CheckButton/styles/disabled = null
-CheckButton/styles/focus = null
+CheckButton/styles/disabled = SubResource( 7 )
+CheckButton/styles/focus = SubResource( 8 )
 CheckButton/styles/hover = SubResource( 3 )
-CheckButton/styles/hover_pressed = null
+CheckButton/styles/hover_pressed = SubResource( 9 )
 CheckButton/styles/normal = SubResource( 4 )
-CheckButton/styles/pressed = null
+CheckButton/styles/pressed = SubResource( 10 )
 Label/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
