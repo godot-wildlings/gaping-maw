@@ -114,6 +114,7 @@ func follow_cursor(delta : float) -> void:
 
 
 func die() -> void:
+	state = states.DEAD
 	# needs a noise an animation
 	velocity *= 0.1 # slow down, but don't stop altogether
 	$AnimationPlayer.play("pop")
@@ -160,6 +161,9 @@ func drop() -> void:
 
 
 func _on_Creature_body_entered(body : PhysicsBody2D) -> void:
+	if state == states.DEAD:
+		return
+
 	if body.is_in_group("draggable"):
 		if body.has_method("die"):
 			body.die()

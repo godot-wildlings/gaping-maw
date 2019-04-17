@@ -50,7 +50,7 @@ func clamp_linear_velocity() -> void:
 func on_hit(damage : float) -> void:
 	health -= int(damage)
 	if health <= 0:
-		die("extradimensional horrors.")
+		die("ingestion. Consumed by unknown extradimensional horrors.")
 
 func _on_OxygenTimer_timeout() -> void:
 	# remove 1 oxygen unless you're on a planet, then add 10
@@ -61,7 +61,7 @@ func _on_OxygenTimer_timeout() -> void:
 		oxygen_remaining = clamp(oxygen_remaining - 1, 0, 100)
 
 	if oxygen_remaining == 0:
-		die("asphyxiation")
+		die("asphyxiation in the cold blackness of space.")
 
 
 func _on_atmosphere_entered() -> void:
