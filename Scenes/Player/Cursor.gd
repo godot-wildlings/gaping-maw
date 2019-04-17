@@ -9,7 +9,7 @@ Creatures which latch onto the line can follow the PathFollow2D node.
 
 extends Area2D
 
-var mouse_over_node : Node2D = null
+#var mouse_over_node : Node2D = null
 var object_hooked : Node2D = null
 
 export var max_range : float = 1000.0
@@ -49,8 +49,8 @@ func unhook_freed_nodes():
 		if state == states.HOOKED:
 			state = states.IDLE
 			$RayGunNoise.stop()
-	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
-		mouse_over_node = null
+#	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
+#		mouse_over_node = null
 
 
 
@@ -59,25 +59,23 @@ func unhook_freed_nodes():
 func _input(event : InputEvent) -> void:
 
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
-		if state == states.IDLE and mouse_over_node != null:
-			grab(mouse_over_node)
+		var potential_objects = get_overlapping_bodies()
+		if state == states.IDLE:
+			if potential_objects.size() > 0:
+				grab(potential_objects)
 
 	elif Input.is_action_just_released("BUTTON_LEFT"):
 		if state == states.HOOKED and object_hooked != null:
 			drop(object_hooked)
 
-func grab(object):
-	if object.has_method("pickup"):
-		$RayGunNoise.play()
-		if object.is_in_group("draggable"):
+func grab(potential_objects):
+	for object in potential_objects:
+		if object.has_method("pickup"):
 			object.pickup()
 			state = states.HOOKED
 			object_hooked = object
-		elif object.is_in_group("creatures"):
-			if game.options["Creatures_Autograb_Hook"] == false: # prevents player from pressing button to relocate creature to the end of the line
-				object.pickup()
-				state = states.HOOKED
-				object_hooked = object
+			$RayGunNoise.play()
+			return
 
 func drop(object):
 	$RayGunNoise.stop()
@@ -88,27 +86,27 @@ func drop(object):
 		state = states.IDLE
 
 
-func _on_Cursor_body_entered(body) -> void:
-	if state == states.IDLE:
-		if mouse_over_node == null:
-			if body.is_in_group("draggable"):
-				mouse_over_node = body
+#func _on_Cursor_body_entered(body) -> void:
+#	if state == states.IDLE:
+#		if mouse_over_node == null:
+#			if body.is_in_group("draggable"):
+#				mouse_over_node = body
 
 
-func _on_Cursor_area_entered(area) -> void:
-	if game.options["Creatures_Grabbable"] == false:
-		return
-
-	if state == states.IDLE:
-		if mouse_over_node == null and area.is_in_group("creatures"):
-			var creature = area
-			mouse_over_node = creature
-
-			if game.options["Creatures_Autograb_Hook"] == true:
-				if creature.has_method("pickup"):
-					creature.pickup() # tell the creature to follow the position2d node
-					state = states.HOOKED
-					object_hooked = creature
+#func _on_Cursor_area_entered(area) -> void:
+#	if game.options["Creatures_Grabbable"] == false:
+#		return
+#
+#	if state == states.IDLE:
+#		if mouse_over_node == null and area.is_in_group("creatures"):
+#			var creature = area
+#			mouse_over_node = creature
+#
+#			if game.options["Creatures_Autograb_Hook"] == true:
+#				if creature.has_method("pickup"):
+#					creature.pickup() # tell the creature to follow the position2d node
+#					state = states.HOOKED
+#					object_hooked = creature
 
 
 
@@ -153,11 +151,11 @@ func draw_tether():
 func _on_creature_escaped():
 	object_hooked = null
 
-#warning-ignore:unused_argument
-func _on_Cursor_body_exited(body): # draggables
-	mouse_over_node = null
+##warning-ignore:unused_argument
+#func _on_Cursor_body_exited(body): # draggables
+#	mouse_over_node = null
 
 
-#warning-ignore:unused_argument
-func _on_Cursor_area_exited(area): # creatures
-	mouse_over_node = null
+##warning-ignore:unused_argument
+#func _on_Cursor_area_exited(area): # creatures
+#	mouse_over_node = null

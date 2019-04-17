@@ -18,8 +18,7 @@ var debug : bool = true
 #warning-ignore:unused_class_variable
 var options : Dictionary = {
 	"Creatures_Grabbable" : true,
-	"Creatures_Walk_The_Line" : false,
-	"Creatures_Autograb_Hook" : false
+	"Creatures_Walk_The_Line" : false
 }
 
 var score : Dictionary = {
