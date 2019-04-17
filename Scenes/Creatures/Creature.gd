@@ -19,7 +19,7 @@ export var max_speed : float = 400.0
 export var turn_speed : float = PI/4 #radians per second
 
 export var DPS : float = 10
-export var mouse_drag_speed : float = 4
+export var mouse_drag_speed : float = 8
 
 enum states { FLYING, EATING, TETHERED, CRAWLING, DEAD }
 #warning-ignore:unused_class_variable

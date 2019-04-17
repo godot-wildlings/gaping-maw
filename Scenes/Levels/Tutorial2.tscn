@@ -32,7 +32,7 @@ margin_top = 59.5777
 margin_right = 717.837
 margin_bottom = 91.5777
 theme = ExtResource( 4 )
-text = "Fling or drag an Object into the Creature"
+text = "Fling an Object into the Creature"
 
 [node name="Creature" parent="." instance=ExtResource( 5 )]
 position = Vector2( 734.631, 145.974 )

@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export var max_speed : float = 400.0
 export var max_health : float = 100.0
+export var fling_damper : float = 0.5 # 0 to 1, 1 is maximum thrust
 
 var health : int = max_health
 var oxygen_remaining : float = 100.0
@@ -18,24 +19,28 @@ func deferred_ready() -> void:
 #		accel_radius = game.black_hole.accel_radius
 	$CanvasLayer/UI.show()
 	initialize_variables()
-
+	$death/Sprite.hide()
 
 func initialize_variables() -> void:
 	oxygen_remaining = 100
 
 func die() -> void:
 	# change this to spawn the lose screen
+
+	$Sprite.hide()
+	$death/Sprite.show()
+
 	$Camera2D/Tween._run_death_cam()
 	yield(get_node("Camera2D/Tween"),"tween_completed")
 
 	game.main.lose()
 
 func _on_draggable_dropped(velocity : Vector2) -> void:
-	linear_velocity += -velocity / 4.0
+	linear_velocity += -velocity * fling_damper
 	clamp_linear_velocity()
 
 func _on_creature_dropped(velocity : Vector2) -> void:
-	linear_velocity += -velocity / 4.0
+	linear_velocity += -velocity * fling_damper
 	clamp_linear_velocity()
 
 func clamp_linear_velocity() -> void:

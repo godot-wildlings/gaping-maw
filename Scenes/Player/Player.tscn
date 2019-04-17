@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Player/compass.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/arrow.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Player/breath.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sprites/DeadRobot.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -53,5 +54,12 @@ autostart = true
 stream = ExtResource( 8 )
 volume_db = -22.0
 bus = "SFX"
+
+[node name="death" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="death"]
+visible = false
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 9 )
 
 [connection signal="timeout" from="OxygenTimer" to="." method="_on_OxygenTimer_timeout"]

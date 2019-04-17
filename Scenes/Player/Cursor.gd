@@ -70,22 +70,24 @@ func _input(event : InputEvent) -> void:
 
 
 func _on_Cursor_body_entered(body) -> void:
-	if mouse_over_node == null:
-		if body.is_in_group("draggable"):
-			mouse_over_node = body
+	if state == states.IDLE:
+		if mouse_over_node == null:
+			if body.is_in_group("draggable"):
+				mouse_over_node = body
 
 
 func _on_Cursor_area_entered(area) -> void:
 	if game.options["Creatures_Grabbable"] == false:
 		return
 
-	if mouse_over_node == null and area.is_in_group("creatures"):
-		mouse_over_node = area
+	if state == states.IDLE:
+		if mouse_over_node == null and area.is_in_group("creatures"):
+			mouse_over_node = area
 
-		if game.options["Creatures_Autograb_Hook"] == true:
-			if area.has_method("pickup"):
-				area.pickup() # tell the creature to follow the position2d node
-				state = states.HOOKED
+			if game.options["Creatures_Autograb_Hook"] == true:
+				if area.has_method("pickup"):
+					area.pickup() # tell the creature to follow the position2d node
+					state = states.HOOKED
 
 
 

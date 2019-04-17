@@ -20,6 +20,14 @@ position = Vector2( 355.134, 314.698 )
 position = Vector2( 567.863, 249.649 )
 rotation = -1.5708
 
+[node name="Draggable2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 575.796, 438.464 )
+rotation = -1.5708
+
+[node name="Draggable3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 95.033, 416.25 )
+rotation = -1.5708
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -28,7 +36,7 @@ margin_top = 69.4554
 margin_right = 674.754
 margin_bottom = 101.455
 theme = ExtResource( 4 )
-text = "Fling the Object into the Antimatter"
+text = "Fling an Object into the Antimatter"
 
 [node name="walls" parent="." instance=ExtResource( 5 )]
 

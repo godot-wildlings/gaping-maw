@@ -1,7 +1,7 @@
 extends RigidBody2D
 class_name Draggable
 
-export var mouse_drag_speed : float = 4
+export var mouse_drag_speed : float = 6.0
 #var gravity_radius : float
 var is_picked : bool = false
 var drag_velocity : Vector2 = Vector2(0,0)
