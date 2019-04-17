@@ -67,12 +67,12 @@ text = "Volume"
 align = 1
 
 [node name="VolSlider" type="HSlider" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 26.0
+margin_top = 34.0
 margin_right = 75.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 6
 max_value = 2.0
 step = 0.0
 value = 1.0
