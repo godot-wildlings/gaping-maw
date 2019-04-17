@@ -113,6 +113,16 @@ func follow_cursor(delta : float) -> void:
 	drag_velocity = mouse_pos - my_pos
 
 
+	var drag_speed = drag_velocity.length()
+	var drag_rot = Vector2.UP.angle_to(drag_velocity)
+	rotation = lerp(rotation, drag_rot, 0.3)
+	#look_at(my_pos + drag_velocity)
+
+	var stretch_reduction_factor = 50
+	$Sprite.scale.y = min(1 + drag_speed/stretch_reduction_factor, 1.5)
+	$Sprite.scale.x = max(1 - drag_speed/stretch_reduction_factor, 0.3)
+
+
 func die() -> void:
 	state = states.DEAD
 	# needs a noise an animation
@@ -128,6 +138,7 @@ func munch(body) -> void:
 
 	if body.has_method("on_hit"):
 		body.on_hit(DPS)
+	$AnimationPlayer.play("munch")
 	$MunchNoise.play()
 	$MunchTimer.start()
 
@@ -135,9 +146,11 @@ func pickup() -> void:
 	if game.options["Creatures_Grabbable"] == false:
 		return
 
+
 	# should also play a noise and animation
 	if state == states.FLYING:
 		state = states.TETHERED
+		$AnimationPlayer.play("drag")
 		$EscapeHookTimer.start()
 
 	if game.options["Creatures_Walk_The_Line"] == true:
@@ -152,6 +165,7 @@ func drop() -> void:
 	# player has a limited time to fling a creature.
 	if state == states.TETHERED:
 		state = states.FLYING
+		$AnimationPlayer.play("idle")
 		velocity = drag_velocity * mouse_drag_speed
 
 	#warning-ignore:return_value_discarded
