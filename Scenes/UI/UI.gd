@@ -16,3 +16,15 @@ func _ready() -> void:
 func _on_draggable_entered() -> void:
 #	progress_value -= 10
 	pass
+
+
+func _on_OptionsButton_pressed():
+	$GameOptions/GameOptionsPanel.show()
+	get_tree().paused = true
+
+
+
+func _on_ResumeButton_pressed():
+	print("options button pressed")
+	$GameOptions/GameOptionsPanel.hide()
+	get_tree().paused = false

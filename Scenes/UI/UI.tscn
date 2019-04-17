@@ -1,107 +1,77 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Themes/hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/UI/HSlider.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/UI/CheckButton.gd" type="Script" id=7]
+[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scenes/UI/HSlider.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/CheckButton.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 3 )
 
 [node name="UI" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="GameOptions" type="MarginContainer" parent="."]
+pause_mode = 2
 anchor_right = 1.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
+anchor_bottom = 1.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
 
-[node name="GridContainer" type="GridContainer" parent="Panel"]
+[node name="GameOptionsPanel" type="PopupPanel" parent="GameOptions"]
+visible = true
+margin_left = 100.0
+margin_top = 100.0
+margin_right = 924.0
+margin_bottom = 500.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOptions/GameOptionsPanel"]
 anchor_right = 1.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 60 )
-custom_constants/vseparation = -10
-custom_constants/hseparation = 25
-columns = 5
+anchor_bottom = 1.0
 
-[node name="PlanetsDestroyedLabel" type="Label" parent="Panel/GridContainer"]
-margin_right = 209.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Planets Lost"
+[node name="OptionsTitle" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+margin_right = 824.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 1 )
+text = "Options"
 align = 1
 
-[node name="SuitIntegrityLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 234.0
-margin_right = 443.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Suit Integrity"
-align = 1
+[node name="GridContainer" type="GridContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+margin_top = 67.0
+margin_right = 824.0
+margin_bottom = 125.0
+columns = 2
 
-[node name="OxygenLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 468.0
-margin_right = 677.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Oxygen Remaining"
-align = 1
-
-[node name="VolLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 702.0
-margin_right = 911.0
+[node name="VolLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
+margin_right = 410.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Volume"
 align = 1
 
-[node name="FullscreenLabel" type="Label" parent="Panel/GridContainer"]
-margin_left = 936.0
-margin_right = 1023.0
+[node name="FullscreenLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
+margin_left = 414.0
+margin_right = 824.0
 margin_bottom = 22.0
+size_flags_horizontal = 3
 text = "Fullscreen"
 align = 1
 
-[node name="PlanetsDestroyed2" type="Label" parent="Panel/GridContainer"]
-margin_top = 17.0
-margin_right = 209.0
-margin_bottom = 39.0
-size_flags_horizontal = 3
-text = "0"
-align = 1
-script = ExtResource( 3 )
-
-[node name="SuitIntegrity" type="ProgressBar" parent="Panel/GridContainer"]
-margin_left = 234.0
-margin_top = 21.0
-margin_right = 443.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 75, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-step = 1.0
-value = 100.0
-script = ExtResource( 4 )
-
-[node name="OxygenRemaining" type="ProgressBar" parent="Panel/GridContainer"]
-margin_left = 468.0
-margin_top = 21.0
-margin_right = 677.0
-margin_bottom = 35.0
-rect_min_size = Vector2( 75, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-step = 1.0
-script = ExtResource( 5 )
-
-[node name="VolSlider" type="HSlider" parent="Panel/GridContainer"]
-margin_left = 702.0
-margin_top = 20.0
-margin_right = 911.0
-margin_bottom = 36.0
+[node name="VolSlider" type="HSlider" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
+margin_top = 34.0
+margin_right = 410.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -109,16 +79,118 @@ max_value = 1.0
 step = 0.0
 value = 1.0
 tick_count = 10
-script = ExtResource( 6 )
+script = ExtResource( 4 )
 
-[node name="CheckButton" type="CheckButton" parent="Panel/GridContainer"]
-margin_left = 947.0
-margin_top = 12.0
-margin_right = 1011.0
-margin_bottom = 44.0
+[node name="CheckButton" type="CheckButton" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
+margin_left = 587.0
+margin_top = 26.0
+margin_right = 651.0
+margin_bottom = 58.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource( 5 )
+
+[node name="ResumeButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+margin_top = 129.0
+margin_right = 824.0
+margin_bottom = 165.0
+text = "Resume Game"
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 0
+
+[node name="TopPanel" type="HBoxContainer" parent="Panel/MarginContainer"]
+margin_left = 100.0
+margin_right = 924.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+custom_constants/separation = 25
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
+margin_left = 139.0
+margin_right = 297.0
+margin_bottom = 60.0
+
+[node name="OxygenLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer"]
+margin_right = 158.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Oxygen Remaining"
+align = 1
+
+[node name="OxygenRemaining" type="ProgressBar" parent="Panel/MarginContainer/TopPanel/VBoxContainer"]
+margin_top = 26.0
+margin_right = 158.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+script = ExtResource( 6 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
+margin_left = 322.0
+margin_right = 433.0
+margin_bottom = 60.0
+
+[node name="SuitIntegrityLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer2"]
+margin_right = 111.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Suit Integrity"
+align = 1
+
+[node name="SuitIntegrity" type="ProgressBar" parent="Panel/MarginContainer/TopPanel/VBoxContainer2"]
+margin_top = 26.0
+margin_right = 111.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 1.0
+value = 100.0
 script = ExtResource( 7 )
 
-[connection signal="value_changed" from="Panel/GridContainer/VolSlider" to="Panel/GridContainer/VolSlider" method="_on_HSlider_value_changed"]
-[connection signal="toggled" from="Panel/GridContainer/CheckButton" to="Panel/GridContainer/CheckButton" method="_on_CheckButton_toggled"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
+margin_left = 458.0
+margin_right = 561.0
+margin_bottom = 60.0
+
+[node name="PlanetsDestroyedLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
+margin_right = 103.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Planets Lost"
+align = 1
+
+[node name="PlanetsDestroyed" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
+margin_top = 26.0
+margin_right = 103.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+text = "0"
+align = 1
+script = ExtResource( 8 )
+
+[node name="OptionsButton" type="Button" parent="Panel/MarginContainer/TopPanel"]
+margin_left = 586.0
+margin_top = 12.0
+margin_right = 684.0
+margin_bottom = 48.0
+size_flags_vertical = 4
+text = "Options"
+
+[connection signal="value_changed" from="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/VolSlider" method="_on_HSlider_value_changed"]
+[connection signal="toggled" from="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/CheckButton" to="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/CheckButton" method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/TopPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
