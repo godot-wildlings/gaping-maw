@@ -48,8 +48,12 @@ func lose() -> void:
 	$AudioStreamPlayer.play()
 
 func restart() -> void:
+	if get_tree().paused == true:
+		get_tree().paused = false
+	$AudioStreamPlayer.stop()
 	EndScreen.hide()
 	IntroScreen.hide()
+	level_idx = -1
 	next_level()
-	$AudioStreamPlayer.stop()
+
 

@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://Themes/maw_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Scenes/Main/QuitButton.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Main/RestartButton.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Main/StartButton.gd" type="Script" id=5]
-[ext_resource path="res://Marketing/Cover.jpg" type="Texture" id=6]
-[ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Marketing/Cover.jpg" type="Texture" id=5]
+[ext_resource path="res://Themes/Fonts/Offside/Offside-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/Main/StartButton.gd" type="Script" id=7]
+[ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 12
+font_data = ExtResource( 6 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -16,7 +21,6 @@ script = ExtResource( 1 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="EndScreen" type="PopupPanel" parent="CanvasLayer"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -72,6 +76,7 @@ text = "Restart"
 script = ExtResource( 4 )
 
 [node name="IntroScreen" type="PopupPanel" parent="CanvasLayer"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -84,22 +89,27 @@ custom_constants/margin_top = 40
 custom_constants/margin_left = 40
 custom_constants/margin_bottom = 40
 
-[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/IntroScreen/MarginContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/IntroScreen/MarginContainer"]
 margin_left = 40.0
 margin_top = 40.0
 margin_right = 984.0
 margin_bottom = 560.0
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer"]
+margin_right = 944.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 dragger_visibility = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_right = 466.0
-margin_bottom = 520.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Description" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_right = 466.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
@@ -110,7 +120,7 @@ bbcode_text = "[b]Description[/b]
 text = "Description
 \"Gaping Maw\" is a \"fling-em-up\" game. Fling objects into the black hole to save yourself."
 
-[node name="IntroDialog" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer"]
+[node name="IntroDialog" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 visible = false
 margin_top = 164.0
 margin_right = 462.0
@@ -133,10 +143,10 @@ Here I am, adrift with nothing but my Carbon-Attractor-Gun\".
 
 Did I mention the black hole is spitting out extra-dimensional lovecraft-entities? Great."
 
-[node name="Instructions" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer"]
+[node name="Instructions" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_top = 104.0
 margin_right = 466.0
-margin_bottom = 496.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -159,27 +169,57 @@ Try and fling objects into the black hole or into the cthulhu creatures coming a
 
 When you fling an object, you'll receive a little push in the opposite direction. Stay away from the black hole and the creatures."
 
-[node name="StartButton" type="Button" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer"]
-margin_top = 500.0
-margin_right = 466.0
-margin_bottom = 520.0
-text = "Start Game"
-script = ExtResource( 5 )
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_left = 478.0
 margin_right = 944.0
-margin_bottom = 520.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 6 )
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
+margin_right = 466.0
+margin_bottom = 359.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
 expand = true
 
+[node name="Credits" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
+margin_top = 363.0
+margin_right = 466.0
+margin_bottom = 418.0
+rect_min_size = Vector2( 0, 55 )
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.482353, 0.360784, 0.541176, 1 )
+text = "By: Plexsoup, Caevv, DoggieBalloon. 
+Using: Godot Game Engine, Gimp, Audacity. 
+Source: https://github.com/godot-wildlings/gwj8"
+
+[node name="Credits2" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
+margin_top = 422.0
+margin_right = 466.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.482353, 0.360784, 0.541176, 1 )
+text = "Contains music ©2019 Joshua McLean (mrjoshuamclean.com) Licensed under Creative Commons Attribution-ShareAlike 4.0 International"
+
+[node name="StartButton" type="Button" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer"]
+margin_left = 401.0
+margin_top = 484.0
+margin_right = 542.0
+margin_bottom = 520.0
+size_flags_horizontal = 4
+text = "Start Game"
+script = ExtResource( 7 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -9.0
+stream = ExtResource( 8 )
+volume_db = -22.0
 autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" method="_on_RestartButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer/StartButton" to="CanvasLayer/IntroScreen/MarginContainer/HSplitContainer/VBoxContainer/StartButton" method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/StartButton" to="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/StartButton" method="_on_StartButton_pressed"]

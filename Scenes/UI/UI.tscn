@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Themes/hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=2]
 [ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Scenes/UI/HSlider.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/UI/CheckButton.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=8]
+[ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Scenes/UI/CheckButton.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -47,53 +48,87 @@ custom_fonts/font = SubResource( 1 )
 text = "Options"
 align = 1
 
-[node name="GridContainer" type="GridContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
 margin_top = 67.0
 margin_right = 824.0
 margin_bottom = 125.0
-columns = 2
+alignment = 1
 
-[node name="VolLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
-margin_right = 410.0
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer"]
+margin_left = 329.0
+margin_right = 404.0
+margin_bottom = 58.0
+
+[node name="VolLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 75.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Volume"
 align = 1
 
-[node name="FullscreenLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
-margin_left = 414.0
-margin_right = 824.0
+[node name="VolSlider" type="HSlider" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 75.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 2.0
+step = 0.0
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider"]
+stream = ExtResource( 5 )
+volume_db = -22.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer"]
+margin_left = 408.0
+margin_right = 495.0
+margin_bottom = 58.0
+
+[node name="FullscreenLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 87.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Fullscreen"
 align = 1
 
-[node name="VolSlider" type="HSlider" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
-margin_top = 34.0
-margin_right = 410.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 75, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-max_value = 1.0
-step = 0.0
-value = 1.0
-tick_count = 10
-script = ExtResource( 4 )
-
-[node name="CheckButton" type="CheckButton" parent="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer"]
-margin_left = 587.0
+[node name="FullscreenButton" type="CheckButton" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_left = 11.0
 margin_top = 26.0
-margin_right = 651.0
+margin_right = 75.0
 margin_bottom = 58.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 
-[node name="ResumeButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
 margin_top = 129.0
 margin_right = 824.0
 margin_bottom = 165.0
+custom_constants/separation = 25
+
+[node name="QuitButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
+margin_right = 258.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+text = "Quit Game"
+
+[node name="RestartButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
+margin_left = 283.0
+margin_right = 541.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+text = "Restart Game"
+
+[node name="ResumeButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
+margin_left = 566.0
+margin_right = 824.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
 text = "Resume Game"
 
 [node name="Panel" type="Panel" parent="."]
@@ -136,7 +171,7 @@ rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 1.0
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
 margin_left = 322.0
@@ -159,7 +194,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 1.0
 value = 100.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
 margin_left = 458.0
@@ -180,7 +215,7 @@ margin_bottom = 48.0
 size_flags_horizontal = 3
 text = "0"
 align = 1
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="OptionsButton" type="Button" parent="Panel/MarginContainer/TopPanel"]
 margin_left = 586.0
@@ -190,7 +225,12 @@ margin_bottom = 48.0
 size_flags_vertical = 4
 text = "Options"
 
-[connection signal="value_changed" from="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/VolSlider" method="_on_HSlider_value_changed"]
-[connection signal="toggled" from="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/CheckButton" to="GameOptions/GameOptionsPanel/VBoxContainer/GridContainer/CheckButton" method="_on_CheckButton_toggled"]
-[connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="visibility_changed" from="GameOptions/GameOptionsPanel" to="." method="_on_GameOptionsPanel_visibility_changed"]
+[connection signal="mouse_entered" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_VolSlider_mouse_entered"]
+[connection signal="mouse_exited" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_VolSlider_mouse_exited"]
+[connection signal="value_changed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_HSlider_value_changed"]
+[connection signal="toggled" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2/FullscreenButton" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2/FullscreenButton" method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/TopPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
