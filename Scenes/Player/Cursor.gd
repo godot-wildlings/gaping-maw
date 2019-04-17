@@ -12,6 +12,9 @@ extends Area2D
 var mouse_over_node : Node2D = null
 export var max_range : float = 1000.0
 
+enum states { IDLE, HOOKED }
+var state = states.IDLE
+
 func _init():
 	game.cursor = self
 
@@ -44,20 +47,26 @@ func _input(event : InputEvent) -> void:
 			if mouse_over_node.is_in_group("draggable"):
 				if mouse_over_node.has_method("pickup"):
 					mouse_over_node.pickup()
+					state = states.HOOKED
 			elif mouse_over_node.is_in_group("creatures"):
 				if game.options["Creatures_Autograb_Hook"] == false:
 					if mouse_over_node.has_method("pickup"):
 						mouse_over_node.pickup()
+						state = states.HOOKED
 
 
-	if Input.is_action_just_released("BUTTON_LEFT") and mouse_over_node != null:
-		if is_instance_valid(mouse_over_node):
-			if mouse_over_node.is_in_group("draggable") or mouse_over_node.is_in_group("creatures"):
-				if mouse_over_node.has_method("drop"):
-					mouse_over_node.drop()
-					mouse_over_node = null
-		else:
-			mouse_over_node = null # probably eaten by the black hole
+	if Input.is_action_just_released("BUTTON_LEFT"):
+		if mouse_over_node != null:
+			if is_instance_valid(mouse_over_node):
+				#print("Cursor.gd thinks mouse_over_node is: ", mouse_over_node)
+				if mouse_over_node.is_in_group("draggable") or mouse_over_node.is_in_group("creatures"):
+					if mouse_over_node.has_method("drop"):
+						mouse_over_node.drop()
+						mouse_over_node = null
+						state = states.IDLE
+			else:
+				mouse_over_node = null # probably eaten by the black hole
+				state = states.IDLE
 
 
 func _on_Cursor_body_entered(body) -> void:
@@ -76,6 +85,7 @@ func _on_Cursor_area_entered(area) -> void:
 		if game.options["Creatures_Autograb_Hook"] == true:
 			if area.has_method("pickup"):
 				area.pickup() # tell the creature to follow the position2d node
+				state = states.HOOKED
 
 
 
@@ -90,4 +100,10 @@ func _draw() -> void:
 
 func _on_creature_escaped():
 	mouse_over_node = null
+
+
+
+func _on_Cursor_body_exited(body):
+	if state == states.IDLE:
+		mouse_over_node = null
 
