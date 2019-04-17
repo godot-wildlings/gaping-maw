@@ -10,16 +10,27 @@ Creatures which latch onto the line can follow the PathFollow2D node.
 extends Area2D
 
 var mouse_over_node : Node2D = null
+var object_hooked : Node2D = null
+
 export var max_range : float = 1000.0
 
 enum states { IDLE, HOOKED }
 var state = states.IDLE
+
+var time_elapsed : float = 0.0
 
 func _init():
 	game.cursor = self
 
 #warning-ignore:unused_argument
 func _process(delta : float) -> void:
+	time_elapsed += delta
+	follow_mouse(delta)
+	unhook_freed_nodes()
+	update() # calls _draw()
+
+
+func follow_mouse(delta):
 	var my_pos : Vector2 = get_global_position()
 	var mouse_pos : Vector2 = get_global_mouse_position()
 	var player_pos : Vector2 = game.player.get_global_position()
@@ -30,46 +41,48 @@ func _process(delta : float) -> void:
 		var vector_to_cursor = (mouse_pos - player_pos).normalized() * max_range
 		set_global_position(lerp(my_pos, player_pos + vector_to_cursor, 0.8))
 
-	unhook_freed_nodes()
-
-	update() # calls _draw()
 
 func unhook_freed_nodes():
-	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
-		mouse_over_node = null
+	if object_hooked != null and is_instance_valid(object_hooked) == false:
+		object_hooked = null
 		if state == states.HOOKED:
 			state = states.IDLE
+	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
+		mouse_over_node = null
+
 
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
 
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
-		if mouse_over_node != null:
+		if state == states.IDLE and mouse_over_node != null:
+			grab(mouse_over_node)
 
-			if mouse_over_node.is_in_group("draggable"):
-				if mouse_over_node.has_method("pickup"):
-					mouse_over_node.pickup()
-					state = states.HOOKED
-			elif mouse_over_node.is_in_group("creatures"):
-				if game.options["Creatures_Autograb_Hook"] == false:
-					if mouse_over_node.has_method("pickup"):
-						mouse_over_node.pickup()
-						state = states.HOOKED
+	elif Input.is_action_just_released("BUTTON_LEFT"):
+		if state == states.HOOKED and object_hooked != null:
+			drop(object_hooked)
 
+func grab(object):
+	if object.has_method("pickup"):
+		$RayGunNoise.play()
+		if object.is_in_group("draggable"):
+			object.pickup()
+			state = states.HOOKED
+			object_hooked = object
+		elif object.is_in_group("creatures"):
+			if game.options["Creatures_Autograb_Hook"] == false: # prevents player from pressing button to relocate creature to the end of the line
+				object.pickup()
+				state = states.HOOKED
+				object_hooked = object
 
-	if Input.is_action_just_released("BUTTON_LEFT"):
-		if mouse_over_node != null:
-			if is_instance_valid(mouse_over_node):
-				#print("Cursor.gd thinks mouse_over_node is: ", mouse_over_node)
-				if mouse_over_node.is_in_group("draggable") or mouse_over_node.is_in_group("creatures"):
-					if mouse_over_node.has_method("drop"):
-						mouse_over_node.drop()
-						mouse_over_node = null
-						state = states.IDLE
-			else:
-				mouse_over_node = null # probably eaten by the black hole
-				state = states.IDLE
+func drop(object):
+	$RayGunNoise.stop()
+	if is_instance_valid(object):
+		if object.has_method("drop"):
+			object.drop()
+		object_hooked = null
+		state = states.IDLE
 
 
 func _on_Cursor_body_entered(body) -> void:
@@ -85,35 +98,63 @@ func _on_Cursor_area_entered(area) -> void:
 
 	if state == states.IDLE:
 		if mouse_over_node == null and area.is_in_group("creatures"):
-			mouse_over_node = area
+			var creature = area
+			mouse_over_node = creature
 
 			if game.options["Creatures_Autograb_Hook"] == true:
-				if area.has_method("pickup"):
-					area.pickup() # tell the creature to follow the position2d node
+				if creature.has_method("pickup"):
+					creature.pickup() # tell the creature to follow the position2d node
 					state = states.HOOKED
+					object_hooked = creature
 
 
 
 func _draw() -> void:
 	# draw a line between the player and the targeting reticle
-	if mouse_over_node != null and Input.is_action_pressed("BUTTON_LEFT"):
-		var myPos : Vector2 = to_local(get_global_position())
-		var playerPos : Vector2 = to_local(game.player.get_global_position())
-		var width : float = 3.0
-		var antialias : bool = true
-		draw_line(myPos, playerPos, Color.antiquewhite, width, antialias)
+	if object_hooked != null and Input.is_action_pressed("BUTTON_LEFT"):
+		draw_tether()
+
+func draw_tether():
+	var my_pos : Vector2 = to_local(get_global_position())
+	var player_pos : Vector2 = to_local(game.player.get_global_position())
+	var vector_to_cursor : Vector2 = my_pos - player_pos
+	var tangent_vector = vector_to_cursor.normalized().rotated(PI/2)
+
+	var distance : float = vector_to_cursor.length()
+	# print(distance) ~ 100 to 500
+	var num_segments : float = distance / 5.0
+	var amplitude : float = 30
+	var frequency : float = 0.2
+	var speed : float = 100.0
+
+	var wave_points = []
+	#warning-ignore:unused_variable
+	for i in range(num_segments):
+		var base_distance = distance/num_segments*i
+		var base_location = vector_to_cursor/num_segments*i
+		var location = player_pos + base_location + (tangent_vector*sin( (time_elapsed*speed + base_distance) * frequency)*amplitude * (1-base_distance/distance))
+		wave_points.push_back(location)
+
+	var width : float = 3.0
+	var antialias : bool = true
+
+	var i = 0
+	var last_pos = player_pos
+	for point in wave_points:
+		draw_line(last_pos, point, Color.blueviolet, width, antialias)
+		last_pos = point
+
+	draw_line(my_pos, player_pos, Color.antiquewhite, width, antialias)
+
 
 func _on_creature_escaped():
+	object_hooked = null
+
+#warning-ignore:unused_argument
+func _on_Cursor_body_exited(body): # draggables
 	mouse_over_node = null
 
 
 #warning-ignore:unused_argument
-func _on_Cursor_body_exited(body): # draggables
-	if state == states.IDLE:
-		mouse_over_node = null
-
-
-#warning-ignore:unused_argument
 func _on_Cursor_area_exited(area): # creatures
-	if state == states.IDLE:
-		mouse_over_node = null
+	mouse_over_node = null

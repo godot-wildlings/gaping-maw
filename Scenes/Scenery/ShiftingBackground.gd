@@ -7,11 +7,16 @@ export var speed_factor : float = 25.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	base_rect = get_region_rect()
-	texture_shift_y = 0
+	pass
+#	base_rect = get_region_rect()
+#	texture_shift_y = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	#shift_y(delta)
+	pass
+
+func shift_y(delta):
 	texture_shift_y += 1 * speed_factor * delta
 	texture_shift_y = wrapf(texture_shift_y, 0, base_rect.size.y)
 

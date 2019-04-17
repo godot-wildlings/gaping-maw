@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player/Cursor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/reticle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Player/raygun.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 49.1335
@@ -15,6 +16,11 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="RayGunNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -9.0
+bus = "SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_Cursor_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_Cursor_area_exited"]
