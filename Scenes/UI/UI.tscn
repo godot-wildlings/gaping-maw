@@ -208,7 +208,7 @@ size_flags_horizontal = 3
 text = "Planets Lost"
 align = 1
 
-[node name="PlanetsDestroyed" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
+[node name="PlanetsLost" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
 margin_top = 26.0
 margin_right = 103.0
 margin_bottom = 48.0

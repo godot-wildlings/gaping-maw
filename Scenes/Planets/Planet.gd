@@ -37,7 +37,8 @@ func spawn_surface_objects() -> void:
 
 func die() -> void:
 	# update the score, then disappear
-	game.planets_destroyed += 1
+	#game.planets_destroyed += 1
+	game.score["Planets_Lost"] += 1
 	call_deferred("queue_free")
 
 func on_hit(damage : float) -> void:

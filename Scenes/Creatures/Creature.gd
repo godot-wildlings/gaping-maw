@@ -115,17 +115,15 @@ func follow_cursor(delta : float) -> void:
 
 func die() -> void:
 	# needs a noise an animation
-	velocity *= 0.1 # slow down, but maybe don't stop altogether?
+	velocity *= 0.1 # slow down, but don't stop altogether
 	$AnimationPlayer.play("pop")
 	yield($AnimationPlayer, "animation_finished")
+	game.score["Creatures_Destroyed"] += 1
 	call_deferred("queue_free")
 
 func munch(body) -> void:
 	# nom nom nom
-
-	print(velocity)
-	velocity *= 0.1 # slow down, but maybe don't stop altogether?
-	print(velocity)
+	velocity *= 0.3 # slow down, but don't stop altogether
 
 	if body.has_method("on_hit"):
 		body.on_hit(DPS)
@@ -141,13 +139,11 @@ func pickup() -> void:
 		state = states.TETHERED
 		$EscapeHookTimer.start()
 
-	#is_picked = true
-
-	# spawn a pathfollow2d and start following it's offset toward the player.
-	var grapple_line_scene = load("res://Scenes/Creatures/CreatureCrawlLine.tscn")
-	var new_grapple = grapple_line_scene.instance()
-	add_child(new_grapple)
-	grapple_line = new_grapple
+	if game.options["Creatures_Walk_The_Line"] == true:
+		var grapple_line_scene = load("res://Scenes/Creatures/CreatureCrawlLine.tscn")
+		var new_grapple = grapple_line_scene.instance()
+		add_child(new_grapple)
+		grapple_line = new_grapple
 
 
 

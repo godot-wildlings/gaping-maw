@@ -42,8 +42,18 @@ func remove_all_levels() -> void:
 		else:
 			level.call_deferred("queue_free")
 
-func lose() -> void:
+func lose(cause_of_death : String = "") -> void:
 	remove_all_levels()
+
+	var textbox = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/CenterContainer/WinLoseText
+
+	var score_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/Score
+	score_container.get_node("Planets/PlanetsLost").set_text(str(game.score["Planets_Lost"]))
+	score_container.get_node("Creatures/CreaturesDestroyed").set_text(str(game.score["Creatures_Destroyed"]))
+	score_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Time_Elapsed"]*100)/100))
+
+	if cause_of_death != "":
+		textbox.set_text("Death by " + cause_of_death)
 	EndScreen.show()
 	$AudioStreamPlayer.play()
 

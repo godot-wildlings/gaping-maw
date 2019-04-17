@@ -25,6 +25,7 @@ func _init():
 #warning-ignore:unused_argument
 func _process(delta : float) -> void:
 	time_elapsed += delta
+	game.score["Time_Elapsed"] = time_elapsed
 	follow_mouse(delta)
 	unhook_freed_nodes()
 	update() # calls _draw()
@@ -47,8 +48,10 @@ func unhook_freed_nodes():
 		object_hooked = null
 		if state == states.HOOKED:
 			state = states.IDLE
+			$RayGunNoise.stop()
 	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
 		mouse_over_node = null
+
 
 
 
