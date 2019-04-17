@@ -30,16 +30,19 @@ func _process(delta : float) -> void:
 		var vector_to_cursor = (mouse_pos - player_pos).normalized() * max_range
 		set_global_position(lerp(my_pos, player_pos + vector_to_cursor, 0.8))
 
+	unhook_freed_nodes()
+
 	update() # calls _draw()
+
+func unhook_freed_nodes():
+	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
+		mouse_over_node = null
+		if state == states.HOOKED:
+			state = states.IDLE
 
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
-	if is_instance_valid(mouse_over_node) == false:
-		mouse_over_node = null
-		return
-
-
 
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
 		if mouse_over_node != null:

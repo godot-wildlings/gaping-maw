@@ -10,8 +10,8 @@ The only way to get rid of it then will be to feed it something else.
 extends Area2D
 
 #export var speed : float = 60.0
-export var acceleration : float = 2500.0 # per second.. will be reduced by delta
-export var max_speed : float = 400.0
+export var acceleration : float = 350.0 # per second.. will be reduced by delta
+export var max_speed : float = 350.0
 
 
 #export var crawl_speed : float = 200.0
@@ -53,6 +53,7 @@ func _process(delta : float) -> void:
 
 	if state == states.FLYING:
 		turn_toward_target(delta)
+		accelerate_if_on_target(delta)
 		fly_forward(delta)
 	elif state == states.TETHERED: # creature on the hook. Player has limited time to fling/drop them
 		follow_cursor(delta)
@@ -70,11 +71,16 @@ func crawl_toward_player(delta) -> void:
 	set_global_position(lerp(my_pos, target_pos, 0.8))
 
 func fly_forward(delta : float) -> void:
-
-	velocity += Vector2.RIGHT.rotated(rotation) * acceleration * delta
 	velocity = clamp_velocity(velocity)
-
 	set_global_position(get_global_position() + velocity * delta)
+
+func accelerate_if_on_target(delta):
+	var my_pos = get_global_position()
+	var target_pos = game.player.get_global_position()
+	var vector_to_target = target_pos - my_pos
+	var forward_vector = Vector2.RIGHT.rotated(rotation)
+	if vector_to_target.dot(forward_vector) > 0: # within 90deg
+		velocity += Vector2.RIGHT.rotated(rotation) * acceleration * delta
 
 
 func turn_toward_target(delta : float) -> void:
@@ -109,12 +115,18 @@ func follow_cursor(delta : float) -> void:
 
 func die() -> void:
 	# needs a noise an animation
+	velocity *= 0.1 # slow down, but maybe don't stop altogether?
 	$AnimationPlayer.play("pop")
 	yield($AnimationPlayer, "animation_finished")
 	call_deferred("queue_free")
 
 func munch(body) -> void:
 	# nom nom nom
+
+	print(velocity)
+	velocity *= 0.1 # slow down, but maybe don't stop altogether?
+	print(velocity)
+
 	if body.has_method("on_hit"):
 		body.on_hit(DPS)
 	$MunchNoise.play()
