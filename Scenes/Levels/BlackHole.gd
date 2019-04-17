@@ -43,13 +43,14 @@ func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 	if body == game.player:
 		body.die("instantaneous, infinite and unfathomable compression inside a black hole.")
 
-	elif body.is_in_group("draggable"):
-		emit_signal("draggable_entered")
+#	elif body.is_in_group("draggable"):
+#		emit_signal("draggable_entered") # in case we want to destroy the black hole by throwing cows into it
 
-		if body.has_method("die"):
-			body.die()
-		else:
-			body.call_deferred("queue_free")
+
+	if body.has_method("die"):
+		body.die()
+	else:
+		body.call_deferred("queue_free")
 
 func spawn_creature() -> void:
 	var creature_scene : PackedScene = load("res://Scenes/Creatures/Creature.tscn")

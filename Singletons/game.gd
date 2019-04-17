@@ -21,6 +21,7 @@ var options : Dictionary = {
 	"Creatures_Walk_The_Line" : false
 }
 
+#warning-ignore:unused_class_variable
 var score : Dictionary = {
 	"Creatures_Destroyed" : 0,
 	"Planets_Lost": 0,

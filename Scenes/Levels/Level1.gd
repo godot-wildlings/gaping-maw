@@ -6,7 +6,6 @@ Spawn planets and asteroids at some frequency.
 extends Node2D
 
 export var max_spawned_objects : int = 25
-var ticks = 0
 
 
 func spawn_random_object() -> void:
@@ -44,12 +43,13 @@ func cull_distant_objects() -> void:
 		var player_pos = game.player.get_global_position()
 		var hole_pos = game.black_hole.get_global_position()
 		var hole_proximity = object_pos.distance_squared_to(hole_pos)
-		var max_distance = 500
+		var max_distance = 1500
 		var max_proximity = max_distance * max_distance
 		if hole_proximity > max_proximity:
 			var player_proximity = object_pos.distance_squared_to(player_pos)
 			if player_proximity > hole_proximity:
 				# black hole is closer than the player.
+				#print("object culled")
 				object.call_deferred("queue_free")
 
 func _on_NewObjectSpawnTimer_timeout() -> void:
