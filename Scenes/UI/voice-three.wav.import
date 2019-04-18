@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/voice-three.wav-34dbbb38bb88f76d4f148b1d8f8080d0.sample"
+
+[deps]
+
+source_file="res://Scenes/UI/voice-three.wav"
+dest_files=[ "res://.import/voice-three.wav-34dbbb38bb88f76d4f148b1d8f8080d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

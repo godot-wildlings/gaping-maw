@@ -2,6 +2,9 @@ extends Control
 class_name UI
 
 onready var options_panel = $GameOptions/GameOptionsPanel
+onready var click_noise = $ClickNoise
+onready var hover_noise = $HoverNoise
+
 
 #onready var progress_bar : ProgressBar = $Panel/GridContainer/ProgressBar
 #var progress_value : float
@@ -22,6 +25,9 @@ func _on_draggable_entered() -> void:
 
 
 func _on_OptionsButton_pressed():
+	click_noise.play()
+	yield(click_noise, "finished")
+
 	options_panel.show()
 	get_tree().paused = true
 
@@ -37,12 +43,19 @@ func _input(event):
 
 
 func _on_ResumeButton_pressed():
+	click_noise.play()
+	yield(click_noise, "finished")
+
+
 	$GameOptions/GameOptionsPanel.hide()
 	get_tree().paused = false
 
 
 func _on_QuitButton_pressed():
+	click_noise.play()
+	yield(click_noise, "finished")
 	get_tree().quit()
+
 
 
 func _on_GameOptionsPanel_visibility_changed():
@@ -56,5 +69,12 @@ func _on_GameOptionsPanel_visibility_changed():
 
 
 func _on_RestartButton_pressed():
+	click_noise.play()
+	yield(click_noise, "finished")
+
 	game.main.restart()
+
+func _on_button_hover():
+	hover_noise.play()
+
 

@@ -14,4 +14,10 @@ func _ready():
 
 
 func _on_SkipTutorialButton_pressed():
+	$ClickNoise.play()
+	yield($ClickNoise, "finished")
 	game.main.skip_tutorial()
+
+
+func _on_button_hover():
+	$HoverNoise.play()
