@@ -30,6 +30,7 @@ position = Vector2( 95.033, 416.25 )
 rotation = -1.5708
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0

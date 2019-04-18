@@ -66,9 +66,14 @@ func _on_OxygenTimer_timeout() -> void:
 	# remove 1 oxygen unless you're on a planet, then add 10
 	if in_atmosphere:
 		oxygen_remaining = min(oxygen_remaining + 10, 100)
-		$DeepBreathNoise.play()
+		$Oxygen/DeepBreathNoise.play()
 	else:
 		oxygen_remaining = max(oxygen_remaining - oxygen_depletion_per_tick, 0)
+		var oxygen_warning_threshold : float = 33
+		if oxygen_remaining < oxygen_warning_threshold:
+			if $AnimationPlayer.is_playing() == false:
+				$AnimationPlayer.play("warning_oxygen_low")
+
 
 	if oxygen_remaining == 0:
 		die("asphyxiation in the cold blackness of space.")

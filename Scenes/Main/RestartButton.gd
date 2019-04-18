@@ -6,3 +6,7 @@ func _on_RestartButton_pressed() -> void:
 	yield(click_noise, "finished")
 
 	game.main.restart()
+
+func _on_button_hover():
+	var hover_noise = get_parent().get_node("HoverNoise")
+	hover_noise.play()
