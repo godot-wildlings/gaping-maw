@@ -8,3 +8,6 @@ export_presets.cfg
 
 # Work in Progress large files, reference photos, etc.
 WIP/
+
+#Exported executables
+export/

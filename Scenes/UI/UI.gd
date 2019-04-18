@@ -1,7 +1,7 @@
 extends Control
 class_name UI
 
-onready var options_panel = $GameOptions/GameOptionsPanel
+onready var options_panel = $GameOptionsPopupPanel
 onready var click_noise = $ClickNoise
 onready var hover_noise = $HoverNoise
 
@@ -28,17 +28,21 @@ func _on_OptionsButton_pressed():
 	click_noise.play()
 	yield(click_noise, "finished")
 
-	options_panel.show()
-	get_tree().paused = true
+	if options_panel.visible == false:
+		options_panel.show()
+		get_tree().paused = true
+	else:
+		options_panel.hide()
+		get_tree().paused = false
 
 #warning-ignore:unused_argument
 func _input(event):
 	if Input.is_action_just_pressed("options"):
 		if options_panel.visible == false:
-			$GameOptions/GameOptionsPanel.show()
+			options_panel.show()
 			get_tree().paused = true
 		else:
-			$GameOptions/GameOptionsPanel.hide()
+			options_panel.hide()
 			get_tree().paused = false
 
 
@@ -47,7 +51,7 @@ func _on_ResumeButton_pressed():
 	yield(click_noise, "finished")
 
 
-	$GameOptions/GameOptionsPanel.hide()
+	options_panel.hide()
 	get_tree().paused = false
 
 
@@ -62,7 +66,7 @@ func _on_GameOptionsPanel_visibility_changed():
 
 	# hack to prevent edge-case bug:
 	# when user closes the options panel with the mouse hovering over the audio slider, music continued to play.
-	var sample_audio = $GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider/AudioStreamPlayer
+	var sample_audio = $SampleAudio
 	if sample_audio.is_playing() and options_panel.visible == false:
 		sample_audio.stop()
 
@@ -78,3 +82,17 @@ func _on_button_hover():
 	hover_noise.play()
 
 
+
+
+func _on_VolSlider_mouse_entered():
+	$SampleAudio.play()
+
+
+func _on_VolSlider_mouse_exited():
+	$SampleAudio.stop()
+
+
+
+func _on_generic_button_pressed():
+	click_noise.play()
+	#yield(click_noise, "finished")
