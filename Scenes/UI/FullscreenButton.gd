@@ -29,9 +29,10 @@ func _input(event):
 				#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func is_mouse_over():
+	update()
+
 	return get_rect().has_point(get_local_mouse_position())
 
-	update()
 
 func _draw():
 	draw_rect(get_rect(), Color.orangered, false)

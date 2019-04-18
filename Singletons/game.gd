@@ -34,5 +34,6 @@ func reset_scores():
 	score["Planets_Lost"] = 0
 	score["Time_Elapsed"] = 0
 
-func quit_game():
-	get_tree().quit()
+#Moved to main.tscn, because it needs GUI elements
+#func quit_game():
+#	get_tree().quit()

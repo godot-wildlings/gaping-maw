@@ -2,6 +2,7 @@ extends Node
 
 onready var IntroScreen = $CanvasLayer/IntroScreen
 onready var EndScreen = $CanvasLayer/EndScreen
+onready var QuitScreen = $CanvasLayer/QuitScreen
 
 var level_scenes = [
 		"res://Scenes/Levels/Tutorial1.tscn",
@@ -16,6 +17,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	IntroScreen.show()
+	QuitScreen.hide()
 
 func next_level() -> void:
 	level_idx = wrapi(level_idx + 1, 0, level_scenes.size())
@@ -70,6 +72,18 @@ func lose(cause_of_death : String = "") -> void:
 	EndScreen.show()
 	$AudioStreamPlayer.play()
 
+func quit_game():
+
+	QuitScreen.show()
+	#options_panel.hide()
+
+	# for the html version
+
+	get_tree().paused = true
+	QuitScreen.get_node("QuitTimer").start()
+
+
+
 func restart() -> void:
 	if get_tree().paused == true:
 		get_tree().paused = false
@@ -81,3 +95,7 @@ func restart() -> void:
 
 func skip_tutorial() -> void:
 	goto_level(2)
+
+
+func _on_QuitTimer_timeout():
+	get_tree().quit()

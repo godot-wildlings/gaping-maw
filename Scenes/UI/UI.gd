@@ -16,7 +16,7 @@ func _ready() -> void:
 #	game.UI = self
 #	progress_value = progress_bar.value
 #	self.connect("progression", get_tree().get_root().get_node("/root/game"), "on_Object_Enter")
-	$BlackScreen.hide()
+	pass
 
 func _on_draggable_entered() -> void:
 #	progress_value -= 10
@@ -56,16 +56,18 @@ func _on_ResumeButton_pressed():
 
 
 func _on_QuitButton_pressed():
-	click_noise.play()
-	yield(click_noise, "finished")
+	game.main.quit_game()
 
-	$BlackScreen.show()
-	options_panel.hide()
-
-	# for the html version
-
-	get_tree().paused = true
-	$BlackScreen/QuitTimer.start()
+#	click_noise.play()
+#	yield(click_noise, "finished")
+#
+#	$BlackScreen.show()
+#	options_panel.hide()
+#
+#	# for the html version
+#
+#	get_tree().paused = true
+#	$BlackScreen/QuitTimer.start()
 
 
 func _on_GameOptionsPanel_visibility_changed():
