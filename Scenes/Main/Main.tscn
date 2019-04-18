@@ -206,14 +206,14 @@ dragger_visibility = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer"]
 margin_right = 924.0
-margin_bottom = 453.0
+margin_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 dragger_visibility = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_right = 456.0
-margin_bottom = 453.0
+margin_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -254,7 +254,7 @@ Did I mention the black hole is spitting out extra-dimensional lovecraft-entitie
 [node name="Instructions" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer"]
 margin_top = 124.0
 margin_right = 456.0
-margin_bottom = 453.0
+margin_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -280,22 +280,22 @@ When you fling an object, you'll receive a little push in the opposite direction
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer"]
 margin_left = 468.0
 margin_right = 924.0
-margin_bottom = 453.0
+margin_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
 margin_right = 456.0
-margin_bottom = 340.0
+margin_bottom = 347.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
 expand = true
 
 [node name="Credits" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
-margin_top = 344.0
+margin_top = 351.0
 margin_right = 456.0
-margin_bottom = 399.0
+margin_bottom = 406.0
 rect_min_size = Vector2( 0, 55 )
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -305,9 +305,9 @@ Using: Godot Game Engine, Gimp, Audacity.
 Source: https://github.com/godot-wildlings/gwj8"
 
 [node name="Credits2" type="RichTextLabel" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HSplitContainer/VBoxContainer2"]
-margin_top = 403.0
+margin_top = 410.0
 margin_right = 456.0
-margin_bottom = 453.0
+margin_bottom = 460.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
@@ -315,7 +315,7 @@ custom_colors/default_color = Color( 0.482353, 0.360784, 0.541176, 1 )
 text = "Contains music ©2019 Joshua McLean (mrjoshuamclean.com) Licensed under Creative Commons Attribution-ShareAlike 4.0 International"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer"]
-margin_top = 465.0
+margin_top = 472.0
 margin_right = 924.0
 margin_bottom = 500.0
 custom_constants/separation = 50
@@ -323,7 +323,7 @@ alignment = 1
 
 [node name="FullscreenButton" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HBoxContainer" instance=ExtResource( 9 )]
 margin_right = 274.0
-margin_bottom = 35.0
+margin_bottom = 28.0
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 11 )
 custom_styles/focus = ExtResource( 11 )
@@ -334,7 +334,7 @@ text = "Toggle Fullscreen"
 [node name="StartButton" type="Button" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HBoxContainer"]
 margin_left = 324.0
 margin_right = 598.0
-margin_bottom = 35.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "Start Game"
 script = ExtResource( 12 )
@@ -342,7 +342,7 @@ script = ExtResource( 12 )
 [node name="VolSlider" type="HSlider" parent="CanvasLayer/IntroScreen/MarginContainer/VSplitContainer/HBoxContainer"]
 margin_left = 648.0
 margin_right = 924.0
-margin_bottom = 35.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 5
