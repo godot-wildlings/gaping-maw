@@ -29,13 +29,17 @@ func _input(event):
 				#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func is_mouse_over():
-	update()
+	#update()
 
 	return get_rect().has_point(get_local_mouse_position())
 
 
-func _draw():
-	draw_rect(get_rect(), Color.orangered, false)
-	draw_circle(get_local_mouse_position(), 10, Color.blue)
+#func _draw():
+#	draw_rect(get_rect(), Color.orangered, false)
+#	draw_circle(get_local_mouse_position(), 10, Color.blue)
 
 
+
+func _on_button_mouse_entered():
+	var hover_noise = get_parent().get_node("HoverNoise")
+	hover_noise.play()

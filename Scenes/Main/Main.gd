@@ -99,3 +99,7 @@ func skip_tutorial() -> void:
 
 func _on_QuitTimer_timeout():
 	get_tree().quit()
+
+
+func _on_generic_button_hover():
+	pass # Replace with function body.
