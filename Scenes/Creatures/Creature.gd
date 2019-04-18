@@ -141,6 +141,7 @@ func die() -> void:
 	call_deferred("queue_free")
 
 func munch(body) -> void:
+	state = states.EATING
 	# nom nom nom
 	velocity *= 0.3 # slow down, but don't stop altogether
 
@@ -156,7 +157,7 @@ func pickup() -> void:
 
 
 	# should also play a noise and animation
-	if state == states.FLYING:
+	if state == states.FLYING or state == states.EATING:
 		state = states.TETHERED
 		$AnimationPlayer.play("drag")
 		$EscapeHookTimer.start()

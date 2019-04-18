@@ -62,4 +62,6 @@ visible = false
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 9 )
 
+[node name="Damage" type="Node2D" parent="."]
+
 [connection signal="timeout" from="OxygenTimer" to="." method="_on_OxygenTimer_timeout"]
