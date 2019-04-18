@@ -18,19 +18,12 @@ func _ready() -> void:
 	IntroScreen.show()
 
 func next_level() -> void:
-	if $AudioStreamPlayer.is_playing():
-		$AudioStreamPlayer.stop()
-
-	remove_previous_level()
-
 	level_idx = wrapi(level_idx + 1, 0, level_scenes.size())
-	var new_level_scene = load(level_scenes[level_idx])
-	var new_level = new_level_scene.instance()
-
-	$Levels.call_deferred("add_child", new_level)
-	game.level = new_level
+	goto_level(level_idx)
 
 func goto_level(level_num) -> void:
+	game.reset_scores()
+
 	if $AudioStreamPlayer.is_playing():
 		$AudioStreamPlayer.stop()
 
@@ -60,6 +53,9 @@ func remove_all_levels() -> void:
 func lose(cause_of_death : String = "") -> void:
 	remove_all_levels()
 
+	if game.score["Time_Elapsed"] > game.score["Best_Time"]:
+		game.score["Best_Time"] = game.score["Time_Elapsed"]
+
 	var textbox = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/CenterContainer/WinLoseText
 
 	var score_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/Score
@@ -67,6 +63,8 @@ func lose(cause_of_death : String = "") -> void:
 	score_container.get_node("Creatures/CreaturesDestroyed").set_text(str(game.score["Creatures_Destroyed"]))
 	score_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Time_Elapsed"]*100)/100))
 
+	var highscore_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HighScore
+	highscore_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Best_Time"]*100)/100))
 	if cause_of_death != "":
 		textbox.set_text("Death by " + cause_of_death)
 	EndScreen.show()

@@ -141,7 +141,9 @@ func die() -> void:
 	call_deferred("queue_free")
 
 func munch(body) -> void:
-	state = states.EATING
+	#state = states.EATING
+	# ^^^^ good idea, but we don't yet have a way to know when go back to flying
+
 	# nom nom nom
 	velocity *= 0.3 # slow down, but don't stop altogether
 
