@@ -61,6 +61,7 @@ func _input(event : InputEvent) -> void:
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
 		if state == states.IDLE:
 			var potential_bodies = get_overlapping_bodies()
+			potential_bodies.erase(game.player)
 			if potential_bodies.size() > 0:
 				grab(potential_bodies)
 			else:
@@ -79,7 +80,8 @@ func grab(potential_objects):
 			state = states.HOOKED
 			object_hooked = object
 			$RayGunNoise.play()
-			return
+			return object
+	return null
 
 func drop(object):
 	$RayGunNoise.stop()

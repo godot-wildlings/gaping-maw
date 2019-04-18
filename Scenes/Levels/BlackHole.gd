@@ -3,9 +3,11 @@ class_name BlackHole
 
 onready var EventHorizon = $EventHorizon
 export var base_speed : float = 20.0
+export var time_to_double_speed : float = 45
 
 var gravity_radius : float
 var speed : float = base_speed
+var time_elapsed : float
 
 signal draggable_entered
 
@@ -29,12 +31,15 @@ func move_toward_player(delta) -> void:
 
 	# move faster if you're far away from player
 	var radius_increment : float  = 750.0
-	speed = base_speed * dist_sq_to_player / (radius_increment * radius_increment)
+	var time_factor : float = 1.0 + time_elapsed / time_to_double_speed
+	speed = base_speed * dist_sq_to_player / (radius_increment * radius_increment) * time_factor
 
 	var vector_to_player = (player_pos - my_pos).normalized() * speed
 	position += vector_to_player * delta
 
 func _process(delta : float) -> void:
+	time_elapsed += delta
+
 	move_toward_player(delta)
 
 func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:

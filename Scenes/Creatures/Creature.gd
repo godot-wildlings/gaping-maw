@@ -113,6 +113,24 @@ func follow_cursor(delta : float) -> void:
 	drag_velocity = mouse_pos - my_pos
 
 
+	var drag_speed = drag_velocity.length()
+	var drag_rot = Vector2.UP.angle_to(drag_velocity)
+	rotation = lerp_angle(rotation, drag_rot, 0.1)
+	#look_at(my_pos + drag_velocity)
+
+	var stretch_reduction_factor = 50
+	$Sprite.scale.y = min(1 + drag_speed/stretch_reduction_factor, 1.5)
+	$Sprite.scale.x = max(1 - drag_speed/stretch_reduction_factor, 0.3)
+
+func lerp_angle(from, to, weight) -> float:
+    return from + short_angle_dist(from, to) * weight
+
+func short_angle_dist(from, to) -> float:
+    var max_angle = PI * 2
+    var difference = fmod(to - from, max_angle)
+    return fmod(2 * difference, max_angle) - difference
+
+
 func die() -> void:
 	state = states.DEAD
 	# needs a noise an animation
@@ -123,11 +141,15 @@ func die() -> void:
 	call_deferred("queue_free")
 
 func munch(body) -> void:
+	#state = states.EATING
+	# ^^^^ good idea, but we don't yet have a way to know when go back to flying
+
 	# nom nom nom
 	velocity *= 0.3 # slow down, but don't stop altogether
 
 	if body.has_method("on_hit"):
 		body.on_hit(DPS)
+	$AnimationPlayer.play("munch")
 	$MunchNoise.play()
 	$MunchTimer.start()
 
@@ -135,9 +157,11 @@ func pickup() -> void:
 	if game.options["Creatures_Grabbable"] == false:
 		return
 
+
 	# should also play a noise and animation
-	if state == states.FLYING:
+	if state == states.FLYING or state == states.EATING:
 		state = states.TETHERED
+		$AnimationPlayer.play("drag")
 		$EscapeHookTimer.start()
 
 	if game.options["Creatures_Walk_The_Line"] == true:
@@ -152,6 +176,7 @@ func drop() -> void:
 	# player has a limited time to fling a creature.
 	if state == states.TETHERED:
 		state = states.FLYING
+		$AnimationPlayer.play("idle")
 		velocity = drag_velocity * mouse_drag_speed
 
 	#warning-ignore:return_value_discarded

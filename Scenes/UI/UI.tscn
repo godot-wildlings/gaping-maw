@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Themes/hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=2]
@@ -6,9 +6,11 @@
 [ext_resource path="res://Scenes/UI/VolumeSlider.gd" type="Script" id=4]
 [ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/UI/FullscreenButton.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/UI/ClickNoise.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/HoverNoise.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -18,13 +20,17 @@ font_data = ExtResource( 3 )
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="GameOptions" type="MarginContainer" parent="."]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 984.0
+margin_bottom = 560.0
 custom_constants/margin_right = 100
 custom_constants/margin_top = 100
 custom_constants/margin_left = 100
@@ -34,15 +40,15 @@ custom_constants/margin_bottom = 100
 visible = true
 margin_left = 100.0
 margin_top = 100.0
-margin_right = 924.0
-margin_bottom = 500.0
+margin_right = 884.0
+margin_bottom = 460.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOptions/GameOptionsPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="OptionsTitle" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
-margin_right = 824.0
+margin_right = 784.0
 margin_bottom = 63.0
 custom_fonts/font = SubResource( 1 )
 text = "Options"
@@ -50,13 +56,13 @@ align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
 margin_top = 67.0
-margin_right = 824.0
+margin_right = 784.0
 margin_bottom = 125.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer"]
-margin_left = 329.0
-margin_right = 404.0
+margin_left = 309.0
+margin_right = 384.0
 margin_bottom = 58.0
 
 [node name="VolLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
@@ -67,12 +73,12 @@ text = "Volume"
 align = 1
 
 [node name="VolSlider" type="HSlider" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 26.0
+margin_top = 34.0
 margin_right = 75.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
-size_flags_vertical = 4
+size_flags_vertical = 6
 max_value = 2.0
 step = 0.0
 value = 1.0
@@ -85,8 +91,8 @@ stream = ExtResource( 5 )
 volume_db = -22.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer"]
-margin_left = 408.0
-margin_right = 495.0
+margin_left = 388.0
+margin_right = 475.0
 margin_bottom = 58.0
 
 [node name="FullscreenLabel" type="Label" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2"]
@@ -105,65 +111,79 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource( 6 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
+[node name="ClickNoise" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource( 7 )]
+
+[node name="HoverNoise" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource( 8 )]
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="GameOptions/GameOptionsPanel/VBoxContainer"]
 margin_top = 129.0
-margin_right = 824.0
-margin_bottom = 165.0
+margin_right = 784.0
+margin_bottom = 287.0
 custom_constants/separation = 25
 
 [node name="QuitButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
-margin_right = 258.0
+margin_left = 292.0
+margin_right = 492.0
 margin_bottom = 36.0
-size_flags_horizontal = 3
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 4
 text = "Quit Game"
 
 [node name="RestartButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
-margin_left = 283.0
-margin_right = 541.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
+margin_left = 292.0
+margin_top = 61.0
+margin_right = 492.0
+margin_bottom = 97.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 4
 text = "Restart Game"
 
 [node name="ResumeButton" type="Button" parent="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2"]
-margin_left = 566.0
-margin_right = 824.0
-margin_bottom = 36.0
-size_flags_horizontal = 3
+margin_left = 292.0
+margin_top = 122.0
+margin_right = 492.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 4
 text = "Resume Game"
 
 [node name="Panel" type="Panel" parent="."]
-anchor_right = 1.0
-margin_bottom = 40.0
+visible = false
+margin_right = 984.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 10.0
 custom_constants/margin_right = 100
 custom_constants/margin_left = 100
 custom_constants/margin_bottom = 0
 
-[node name="TopPanel" type="HBoxContainer" parent="Panel/MarginContainer"]
-margin_left = 100.0
-margin_right = 924.0
-margin_bottom = 60.0
+[node name="TopPanel" type="HBoxContainer" parent="."]
+margin_right = 984.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 60 )
 custom_constants/separation = 25
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
-margin_left = 139.0
-margin_right = 297.0
-margin_bottom = 60.0
+[node name="VBoxContainer" type="VBoxContainer" parent="TopPanel"]
+margin_left = 345.0
+margin_right = 503.0
+margin_bottom = 560.0
 
-[node name="OxygenLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer"]
+[node name="OxygenLabel" type="Label" parent="TopPanel/VBoxContainer"]
 margin_right = 158.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Oxygen Remaining"
 align = 1
 
-[node name="OxygenRemaining" type="ProgressBar" parent="Panel/MarginContainer/TopPanel/VBoxContainer"]
+[node name="OxygenRemaining" type="ProgressBar" parent="TopPanel/VBoxContainer"]
 margin_top = 26.0
 margin_right = 158.0
 margin_bottom = 40.0
@@ -171,21 +191,21 @@ rect_min_size = Vector2( 75, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 1.0
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
-margin_left = 322.0
-margin_right = 433.0
-margin_bottom = 60.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="TopPanel"]
+margin_left = 528.0
+margin_right = 639.0
+margin_bottom = 560.0
 
-[node name="SuitIntegrityLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer2"]
+[node name="SuitIntegrityLabel" type="Label" parent="TopPanel/VBoxContainer2"]
 margin_right = 111.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Suit Integrity"
 align = 1
 
-[node name="SuitIntegrity" type="ProgressBar" parent="Panel/MarginContainer/TopPanel/VBoxContainer2"]
+[node name="SuitIntegrity" type="ProgressBar" parent="TopPanel/VBoxContainer2"]
 margin_top = 26.0
 margin_right = 111.0
 margin_bottom = 40.0
@@ -194,43 +214,53 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 1.0
 value = 100.0
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Panel/MarginContainer/TopPanel"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="TopPanel"]
+visible = false
 margin_left = 458.0
 margin_right = 561.0
 margin_bottom = 60.0
 
-[node name="PlanetsDestroyedLabel" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
+[node name="PlanetsDestroyedLabel" type="Label" parent="TopPanel/VBoxContainer3"]
 margin_right = 103.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Planets Lost"
 align = 1
 
-[node name="PlanetsLost" type="Label" parent="Panel/MarginContainer/TopPanel/VBoxContainer3"]
+[node name="PlanetsLost" type="Label" parent="TopPanel/VBoxContainer3"]
 margin_top = 26.0
 margin_right = 103.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 text = "0"
 align = 1
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
-[node name="OptionsButton" type="Button" parent="Panel/MarginContainer/TopPanel"]
-margin_left = 586.0
-margin_top = 12.0
-margin_right = 684.0
-margin_bottom = 48.0
-size_flags_vertical = 4
+[node name="OptionsButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -98.0
+margin_bottom = 36.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Options"
+
+[node name="ClickNoise" parent="." instance=ExtResource( 7 )]
+
+[node name="HoverNoise" parent="." instance=ExtResource( 8 )]
 
 [connection signal="visibility_changed" from="GameOptions/GameOptionsPanel" to="." method="_on_GameOptionsPanel_visibility_changed"]
 [connection signal="mouse_entered" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_VolSlider_mouse_entered"]
 [connection signal="mouse_exited" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_VolSlider_mouse_exited"]
 [connection signal="value_changed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" method="_on_VolSlider_value_changed"]
 [connection signal="toggled" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2/FullscreenButton" to="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer/VBoxContainer2/FullscreenButton" method="_on_FullscreenButton_toggled"]
+[connection signal="mouse_entered" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/QuitButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="mouse_entered" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="mouse_entered" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptions/GameOptionsPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/TopPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="mouse_entered" from="OptionsButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]

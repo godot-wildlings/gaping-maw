@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hooked.wav-b0c8e1a2ebea9c24e462fddc1253a185.sample"
+
+[deps]
+
+source_file="res://Scenes/Creatures/hooked.wav"
+dest_files=[ "res://.import/hooked.wav-b0c8e1a2ebea9c24e462fddc1253a185.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -65,6 +65,7 @@ position = Vector2( -142.994, 2695.37 )
 position = Vector2( 1152.38, 2234.55 )
 
 [node name="NewObjectSpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [node name="SpawnedObjects" type="Node2D" parent="."]

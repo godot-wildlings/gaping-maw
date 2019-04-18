@@ -3,6 +3,7 @@ extends RigidBody2D
 export var max_speed : float = 400.0
 export var max_health : float = 100.0
 export var fling_damper : float = 0.5 # 0 to 1, 1 is maximum thrust
+export var oxygen_depletion_per_tick : float = 2.0
 
 var health : int = max_health
 var oxygen_remaining : float = 100.0
@@ -47,18 +48,27 @@ func clamp_linear_velocity() -> void:
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
 
+func spawn_bloodsplat():
+	var bloodsplat_scene = preload("res://Scenes/Effects/BloodSplat.tscn")
+	var new_bloodsplat = bloodsplat_scene.instance()
+	new_bloodsplat.set_global_position(get_global_position())
+	$Damage.add_child(new_bloodsplat)
+
+
+
 func on_hit(damage : float) -> void:
 	health -= int(damage)
+	spawn_bloodsplat()
 	if health <= 0:
 		die("ingestion. Consumed by unknown extradimensional horrors.")
 
 func _on_OxygenTimer_timeout() -> void:
 	# remove 1 oxygen unless you're on a planet, then add 10
 	if in_atmosphere:
-		oxygen_remaining = clamp(oxygen_remaining + 10, 0, 100)
+		oxygen_remaining = min(oxygen_remaining + 10, 100)
 		$DeepBreathNoise.play()
 	else:
-		oxygen_remaining = clamp(oxygen_remaining - 1, 0, 100)
+		oxygen_remaining = max(oxygen_remaining - oxygen_depletion_per_tick, 0)
 
 	if oxygen_remaining == 0:
 		die("asphyxiation in the cold blackness of space.")
