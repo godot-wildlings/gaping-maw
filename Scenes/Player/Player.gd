@@ -28,7 +28,7 @@ func initialize_variables() -> void:
 func die(cause_of_death : String = "") -> void:
 	# change this to spawn the lose screen
 
-	$Sprite.hide()
+	$Helmet.hide()
 	$death/Sprite.show()
 
 	$Camera2D/Tween._run_death_cam()
