@@ -1,37 +1,69 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=8]
-[ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=9]
-[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=10]
+[ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=9]
+[ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
-font_data = ExtResource( 5 )
+font_data = ExtResource( 8 )
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 503.191, 1376.75 )
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
 
-[node name="Cursor" parent="." instance=ExtResource( 3 )]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
+motion_scale = Vector2( 0.75, 0.75 )
+motion_mirroring = Vector2( 905, 814 )
 
-[node name="BlackHole" parent="." instance=ExtResource( 4 )]
+[node name="StarField" type="Sprite" parent="ParallaxBackground2/ParallaxLayer"]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 905, 814 )
+
+[node name="BlackHole" parent="." instance=ExtResource( 3 )]
 position = Vector2( 512, 80 )
 gravity_distance_scale = 0.01
 gravity = 750.0
 linear_damp = 0.0
 
+[node name="Planets" type="Node2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 4 )
+
+[node name="Planet" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 198.94, 2006.04 )
+
+[node name="Planet2" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( -142.994, 2695.37 )
+
+[node name="Planet3" parent="Planets" instance=ExtResource( 5 )]
+position = Vector2( 1152.38, 2234.55 )
+
+[node name="Cursor" parent="." instance=ExtResource( 6 )]
+
 [node name="non-draggables" type="Node2D" parent="."]
 
 [node name="draggables" type="Node2D" parent="."]
+
+[node name="NewObjectSpawnTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="SpawnedObjects" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 503.191, 1376.75 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -48,45 +80,14 @@ margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.870588, 0.458824, 0.0588235, 0.94902 )
 text = "Save Yourself!"
-script = ExtResource( 6 )
+script = ExtResource( 9 )
 
 [node name="Tween" type="Tween" parent="CanvasLayer/WarningLabel"]
 
-[node name="Planets" type="Node2D" parent="."]
-script = ExtResource( 7 )
-
-[node name="Planet" parent="Planets" instance=ExtResource( 8 )]
-position = Vector2( 198.94, 2006.04 )
-
-[node name="Planet2" parent="Planets" instance=ExtResource( 8 )]
-position = Vector2( -142.994, 2695.37 )
-
-[node name="Planet3" parent="Planets" instance=ExtResource( 8 )]
-position = Vector2( 1152.38, 2234.55 )
-
-[node name="NewObjectSpawnTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="SpawnedObjects" type="Node2D" parent="."]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 volume_db = -9.0
 autoplay = true
 bus = "Music"
-
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
-motion_scale = Vector2( 0.75, 0.75 )
-motion_mirroring = Vector2( 905, 814 )
-
-[node name="StarField" type="Sprite" parent="ParallaxBackground2/ParallaxLayer"]
-texture = ExtResource( 10 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 905, 814 )
 
 [connection signal="timeout" from="NewObjectSpawnTimer" to="." method="_on_NewObjectSpawnTimer_timeout"]

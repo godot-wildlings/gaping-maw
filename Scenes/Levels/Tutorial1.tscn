@@ -30,23 +30,44 @@ position = Vector2( 95.033, 416.25 )
 rotation = -1.5708
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -1
+layer = 0
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+mouse_filter = 1
 theme = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="CanvasLayer/Control"]
-margin_left = 232.754
-margin_top = 69.4554
-margin_right = 674.754
-margin_bottom = 101.455
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -28.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+margin_top = 2.0
+margin_right = 856.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
 theme = ExtResource( 4 )
 text = "Fling an Object into the Antimatter"
+align = 1
 
-[node name="SkipTutorialButton" parent="CanvasLayer/Control" instance=ExtResource( 5 )]
+[node name="SkipTutorialButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 5 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 860.0
+margin_top = 0.0
+margin_right = 984.0
+margin_bottom = 28.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="walls" parent="." instance=ExtResource( 6 )]
 

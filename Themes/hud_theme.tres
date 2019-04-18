@@ -1,15 +1,16 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=18 format=2]
 
 [ext_resource path="res://Themes/Fonts/Offside/Offside-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Themes/purple_normal.tres" type="StyleBox" id=2]
-[ext_resource path="res://Themes/Fonts/Tarzan16.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Themes/stylebox_purple.tres" type="StyleBox" id=4]
-[ext_resource path="res://Themes/Fonts/TarzanFont.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Themes/purple_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://Themes/purple_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://Themes/Fonts/Tarzan16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Themes/stylebox_purple.tres" type="StyleBox" id=5]
+[ext_resource path="res://Themes/Fonts/TarzanFont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
-size = 24
+size = 14
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -25,11 +26,11 @@ font_data = ExtResource( 1 )
 [sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="DynamicFont" id=8]
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 18
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [resource]
 Button/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
@@ -40,8 +41,8 @@ Button/constants/hseparation = 2
 Button/fonts/font = SubResource( 1 )
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = null
-Button/styles/normal = ExtResource( 2 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = null
 CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 CheckButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
@@ -66,12 +67,12 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = ExtResource( 3 )
+Label/fonts/font = ExtResource( 4 )
 Label/styles/normal = null
-Panel/styles/panel = ExtResource( 4 )
+Panel/styles/panel = ExtResource( 5 )
 Panel/styles/panelf = null
 Panel/styles/panelnc = null
-PopupPanel/styles/panel = ExtResource( 4 )
+PopupPanel/styles/panel = ExtResource( 5 )
 RichTextLabel/colors/default_color = Color( 1, 0.52549, 0.211765, 1 )
 RichTextLabel/colors/font_color_selected = Color( 0.490196, 0.490196, 0.490196, 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
@@ -82,7 +83,7 @@ RichTextLabel/constants/shadow_offset_x = 1
 RichTextLabel/constants/shadow_offset_y = 1
 RichTextLabel/constants/table_hseparation = 3
 RichTextLabel/constants/table_vseparation = 3
-RichTextLabel/fonts/bold_font = ExtResource( 5 )
+RichTextLabel/fonts/bold_font = ExtResource( 6 )
 RichTextLabel/fonts/bold_italics_font = null
 RichTextLabel/fonts/italics_font = SubResource( 8 )
 RichTextLabel/fonts/mono_font = null

@@ -5,23 +5,23 @@
 [ext_resource path="res://Scenes/UI/OxygenRemaining.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/UI/SuitIntegrity.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/UI/PlanetsDestroyed.gd" type="Script" id=5]
-[ext_resource path="res://Scenes/UI/FullscreenButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/UI/ClickNoise.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/UI/HoverNoise.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Themes/maw_theme.tres" type="Theme" id=9]
-[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://Scenes/UI/VolumeSlider.gd" type="Script" id=11]
-[ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/UI/ClickNoise.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/HoverNoise.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Themes/maw_theme.tres" type="Theme" id=8]
+[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Scenes/UI/VolumeSlider.gd" type="Script" id=10]
+[ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Scenes/UI/FullscreenButton.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
-font_data = ExtResource( 10 )
+font_data = ExtResource( 9 )
 
 [node name="UI" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -111,29 +111,22 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Options"
 
-[node name="FullscreenButton" parent="." instance=ExtResource( 6 )]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 153.0
-margin_bottom = 56.0
-size_flags_horizontal = 8
-size_flags_vertical = 4
-shortcut_in_tooltip = false
-action_mode = 0
+[node name="ClickNoise" parent="." instance=ExtResource( 6 )]
 
-[node name="ClickNoise" parent="." instance=ExtResource( 7 )]
-
-[node name="HoverNoise" parent="." instance=ExtResource( 8 )]
+[node name="HoverNoise" parent="." instance=ExtResource( 7 )]
 
 [node name="GameOptionsPopupPanel" type="PopupPanel" parent="."]
 visible = true
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 margin_left = -268.0
+margin_top = -300.0
+margin_bottom = 300.0
 mouse_filter = 1
 size_flags_horizontal = 5
-theme = ExtResource( 9 )
+theme = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOptionsPopupPanel"]
 anchor_right = 1.0
@@ -142,6 +135,7 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
+mouse_filter = 2
 size_flags_horizontal = 5
 custom_constants/separation = 50
 
@@ -183,7 +177,7 @@ step = 0.0
 value = 1.0
 tick_count = 10
 ticks_on_borders = true
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer"]
 margin_top = 187.0
@@ -218,13 +212,25 @@ size_flags_horizontal = 4
 text = "Resume Game"
 
 [node name="SampleAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
+stream = ExtResource( 11 )
 volume_db = -22.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="FullscreenButton" parent="MarginContainer" instance=ExtResource( 12 )]
+margin_right = 79.0
+margin_bottom = 22.0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+shortcut_in_tooltip = false
+action_mode = 0
 
 [connection signal="mouse_entered" from="OptionsButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="mouse_entered" from="FullscreenButton" to="." method="_on_button_hover"]
-[connection signal="pressed" from="FullscreenButton" to="." method="_on_generic_button_pressed"]
 [connection signal="visibility_changed" from="GameOptionsPopupPanel" to="." method="_on_GameOptionsPanel_visibility_changed"]
 [connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="." method="_on_VolSlider_mouse_entered"]
 [connection signal="mouse_exited" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer/VBoxContainer/VolSlider" to="." method="_on_VolSlider_mouse_exited"]
@@ -235,3 +241,5 @@ volume_db = -22.0
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/FullscreenButton" to="." method="_on_button_hover"]
+[connection signal="pressed" from="MarginContainer/FullscreenButton" to="." method="_on_generic_button_pressed"]

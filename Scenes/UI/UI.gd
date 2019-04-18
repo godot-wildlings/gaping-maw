@@ -56,6 +56,7 @@ func _on_ResumeButton_pressed():
 
 
 func _on_QuitButton_pressed():
+	self.hide()
 	game.main.quit_game()
 
 #	click_noise.play()
