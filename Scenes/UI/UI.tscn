@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Themes/hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Scenes/UI/VolumeSlider.gd" type="Script" id=11]
 [ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Themes/Fonts/Tarzan48.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Themes/Fonts/Tarzan32.tres" type="DynamicFont" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -21,10 +23,6 @@ font_data = ExtResource( 10 )
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
 mouse_filter = 1
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -38,8 +36,8 @@ custom_constants/separation = 25
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TopPanel"]
-margin_left = 345.0
-margin_right = 503.0
+margin_left = 365.0
+margin_right = 523.0
 margin_bottom = 60.0
 
 [node name="OxygenLabel" type="Label" parent="TopPanel/VBoxContainer"]
@@ -60,8 +58,8 @@ step = 1.0
 script = ExtResource( 3 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="TopPanel"]
-margin_left = 528.0
-margin_right = 639.0
+margin_left = 548.0
+margin_right = 659.0
 margin_bottom = 60.0
 
 [node name="SuitIntegrityLabel" type="Label" parent="TopPanel/VBoxContainer2"]
@@ -107,20 +105,20 @@ script = ExtResource( 5 )
 [node name="OptionsButton" type="Button" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -44.0
-margin_top = -10.0
-margin_right = 54.0
-margin_bottom = 26.0
+margin_left = -74.0
+margin_top = 20.0
+margin_right = 24.0
+margin_bottom = 56.0
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Options"
 
 [node name="FullscreenButton" parent="." instance=ExtResource( 6 )]
-margin_left = -10.0
-margin_top = -10.0
-margin_right = 123.0
-margin_bottom = 26.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 153.0
+margin_bottom = 56.0
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 8
 size_flags_vertical = 4
@@ -132,7 +130,6 @@ action_mode = 0
 [node name="HoverNoise" parent="." instance=ExtResource( 8 )]
 
 [node name="GameOptionsPopupPanel" type="PopupPanel" parent="."]
-visible = true
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -227,6 +224,44 @@ text = "Resume Game"
 stream = ExtResource( 12 )
 volume_db = -22.0
 
+[node name="BlackScreen" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="QuitTimer" type="Timer" parent="BlackScreen"]
+wait_time = 1.5
+
+[node name="CenterContainer" type="CenterContainer" parent="BlackScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlackScreen/CenterContainer"]
+margin_left = 133.0
+margin_top = 177.0
+margin_right = 918.0
+margin_bottom = 422.0
+custom_constants/separation = 50
+
+[node name="Label" type="Label" parent="BlackScreen/CenterContainer/VBoxContainer"]
+margin_right = 785.0
+margin_bottom = 63.0
+custom_fonts/font = ExtResource( 13 )
+text = "Thanks for playing Gaping Maw!"
+align = 1
+
+[node name="Label2" type="Label" parent="BlackScreen/CenterContainer/VBoxContainer"]
+margin_top = 113.0
+margin_right = 785.0
+margin_bottom = 245.0
+custom_fonts/font = ExtResource( 14 )
+text = "Plexsoup
+Caevv
+DoggieBalloon"
+align = 1
+
 [connection signal="mouse_entered" from="OptionsButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="mouse_entered" from="FullscreenButton" to="." method="_on_button_hover"]
@@ -241,3 +276,4 @@ volume_db = -22.0
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="timeout" from="BlackScreen/QuitTimer" to="." method="_on_QuitTimer_timeout"]

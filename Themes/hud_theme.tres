@@ -8,9 +8,11 @@
 [ext_resource path="res://Themes/Fonts/Eater/Eater-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Themes/Fonts/Underdog/Underdog-Regular.ttf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -22,12 +24,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=9]
 size = 18
 font_data = ExtResource( 7 )
 
@@ -37,7 +37,7 @@ Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
-Button/fonts/font = SubResource( 11 )
+Button/fonts/font = SubResource( 1 )
 Button/styles/disabled = null
 Button/styles/focus = null
 Button/styles/hover = null
@@ -53,12 +53,12 @@ CheckButton/constants/hseparation = 4
 CheckButton/fonts/font = null
 CheckButton/icons/off = null
 CheckButton/icons/on = null
-CheckButton/styles/disabled = SubResource( 3 )
-CheckButton/styles/focus = SubResource( 4 )
-CheckButton/styles/hover = SubResource( 5 )
-CheckButton/styles/hover_pressed = SubResource( 6 )
-CheckButton/styles/normal = SubResource( 7 )
-CheckButton/styles/pressed = SubResource( 8 )
+CheckButton/styles/disabled = SubResource( 2 )
+CheckButton/styles/focus = SubResource( 3 )
+CheckButton/styles/hover = SubResource( 4 )
+CheckButton/styles/hover_pressed = SubResource( 5 )
+CheckButton/styles/normal = SubResource( 6 )
+CheckButton/styles/pressed = SubResource( 7 )
 Label/colors/font_color = Color( 1, 0.52549, 0.211765, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -84,9 +84,9 @@ RichTextLabel/constants/table_hseparation = 3
 RichTextLabel/constants/table_vseparation = 3
 RichTextLabel/fonts/bold_font = ExtResource( 5 )
 RichTextLabel/fonts/bold_italics_font = null
-RichTextLabel/fonts/italics_font = SubResource( 9 )
+RichTextLabel/fonts/italics_font = SubResource( 8 )
 RichTextLabel/fonts/mono_font = null
-RichTextLabel/fonts/normal_font = SubResource( 10 )
+RichTextLabel/fonts/normal_font = SubResource( 9 )
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
 
