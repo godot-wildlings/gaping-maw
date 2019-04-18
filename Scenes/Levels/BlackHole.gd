@@ -9,7 +9,8 @@ var gravity_radius : float
 var speed : float = base_speed
 var time_elapsed : float
 
-signal draggable_entered
+
+#signal draggable_entered
 
 func _init() -> void:
 	game.black_hole = self
