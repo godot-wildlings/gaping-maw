@@ -33,3 +33,6 @@ func reset_scores():
 	score["Creatures_Destroyed"] = 0
 	score["Planets_Lost"] = 0
 	score["Time_Elapsed"] = 0
+
+func quit_game():
+	get_tree().quit()
