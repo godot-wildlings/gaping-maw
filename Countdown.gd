@@ -14,8 +14,10 @@ func update_label():
 
 
 func _on_Timer_timeout():
+
 	timer_ticks_remaining -= 1
-	$audio.get_children()[timer_ticks_remaining-1].play()
+	if timer_ticks_remaining > 0:
+		$audio.get_children()[timer_ticks_remaining-1].play()
 
 	update_label()
 
