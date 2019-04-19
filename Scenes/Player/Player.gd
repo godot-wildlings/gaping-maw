@@ -48,13 +48,11 @@ func clamp_linear_velocity() -> void:
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.normalized() * max_speed
 
-func spawn_bloodsplat():
-	var bloodsplat_scene = preload("res://Scenes/Effects/BloodSplat.tscn")
-	var new_bloodsplat = bloodsplat_scene.instance()
+func spawn_bloodsplat() -> void:
+	var bloodsplat_scene : PackedScene = preload("res://Scenes/Effects/BloodSplat.tscn")
+	var new_bloodsplat : Object = bloodsplat_scene.instance()
 	new_bloodsplat.set_global_position(get_global_position())
 	$Damage.add_child(new_bloodsplat)
-
-
 
 func on_hit(damage : float) -> void:
 	health -= int(damage)
@@ -74,10 +72,8 @@ func _on_OxygenTimer_timeout() -> void:
 			if $AnimationPlayer.is_playing() == false:
 				$AnimationPlayer.play("warning_oxygen_low")
 
-
 	if oxygen_remaining == 0:
 		die("asphyxiation in the cold blackness of space.")
-
 
 func _on_atmosphere_entered() -> void:
 	in_atmosphere = true

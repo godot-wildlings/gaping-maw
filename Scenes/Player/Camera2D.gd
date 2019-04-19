@@ -1,47 +1,25 @@
 extends Camera2D
 
-# Declare member variables here. Examples:
-
 #warning-ignore:unused_class_variable
 var target = null
-var DesiredZoom = Vector2(6, 6)
-var Ticks :int = 0
-var MinZoom = 0.3
-var MaxZoom = 25.0
+var desired_zoom : Vector2 = Vector2(6, 6)
+var ticks : int = 0
+var min_zoom : float = 0.3
+var max_zoom : float = 25.0
 
-func _ready():
-	DesiredZoom = zoom
+func _ready() -> void:
+	desired_zoom = zoom
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	Ticks += 1
-
-#	update()
-#
-#	if target != null:
-#		position = target.position
-#	else:
-#		target = global.getPlayerShip()
+func _process(delta : float) -> void:
+	ticks += 1
+	zoom = lerp(zoom, desired_zoom, 0.2 * delta * 60)
 
 
-	zoom = lerp(zoom, DesiredZoom, 0.2 * delta * 60)
-	#print("zoom: ", str(zoom))
-
-func _draw():
-	#draw_string(global.BaseFont, Vector2(0, 20), "zoom: " + str(zoom), Color.antiquewhite )
-	pass
-
-func _input(event):
+func _input(event : InputEvent):
 	if event is InputEventMouseButton and event.is_action("zoom_in"):
-		DesiredZoom = zoom * 0.8
+		desired_zoom = zoom * 0.8
 	if event is InputEventMouseButton and event.is_action("zoom_out"):
-		DesiredZoom = zoom * 1.25
+		desired_zoom = zoom * 1.25
 
-	DesiredZoom.x = clamp(DesiredZoom.x, MinZoom, MaxZoom)
-	DesiredZoom.y = clamp(DesiredZoom.y, MinZoom, MaxZoom)
-
-#func _run_death_cam():
-#
-#	tween.interpolate_property(self, "zoom",Vector2(), Vector2(0.3,0.3), 1,Tween.TRANS_LINEAR, Tween.EASE_OUT)
-#
-#	tween.start()
+	desired_zoom.x = clamp(desired_zoom.x, min_zoom, max_zoom)
+	desired_zoom.y = clamp(desired_zoom.y, min_zoom, max_zoom)

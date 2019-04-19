@@ -20,24 +20,21 @@ func spawn_random_object() -> void:
 	#var object_scenes : Array = [asteroid, planet] # 50/50 chance right now
 
 	var rand_object : PackedScene
-	if randf()<0.66:
+	if randf() < 0.66:
 		rand_object = asteroid
 	else:
 		rand_object = planet
 
-	var black_hole_pos = game.black_hole.get_global_position()
-	var player_pos = game.player.get_global_position()
+	var black_hole_pos : Vector2 = game.black_hole.get_global_position()
+	var player_pos : Vector2 = game.player.get_global_position()
 	var vector_to_player : Vector2 = player_pos - black_hole_pos
-	var distance_to_player : float = vector_to_player.length()
 	var direction_vector : Vector2 = vector_to_player.normalized()
-
-	var rotation_deviation = rand_range(-PI/8, PI/8) # 45 deg
-	var distance = distance_to_player + rand_range(2000, 4000)
-
-	var spawn_location = black_hole_pos + direction_vector.rotated(rotation_deviation) * distance
-
-
+	var distance_to_player : float = vector_to_player.length()
+	var rotation_deviation : float = rand_range(-PI / 8, PI / 8) # 45 deg
+	var distance : float = distance_to_player + rand_range(2000, 4000)
+	var spawn_location : Vector2 = black_hole_pos + direction_vector.rotated(rotation_deviation) * distance
 	var new_object : Object = rand_object.instance()
+	
 	new_object.set_global_position(spawn_location)
 	$SpawnedObjects.add_child(new_object)
 
@@ -46,17 +43,16 @@ func spawned_object_count() -> int:
 
 func cull_distant_objects() -> void:
 	for object in $SpawnedObjects.get_children():
-		var object_pos = object.get_global_position()
-		var player_pos = game.player.get_global_position()
-		var hole_pos = game.black_hole.get_global_position()
-		var hole_proximity = object_pos.distance_squared_to(hole_pos)
-		var max_distance = 1500
-		var max_proximity = max_distance * max_distance
+		var object_pos : Vector2 = object.get_global_position()
+		var player_pos : Vector2 = game.player.get_global_position()
+		var hole_pos : Vector2 = game.black_hole.get_global_position()
+		var hole_proximity : float = object_pos.distance_squared_to(hole_pos)
+		var max_distance : float = 1500
+		var max_proximity : float = max_distance * max_distance
 		if hole_proximity > max_proximity:
-			var player_proximity = object_pos.distance_squared_to(player_pos)
+			var player_proximity : float = object_pos.distance_squared_to(player_pos)
 			if player_proximity > hole_proximity:
 				# black hole is closer than the player.
-				#print("object culled")
 				object.call_deferred("queue_free")
 
 func _on_NewObjectSpawnTimer_timeout() -> void:

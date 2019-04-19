@@ -9,9 +9,6 @@ var gravity_radius : float
 var speed : float = base_speed
 var time_elapsed : float
 
-
-#signal draggable_entered
-
 func _init() -> void:
 	game.black_hole = self
 
@@ -22,20 +19,18 @@ func _ready() -> void:
 func deferred_ready() -> void:
 	#warning-ignore:return_value_discarded
 	EventHorizon.connect("body_entered", self, "_on_EventHorizon_body_entered")
-	#warning-ignore:return_value_discarded
-	#self.connect("draggable_entered", game.UI, "_on_draggable_entered")
 
-func move_toward_player(delta) -> void:
-	var my_pos = get_global_position()
-	var player_pos = game.player.get_global_position()
-	var dist_sq_to_player = (player_pos - my_pos).length_squared()
+func move_toward_player(delta : float) -> void:
+	var my_pos : Vector2 = get_global_position()
+	var player_pos : Vector2 = game.player.get_global_position()
+	var dist_sq_to_player : float = (player_pos - my_pos).length_squared()
 
 	# move faster if you're far away from player
 	var radius_increment : float  = 750.0
 	var time_factor : float = 1.0 + time_elapsed / time_to_double_speed
 	speed = base_speed * dist_sq_to_player / (radius_increment * radius_increment) * time_factor
 
-	var vector_to_player = (player_pos - my_pos).normalized() * speed
+	var vector_to_player : Vector2 = (player_pos - my_pos).normalized() * speed
 	position += vector_to_player * delta
 
 func _process(delta : float) -> void:
@@ -48,10 +43,6 @@ func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 		# if the black hole is supposed to be destroyable.
 	if body == game.player:
 		body.die("instantaneous, infinite and unfathomable compression inside a black hole.")
-
-#	elif body.is_in_group("draggable"):
-#		emit_signal("draggable_entered") # in case we want to destroy the black hole by throwing cows into it
-
 
 	if body.has_method("die"):
 		body.die()

@@ -1,12 +1,8 @@
 extends Node2D
 
-func _ready() -> void:
-	#spawn_planets(5)
-	pass
+onready var planet_scene : PackedScene = preload("res://Scenes/Planets/Planet.tscn")
 
 func spawn_planets(num : int) -> void:
-	print("spawning planet")
-	var planet_scene = load("res://Scenes/Planets/Planet.tscn")
 	#warning-ignore:unused_variable
 	for i in range(num):
 		var new_planet : Object = planet_scene.instance()

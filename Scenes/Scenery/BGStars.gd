@@ -8,6 +8,6 @@ func _ready() -> void:
 		star.set_position(rand_position)
 		var rand_scale : float = rand_range(0.1, 3.0)
 		star.set_scale(Vector2(rand_scale, rand_scale))
-		star.set_rotation(randf()*2*PI)
+		star.set_rotation(randf() * 2 * PI)
 		if randf() < 0.25:
 			hide()

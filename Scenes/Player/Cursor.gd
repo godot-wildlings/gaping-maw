@@ -19,7 +19,7 @@ var state = states.IDLE
 
 var time_elapsed : float = 0.0
 
-func _init():
+func _init() -> void:
 	game.cursor = self
 
 #warning-ignore:unused_argument
@@ -31,7 +31,7 @@ func _process(delta : float) -> void:
 	update() # calls _draw()
 
 
-func follow_mouse(delta):
+func follow_mouse(delta : float):
 	var my_pos : Vector2 = get_global_position()
 	var mouse_pos : Vector2 = get_global_mouse_position()
 	var player_pos : Vector2 = game.player.get_global_position()
@@ -43,24 +43,18 @@ func follow_mouse(delta):
 		set_global_position(lerp(my_pos, player_pos + vector_to_cursor, 0.8))
 
 
-func unhook_freed_nodes():
+func unhook_freed_nodes() -> void:
 	if object_hooked != null and is_instance_valid(object_hooked) == false:
 		object_hooked = null
 		if state == states.HOOKED:
 			state = states.IDLE
 			$RayGunNoise.stop()
-#	if mouse_over_node != null and is_instance_valid(mouse_over_node) == false:
-#		mouse_over_node = null
-
-
-
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
-
 	if Input.is_action_just_pressed("BUTTON_LEFT"):
 		if state == states.IDLE:
-			var potential_bodies = get_overlapping_bodies()
+			var potential_bodies : Array = get_overlapping_bodies()
 			potential_bodies.erase(game.player)
 			if potential_bodies.size() > 0:
 				grab(potential_bodies)
@@ -73,7 +67,7 @@ func _input(event : InputEvent) -> void:
 		if state == states.HOOKED and object_hooked != null:
 			drop(object_hooked)
 
-func grab(potential_objects):
+func grab(potential_objects : Array):
 	for object in potential_objects:
 		if object.has_method("pickup"):
 			object.pickup()
@@ -83,38 +77,13 @@ func grab(potential_objects):
 			return object
 	return null
 
-func drop(object):
+func drop(object : Object):
 	$RayGunNoise.stop()
 	if is_instance_valid(object):
 		if object.has_method("drop"):
 			object.drop()
 		object_hooked = null
 		state = states.IDLE
-
-
-#func _on_Cursor_body_entered(body) -> void:
-#	if state == states.IDLE:
-#		if mouse_over_node == null:
-#			if body.is_in_group("draggable"):
-#				mouse_over_node = body
-
-
-#func _on_Cursor_area_entered(area) -> void:
-#	if game.options["Creatures_Grabbable"] == false:
-#		return
-#
-#	if state == states.IDLE:
-#		if mouse_over_node == null and area.is_in_group("creatures"):
-#			var creature = area
-#			mouse_over_node = creature
-#
-#			if game.options["Creatures_Autograb_Hook"] == true:
-#				if creature.has_method("pickup"):
-#					creature.pickup() # tell the creature to follow the position2d node
-#					state = states.HOOKED
-#					object_hooked = creature
-
-
 
 func _draw() -> void:
 	# draw a line between the player and the targeting reticle
@@ -125,43 +94,31 @@ func draw_tether():
 	var my_pos : Vector2 = to_local(get_global_position())
 	var player_pos : Vector2 = to_local(game.player.get_global_position())
 	var vector_to_cursor : Vector2 = my_pos - player_pos
-	var tangent_vector = vector_to_cursor.normalized().rotated(PI/2)
+	var tangent_vector : Vector2 = vector_to_cursor.normalized().rotated(PI / 2)
 
 	var distance : float = vector_to_cursor.length()
-	# print(distance) ~ 100 to 500
 	var num_segments : float = distance / 5.0
 	var amplitude : float = 30
 	var frequency : float = 0.2
 	var speed : float = 100.0
-
-	var wave_points = []
+	var wave_points : Array = []
 	#warning-ignore:unused_variable
 	for i in range(num_segments):
-		var base_distance = distance/num_segments*i
-		var base_location = vector_to_cursor/num_segments*i
-		var location = player_pos + base_location + (tangent_vector*sin( (time_elapsed*speed + base_distance) * frequency)*amplitude * (1-base_distance/distance))
+		var base_distance : float = distance / num_segments * i
+		var base_location : Vector2 = vector_to_cursor/num_segments * i
+		var location : Vector2 = player_pos + base_location + (tangent_vector * \
+				sin( (time_elapsed * speed + base_distance) * frequency) * \
+				amplitude * (1 - base_distance / distance))
 		wave_points.push_back(location)
 
 	var width : float = 3.0
 	var antialias : bool = true
-
-	var i = 0
-	var last_pos = player_pos
+	var i : int = 0
+	var last_pos : Vector2 = player_pos
 	for point in wave_points:
 		draw_line(last_pos, point, Color.blueviolet, width, antialias)
 		last_pos = point
-
 	draw_line(my_pos, player_pos, Color.antiquewhite, width, antialias)
 
-
-func _on_creature_escaped():
+func _on_creature_escaped() -> void:
 	object_hooked = null
-
-##warning-ignore:unused_argument
-#func _on_Cursor_body_exited(body): # draggables
-#	mouse_over_node = null
-
-
-##warning-ignore:unused_argument
-#func _on_Cursor_area_exited(area): # creatures
-#	mouse_over_node = null

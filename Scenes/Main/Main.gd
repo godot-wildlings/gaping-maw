@@ -1,16 +1,16 @@
 extends Node
 
-onready var IntroScreen = $CanvasLayer/IntroScreen
-onready var EndScreen = $CanvasLayer/EndScreen
-onready var QuitScreen = $CanvasLayer/QuitScreen
+onready var IntroScreen : PopupPanel = $CanvasLayer/IntroScreen
+onready var EndScreen : PopupPanel = $CanvasLayer/EndScreen
+onready var QuitScreen : PopupPanel = $CanvasLayer/QuitScreen
 
+var level_idx : int = -1
 var level_scenes = [
 		"res://Scenes/Levels/Tutorial1.tscn",
 		"res://Scenes/Levels/Tutorial2.tscn",
 		"res://Scenes/Levels/Countdown.tscn",
 		"res://Scenes/Levels/Level1.tscn"
 	]
-var level_idx : int = -1
 
 func _init() -> void:
 	game.main = self
@@ -23,7 +23,7 @@ func next_level() -> void:
 	level_idx = wrapi(level_idx + 1, 0, level_scenes.size())
 	goto_level(level_idx)
 
-func goto_level(level_num) -> void:
+func goto_level(level_num : int) -> void:
 	game.reset_scores()
 
 	if $AudioStreamPlayer.is_playing():
@@ -31,17 +31,14 @@ func goto_level(level_num) -> void:
 
 	remove_previous_level()
 
-	var new_level_scene = load(level_scenes[level_num])
-	var new_level = new_level_scene.instance()
+	var new_level_scene : PackedScene = load(level_scenes[level_num])
+	var new_level : Object = new_level_scene.instance()
 
 	$Levels.call_deferred("add_child", new_level)
 	game.level = new_level
 	level_idx = level_num
 
-
-
-func remove_previous_level():
-
+func remove_previous_level() -> void:
 	if game.level != null and is_instance_valid(game.level):
 		game.level.call_deferred("queue_free")
 
@@ -72,21 +69,18 @@ func lose(cause_of_death : String = "") -> void:
 	EndScreen.show()
 	$AudioStreamPlayer.play()
 
-func quit_game():
-
+func quit_game() -> void:
 	QuitScreen.show()
 	#options_panel.hide()
-
+	
 	# for the html version
-
 	get_tree().paused = true
 	QuitScreen.get_node("QuitTimer").start()
-
-
 
 func restart() -> void:
 	if get_tree().paused == true:
 		get_tree().paused = false
+	
 	$AudioStreamPlayer.stop()
 	EndScreen.hide()
 	IntroScreen.hide()
@@ -96,10 +90,5 @@ func restart() -> void:
 func skip_tutorial() -> void:
 	goto_level(2)
 
-
-func _on_QuitTimer_timeout():
+func _on_QuitTimer_timeout() -> void:
 	get_tree().quit()
-
-
-func _on_generic_button_hover():
-	pass # Replace with function body.

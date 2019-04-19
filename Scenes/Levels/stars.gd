@@ -3,7 +3,6 @@ extends Node2D
 export var speed : float = 25.0
 export var extents : Vector2 = Vector2(1000, 1000)
 
-
 func _ready() -> void:
 	spawn_stars()
 

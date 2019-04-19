@@ -6,7 +6,6 @@ export var mouse_drag_speed : float = 6.0
 var is_picked : bool = false
 var drag_velocity : Vector2 = Vector2(0,0)
 
-
 signal dropped(velocity)
 
 func _ready() -> void:

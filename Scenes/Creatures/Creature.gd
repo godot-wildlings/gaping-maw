@@ -9,17 +9,13 @@ The only way to get rid of it then will be to feed it something else.
 
 extends Area2D
 
-#export var speed : float = 60.0
 export var acceleration : float = 350.0 # per second.. will be reduced by delta
 export var max_speed : float = 350.0
-
-
-#export var crawl_speed : float = 200.0
-
-export var turn_speed : float = PI/4 #radians per second
-
 export var DPS : float = 10
 export var mouse_drag_speed : float = 8
+export var turn_speed : float = PI / 4 #radians per second
+#export var speed : float = 60.0
+#export var crawl_speed : float = 200.0
 
 enum states { FLYING, EATING, TETHERED, CRAWLING, DEAD }
 #warning-ignore:unused_class_variable
@@ -28,19 +24,17 @@ var state = states.FLYING
 var is_picked : bool = false
 var drag_velocity : Vector2
 var velocity : Vector2
-
 var target : Node2D
-
 var grapple_line : Path2D
 
 signal dropped(vel)
 
-func _ready():
+func _ready() -> void:
 	choose_random_target()
 	look_at(target.get_global_position())
 
 
-func choose_random_target():
+func choose_random_target() -> void:
 	var planets = get_tree().get_nodes_in_group("planets")
 	if planets.size() == 0 or randf() < 0.66:
 		target = game.player
@@ -123,12 +117,12 @@ func follow_cursor(delta : float) -> void:
 	$Sprite.scale.x = max(1 - drag_speed/stretch_reduction_factor, 0.3)
 
 func lerp_angle(from, to, weight) -> float:
-    return from + short_angle_dist(from, to) * weight
+	return from + short_angle_dist(from, to) * weight
 
 func short_angle_dist(from, to) -> float:
-    var max_angle = PI * 2
-    var difference = fmod(to - from, max_angle)
-    return fmod(2 * difference, max_angle) - difference
+	var max_angle = PI * 2
+	var difference = fmod(to - from, max_angle)
+	return fmod(2 * difference, max_angle) - difference
 
 
 func die() -> void:
