@@ -208,7 +208,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "munch-inorganic"
 length = 0.6
 tracks/0/type = "value"
@@ -248,7 +248,7 @@ tracks/2/keys = {
 "values": [ Vector2( -7.0247, -10.8072 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -491,11 +491,11 @@ collision_mask = 7
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 
 [node name="InorganicSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 7.56508, -8.10544 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
@@ -509,8 +509,8 @@ autoplay = "idle"
 anims/drag = SubResource( 2 )
 anims/idle = SubResource( 3 )
 anims/munch = SubResource( 4 )
-anims/munch-inorganic = SubResource( 6 )
-anims/pop = SubResource( 5 )
+anims/munch-inorganic = SubResource( 5 )
+anims/pop = SubResource( 6 )
 anims/pop-inorganic = SubResource( 7 )
 
 [node name="MunchTimer" type="Timer" parent="."]
@@ -536,13 +536,11 @@ bus = "SFX"
 
 [node name="Gibs" type="Sprite" parent="explode"]
 visible = false
-self_modulate = Color( 0, 0.137255, 0.882353, 1 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
 
 [node name="PinkMist" type="Sprite" parent="explode"]
 visible = false
-self_modulate = Color( 0, 0.0117647, 0.0235294, 1 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 8 )
 
