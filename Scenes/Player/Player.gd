@@ -9,6 +9,9 @@ var health : int = max_health
 var oxygen_remaining : float = 100.0
 var in_atmosphere : bool = false
 
+var oxygen_warning_played : bool = false
+var suit_integrity_warning_played : bool = false
+
 enum states {
 	IDLE,
 	DEAD
@@ -42,7 +45,11 @@ func die(cause_of_death : String = "") -> void:
 			cause_of_death = "instantaneous, infinite and unfathomable compression inside a black hole."
 		elif cause_of_death == "ingestion":
 			$AnimationPlayer.play("dismemberment")
-			cause_of_death == "ingestion. Consumed by unknown extradimensional horrors."
+			cause_of_death = "ingestion. Consumed by unknown extradimensional horrors."
+		elif cause_of_death == "asphyxiation":
+			$AnimationPlayer.play("asphyxiation")
+			cause_of_death = "asphyxiation in the cold blackness of space."
+
 
 		$Camera2D/Tween._run_death_cam()
 		yield(get_node("Camera2D/Tween"),"tween_completed")
@@ -70,6 +77,12 @@ func spawn_bloodsplat() -> void:
 func on_hit(damage : float) -> void:
 	health -= int(damage)
 	spawn_bloodsplat()
+
+	if health < max_health / 2:
+		if suit_integrity_warning_played == false:
+			$AnimationPlayer.play("warning_suit_integrity")
+			suit_integrity_warning_played = true
+
 	if health <= 0:
 		die("ingestion")
 
@@ -82,11 +95,12 @@ func _on_OxygenTimer_timeout() -> void:
 		oxygen_remaining = max(oxygen_remaining - oxygen_depletion_per_tick, 0)
 		var oxygen_warning_threshold : float = 33
 		if oxygen_remaining < oxygen_warning_threshold:
-			if $AnimationPlayer.is_playing() == false:
+			if oxygen_warning_played == false:
 				$AnimationPlayer.play("warning_oxygen_low")
+				oxygen_warning_played = true
 
 	if oxygen_remaining == 0:
-		die("asphyxiation in the cold blackness of space.")
+		die("asphyxiation")
 
 func _on_atmosphere_entered() -> void:
 	in_atmosphere = true

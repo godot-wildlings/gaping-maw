@@ -5,7 +5,7 @@ var target = null
 var desired_zoom : Vector2 = Vector2(6, 6)
 var ticks : int = 0
 var min_zoom : float = 0.3
-var max_zoom : float = 25.0
+var max_zoom : float = 8.0
 
 func _ready() -> void:
 	desired_zoom = zoom
