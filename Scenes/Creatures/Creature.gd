@@ -32,8 +32,18 @@ signal dropped(vel)
 func _ready() -> void:
 	choose_random_target()
 	look_at(target.get_global_position())
+	set_textures()
+
+
+func set_textures():
 	if game.options["Creatures_Grabbable"] == false:
-		set_modulate("008b82")
+		$Sprite.hide()
+		$InorganicSprite.show()
+	else:
+		$Sprite.show()
+		$InorganicSprite.hide()
+
+
 
 
 func choose_random_target() -> void:
@@ -133,7 +143,12 @@ func die() -> void:
 	state = states.DEAD
 	# needs a noise an animation
 	velocity *= 0.1 # slow down, but don't stop altogether
-	$AnimationPlayer.play("pop")
+
+	if game.options["Creatures_Grabbable"] == true:
+		$AnimationPlayer.play("pop")
+	else:
+		$AnimationPlayer.play("pop-inorganic")
+
 	yield($AnimationPlayer, "animation_finished")
 	game.score["Creatures_Destroyed"] += 1
 	call_deferred("queue_free")
@@ -147,7 +162,12 @@ func munch(body) -> void:
 
 	if body.has_method("on_hit"):
 		body.on_hit(DPS)
-	$AnimationPlayer.play("munch")
+
+	if game.options["Creatures_Grabbable"] == true:
+		$AnimationPlayer.play("munch")
+	else:
+		$AnimationPlayer.play("munch-inorganic")
+
 	$MunchNoise.play()
 	$MunchTimer.start()
 
