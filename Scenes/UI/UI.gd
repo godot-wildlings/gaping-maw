@@ -6,15 +6,38 @@ onready var click_noise : AudioStreamPlayer = $ClickNoise
 onready var hover_noise : AudioStreamPlayer = $HoverNoise
 
 func _on_OptionsButton_pressed() -> void:
+
 	click_noise.play()
 	yield(click_noise, "finished")
 
 	if options_panel.visible == false:
+		set_option_toggles()
 		options_panel.show()
 		get_tree().paused = true
 	else:
 		options_panel.hide()
 		get_tree().paused = false
+
+func set_option_toggles() -> void:
+	var inorganic_enemies_button = find_node("InorganicEnemiesToggle")
+	var confine_mouse_button = find_node("ConfineMouseToggle")
+	var endless_oxygen_button = find_node("EndlessOxygenToggle")
+
+	if game.options["Creatures_Grabbable"] == true:
+		inorganic_enemies_button.pressed = false
+	else:
+		inorganic_enemies_button.pressed = true
+
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CONFINED:
+		confine_mouse_button.pressed = true
+	else:
+		confine_mouse_button.pressed = false
+
+	if game.options["Endless_Oxygen"] == true:
+		endless_oxygen_button.pressed = true
+	else:
+		endless_oxygen_button.pressed = false
+
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
@@ -67,3 +90,24 @@ func _on_generic_button_pressed() -> void:
 
 func _on_QuitTimer_timeout():
 	get_tree().quit()
+
+#warning-ignore:unused_argument
+func _on_ConfineMouseButton_toggled(button_pressed):
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CONFINED:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
+
+func _on_InorganicEnemiesCheckbox_toggled(button_pressed):
+	if button_pressed == true:
+		game.options["Creatures_Grabbable"] = false
+	else:
+		game.options["Creatures_Grabbable"] = true
+
+
+func _on_EndlessOxygenToggle_toggled(button_pressed):
+	if button_pressed == true:
+		game.options["Endless_Oxygen"] = true
+	else:
+		game.options["Endless_Oxygen"] = false

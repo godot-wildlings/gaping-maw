@@ -92,12 +92,13 @@ func _on_OxygenTimer_timeout() -> void:
 		oxygen_remaining = min(oxygen_remaining + 10, 100)
 		$Oxygen/DeepBreathNoise.play()
 	else:
-		oxygen_remaining = max(oxygen_remaining - oxygen_depletion_per_tick, 0)
-		var oxygen_warning_threshold : float = 33
-		if oxygen_remaining < oxygen_warning_threshold:
-			if oxygen_warning_played == false:
-				$AnimationPlayer.play("warning_oxygen_low")
-				oxygen_warning_played = true
+		if game.options["Endless_Oxygen"] == false:
+			oxygen_remaining = max(oxygen_remaining - oxygen_depletion_per_tick, 0)
+			var oxygen_warning_threshold : float = 33
+			if oxygen_remaining < oxygen_warning_threshold:
+				if oxygen_warning_played == false:
+					$AnimationPlayer.play("warning_oxygen_low")
+					oxygen_warning_played = true
 
 	if oxygen_remaining == 0:
 		die("asphyxiation")

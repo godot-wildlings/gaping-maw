@@ -18,7 +18,9 @@ var debug : bool = true
 #warning-ignore:unused_class_variable
 var options : Dictionary = {
 	"Creatures_Grabbable" : true,
-	"Creatures_Walk_The_Line" : false
+	"Creatures_Walk_The_Line" : false,
+	"Endless_Oxygen" : false,
+	"Indestructable_Suit" : false
 }
 
 #warning-ignore:unused_class_variable

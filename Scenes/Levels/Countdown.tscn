@@ -23,10 +23,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="CanvasLayer/CenterContainer"]
-margin_left = 405.0
-margin_top = 70.0
-margin_right = 618.0
-margin_bottom = 529.0
+margin_left = 533.0
+margin_top = 130.0
+margin_right = 746.0
+margin_bottom = 589.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.890196, 0.486275, 0.0588235, 1 )
 text = "0"

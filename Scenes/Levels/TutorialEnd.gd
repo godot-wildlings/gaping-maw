@@ -8,6 +8,11 @@ extends Area2D
 
 func _on_Antimatter_body_entered(body : PhysicsBody2D):
 	if body != game.player:
+		if body.is_in_group("draggable"):
+			if body.has_method("die"):
+				body.die()
+			else:
+				body.call_deferred("queue_free")
 		$CollisionShape2D.call_deferred("set_disabled", true)
 		$AnimationPlayer.play("explode")
 		$ExplosionTimer.start()

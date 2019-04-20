@@ -17,8 +17,10 @@ func _input(event : InputEvent):
 		if is_mouse_over():
 			if OS.is_window_fullscreen() == true:
 				OS.set_window_fullscreen(false)
+				#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			else:
 				OS.set_window_fullscreen(true)
+				#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func is_mouse_over() -> bool:
 	#update()

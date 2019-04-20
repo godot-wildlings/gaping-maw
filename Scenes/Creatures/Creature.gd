@@ -32,6 +32,8 @@ signal dropped(vel)
 func _ready() -> void:
 	choose_random_target()
 	look_at(target.get_global_position())
+	if game.options["Creatures_Grabbable"] == false:
+		set_modulate("008b82")
 
 
 func choose_random_target() -> void:
