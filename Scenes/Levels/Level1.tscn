@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scenes/Levels/Level1.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=2]
-[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=8]
 [ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=9]
@@ -32,23 +32,17 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 905, 814 )
 
-[node name="BlackHole" parent="." instance=ExtResource( 3 )]
-position = Vector2( 512, 80 )
-gravity_distance_scale = 0.01
-gravity = 750.0
-linear_damp = 0.0
-
 [node name="Planets" type="Node2D" parent="."]
 editor/display_folded = true
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
-[node name="Planet" parent="Planets" instance=ExtResource( 5 )]
+[node name="Planet" parent="Planets" instance=ExtResource( 4 )]
 position = Vector2( 198.94, 2006.04 )
 
-[node name="Planet2" parent="Planets" instance=ExtResource( 5 )]
+[node name="Planet2" parent="Planets" instance=ExtResource( 4 )]
 position = Vector2( -142.994, 2695.37 )
 
-[node name="Planet3" parent="Planets" instance=ExtResource( 5 )]
+[node name="Planet3" parent="Planets" instance=ExtResource( 4 )]
 position = Vector2( 1152.38, 2234.55 )
 
 [node name="non-draggables" type="Node2D" parent="."]
@@ -61,8 +55,14 @@ autostart = true
 
 [node name="SpawnedObjects" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 6 )]
+[node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 503.191, 1376.75 )
+
+[node name="BlackHole" parent="." instance=ExtResource( 6 )]
+position = Vector2( 512, 80 )
+gravity_distance_scale = 0.01
+gravity = 750.0
+linear_damp = 0.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

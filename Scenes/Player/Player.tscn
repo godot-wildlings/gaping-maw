@@ -203,7 +203,7 @@ tracks/13/keys = {
 "values": [ 0.0, 77.1866 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=4]
 resource_name = "breathe_deep"
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts/Torso/Head:rotation_degrees")
@@ -314,7 +314,7 @@ tracks/8/keys = {
 "values": [ 0.0, -24.6032, 0.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts:scale")
 tracks/0/interp = 1
@@ -340,7 +340,7 @@ tracks/1/keys = {
 "values": [ 0.0, 720.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts/Torso/LegR:position")
@@ -499,7 +499,7 @@ tracks/12/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Oxygen/Label:visible")
@@ -526,7 +526,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Damage/Warning:visible")
@@ -668,13 +668,13 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "float"
 anims/asphyxiation = SubResource( 3 )
-anims/breathe_deep = SubResource( 8 )
-anims/compression = SubResource( 4 )
-anims/dismemberment = SubResource( 5 )
+anims/breathe_deep = SubResource( 4 )
+anims/compression = SubResource( 5 )
+anims/dismemberment = SubResource( 6 )
 anims/float = ExtResource( 19 )
 anims/panic = ExtResource( 20 )
-anims/warning_oxygen_low = SubResource( 6 )
-anims/warning_suit_integrity = SubResource( 7 )
+anims/warning_oxygen_low = SubResource( 7 )
+anims/warning_suit_integrity = SubResource( 8 )
 
 [node name="vectorBodyParts" type="Node2D" parent="."]
 position = Vector2( -0.0467377, 0.868683 )
