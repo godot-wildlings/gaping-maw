@@ -34,7 +34,7 @@ func spawn_random_object() -> void:
 	var distance : float = distance_to_player + rand_range(2000, 4000)
 	var spawn_location : Vector2 = black_hole_pos + direction_vector.rotated(rotation_deviation) * distance
 	var new_object : Object = rand_object.instance()
-	
+
 	new_object.set_global_position(spawn_location)
 	$SpawnedObjects.add_child(new_object)
 

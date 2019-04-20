@@ -72,7 +72,7 @@ func lose(cause_of_death : String = "") -> void:
 func quit_game() -> void:
 	QuitScreen.show()
 	#options_panel.hide()
-	
+
 	# for the html version
 	get_tree().paused = true
 	QuitScreen.get_node("QuitTimer").start()
@@ -80,7 +80,7 @@ func quit_game() -> void:
 func restart() -> void:
 	if get_tree().paused == true:
 		get_tree().paused = false
-	
+
 	$AudioStreamPlayer.stop()
 	EndScreen.hide()
 	IntroScreen.hide()

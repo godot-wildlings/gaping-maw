@@ -12,7 +12,7 @@ extends Area2D
 #var mouse_over_node : Node2D = null
 var object_hooked : Node2D = null
 
-export var max_range : float = 1000.0
+export var max_range : float = 1500.0
 
 enum states { IDLE, HOOKED }
 var state = states.IDLE

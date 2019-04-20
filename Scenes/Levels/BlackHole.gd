@@ -42,7 +42,7 @@ func _on_EventHorizon_body_entered(body : PhysicsBody2D) -> void:
 	# we could do some progress stuff here if we like.
 		# if the black hole is supposed to be destroyable.
 	if body == game.player:
-		body.die("instantaneous, infinite and unfathomable compression inside a black hole.")
+		body.die("compression")
 
 	if body.has_method("die"):
 		body.die()

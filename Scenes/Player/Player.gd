@@ -9,11 +9,19 @@ var health : int = max_health
 var oxygen_remaining : float = 100.0
 var in_atmosphere : bool = false
 
+enum states {
+	IDLE,
+	DEAD
+}
+
+var state = states.IDLE
+
 func _init() -> void:
 	game.player = self
 
 func _ready() -> void:
 	call_deferred("deferred_ready")
+
 
 func deferred_ready() -> void:
 #	if game.black_hole:
@@ -26,15 +34,20 @@ func initialize_variables() -> void:
 	oxygen_remaining = 100
 
 func die(cause_of_death : String = "") -> void:
-	# change this to spawn the lose screen
+	if state != states.DEAD:
+		state = states.DEAD
 
-	$Helmet.hide()
-	$death/Sprite.show()
+		if cause_of_death == "compression":
+			$AnimationPlayer.play("compression")
+			cause_of_death = "instantaneous, infinite and unfathomable compression inside a black hole."
+		elif cause_of_death == "ingestion":
+			$AnimationPlayer.play("dismemberment")
+			cause_of_death == "ingestion. Consumed by unknown extradimensional horrors."
 
-	$Camera2D/Tween._run_death_cam()
-	yield(get_node("Camera2D/Tween"),"tween_completed")
+		$Camera2D/Tween._run_death_cam()
+		yield(get_node("Camera2D/Tween"),"tween_completed")
 
-	game.main.lose(cause_of_death)
+		game.main.lose(cause_of_death)
 
 func _on_draggable_dropped(velocity : Vector2) -> void:
 	linear_velocity += -velocity * fling_damper
@@ -58,7 +71,7 @@ func on_hit(damage : float) -> void:
 	health -= int(damage)
 	spawn_bloodsplat()
 	if health <= 0:
-		die("ingestion. Consumed by unknown extradimensional horrors.")
+		die("ingestion")
 
 func _on_OxygenTimer_timeout() -> void:
 	# remove 1 oxygen unless you're on a planet, then add 10

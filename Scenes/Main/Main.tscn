@@ -22,7 +22,6 @@ size = 12
 font_data = ExtResource( 8 )
 
 [node name="Main" type="Node"]
-pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Levels" type="Node2D" parent="."]

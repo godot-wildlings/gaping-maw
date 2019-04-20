@@ -1,31 +1,25 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Themes/maw_theme.tres" type="Theme" id=4]
-[ext_resource path="res://Scenes/UI/SkipTutorialButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Levels/TutorialWalls.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Levels/TutorialEndObjective.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Draggable/Draggable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Themes/maw_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/UI/SkipTutorialButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Levels/TutorialWalls.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Levels/TutorialEndObjective.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Obstacles/Asteroid.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=8]
 
 [node name="Tutorial1" type="Node2D"]
 
-[node name="Cursor" parent="." instance=ExtResource( 1 )]
-position = Vector2( 471.168, 370.957 )
-max_range = 500.0
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 355.134, 314.698 )
-
-[node name="Draggable" parent="." instance=ExtResource( 3 )]
+[node name="Draggable" parent="." instance=ExtResource( 1 )]
 position = Vector2( 567.863, 249.649 )
 rotation = -1.5708
 
-[node name="Draggable2" parent="." instance=ExtResource( 3 )]
+[node name="Draggable2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 575.796, 438.464 )
 rotation = -1.5708
 
-[node name="Draggable3" parent="." instance=ExtResource( 3 )]
+[node name="Draggable3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 95.033, 416.25 )
 rotation = -1.5708
 
@@ -40,36 +34,53 @@ margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
 mouse_filter = 1
-theme = ExtResource( 4 )
+theme = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_top = -28.0
+margin_left = -492.0
+margin_top = -78.0
+margin_right = 492.0
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-margin_top = 2.0
+[node name="Instructions" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
 margin_right = 856.0
-margin_bottom = 26.0
+margin_bottom = 78.0
 size_flags_horizontal = 3
-theme = ExtResource( 4 )
-text = "Fling an Object into the Antimatter"
+theme = ExtResource( 2 )
+text = "Your suit is equipped with a carbon - attractor - beam. 
+It works on any Organic Matter. 
+Fling an Object into the Antimatter to test it out."
 align = 1
 
-[node name="SkipTutorialButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 5 )]
+[node name="SkipTutorialButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 860.0
-margin_top = 0.0
+margin_top = 25.0
 margin_right = 984.0
-margin_bottom = 28.0
+margin_bottom = 53.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="walls" parent="." instance=ExtResource( 6 )]
+[node name="walls" parent="." instance=ExtResource( 4 )]
 
-[node name="Antimatter" parent="." instance=ExtResource( 7 )]
+[node name="Antimatter" parent="." instance=ExtResource( 5 )]
+
+[node name="Asteroid" parent="." instance=ExtResource( 6 )]
+position = Vector2( -90.4978, 147.8 )
+
+[node name="Asteroid2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 129.535, 640.482 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 355.134, 314.698 )
+
+[node name="Cursor" parent="." instance=ExtResource( 8 )]
+position = Vector2( 471.168, 370.957 )
+max_range = 800.0
 
