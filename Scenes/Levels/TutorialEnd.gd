@@ -9,5 +9,13 @@ extends Area2D
 func _on_Antimatter_body_entered(body : PhysicsBody2D):
 	if body != game.player:
 		$CollisionShape2D.call_deferred("set_disabled", true)
-		game.main.next_level()
-		call_deferred("queue_free")
+		$AnimationPlayer.play("explode")
+		$ExplosionTimer.start()
+
+
+
+
+
+func _on_ExplosionTimer_timeout():
+	game.main.next_level()
+	call_deferred("queue_free")

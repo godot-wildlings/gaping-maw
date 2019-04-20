@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plasmaExplosion.wav-c0d4428a2615c16f165a965afb96f3e7.sample"
+
+[deps]
+
+source_file="res://Scenes/Effects/plasmaExplosion.wav"
+dest_files=[ "res://.import/plasmaExplosion.wav-c0d4428a2615c16f165a965afb96f3e7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

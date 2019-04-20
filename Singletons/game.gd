@@ -34,6 +34,11 @@ func reset_scores():
 	score["Planets_Lost"] = 0
 	score["Time_Elapsed"] = 0
 
+	black_hole = null
+#	player = null
+#	cursor = null
+#	level = null
+
 #Moved to main.tscn, because it needs GUI elements
 #func quit_game():
 #	get_tree().quit()

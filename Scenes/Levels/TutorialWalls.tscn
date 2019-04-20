@@ -16,6 +16,7 @@ position = Vector2( 45.5496, 9.76065 )
 shape = SubResource( 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="TopWall"]
+visible = false
 margin_left = -966.0
 margin_top = -1.0
 margin_right = -850.0
@@ -30,6 +31,7 @@ position = Vector2( 343.915, 915.104 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="BottomWall"]
+visible = false
 margin_left = -1032.0
 margin_top = -10.0
 margin_right = -921.0
@@ -45,6 +47,7 @@ position = Vector2( -3.5162, 305.908 )
 shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="LeftWall"]
+visible = false
 margin_left = -12.0
 margin_top = -309.0
 margin_right = 7.0
@@ -59,6 +62,7 @@ position = Vector2( -3.5162, 305.908 )
 shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="RightWall"]
+visible = false
 margin_left = -12.0
 margin_top = -299.0
 margin_right = 7.0

@@ -34,7 +34,7 @@ func _process(delta : float) -> void:
 func follow_mouse(delta : float):
 	var my_pos : Vector2 = get_global_position()
 	var mouse_pos : Vector2 = get_global_mouse_position()
-	var player_pos : Vector2 = game.player.get_global_position()
+	var player_pos : Vector2 = game.player.get_transform().origin
 
 	if player_pos.distance_squared_to(mouse_pos) <= max_range * max_range:
 		set_global_position(lerp(my_pos, mouse_pos, 0.8))

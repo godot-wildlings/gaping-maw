@@ -103,7 +103,9 @@ func _on_OxygenTimer_timeout() -> void:
 		die("asphyxiation")
 
 func _on_atmosphere_entered() -> void:
+	$AnimationPlayer.play("breathe_deep")
 	in_atmosphere = true
 
 func _on_atmosphere_left() -> void:
+	$AnimationPlayer.play("float")
 	in_atmosphere = false

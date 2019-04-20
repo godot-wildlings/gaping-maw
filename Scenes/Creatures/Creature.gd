@@ -70,7 +70,7 @@ func fly_forward(delta : float) -> void:
 
 func accelerate_if_on_target(delta):
 	var my_pos = get_global_position()
-	var target_pos = game.player.get_global_position()
+	var target_pos = game.player.get_transform().origin
 	var vector_to_target = target_pos - my_pos
 	var forward_vector = Vector2.RIGHT.rotated(rotation)
 	if vector_to_target.dot(forward_vector) > 0: # within 90deg
@@ -126,6 +126,8 @@ func short_angle_dist(from, to) -> float:
 
 
 func die() -> void:
+	if $AnimationPlayer.is_playing():
+		$AnimationPlayer.stop()
 	state = states.DEAD
 	# needs a noise an animation
 	velocity *= 0.1 # slow down, but don't stop altogether

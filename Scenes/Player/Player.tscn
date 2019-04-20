@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player/helmet.png" type="Texture" id=2]
@@ -32,7 +32,7 @@ height = 23.6015
 size = 22
 font_data = ExtResource( 16 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "asphyxiation"
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts/Torso/Head:position")
@@ -203,8 +203,118 @@ tracks/13/keys = {
 "values": [ 0.0, 77.1866 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "compression"
+[sub_resource type="Animation" id=8]
+resource_name = "breathe_deep"
+tracks/0/type = "value"
+tracks/0/path = NodePath("vectorBodyParts/Torso/Head:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("vectorBodyParts/Torso:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("vectorBodyParts/Torso/Helmet:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 55.2235, 55.2235, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("vectorBodyParts/Torso/Helmet:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -4.64075, -49.7924 ), Vector2( 116.104, -32.2483 ), Vector2( 116.104, -32.2483 ), Vector2( -4.64075, -49.7924 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("vectorBodyParts/Torso/Head:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2.57668, -53.9204 ), Vector2( -2.57668, -53.9204 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("vectorBodyParts/Torso:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("vectorBodyParts/Torso:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.2, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1.5507 ), Vector2( -1.032, -32.5109 ), Vector2( 0, -1.55067 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("vectorBodyParts/Torso/ArmR:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -84.4999, -27.9843, -12.5318, -10.0624, -19.0523, -90.6215, -10.8062 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("vectorBodyParts/Torso/ArmL:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -24.6032, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts:scale")
 tracks/0/interp = 1
@@ -230,8 +340,7 @@ tracks/1/keys = {
 "values": [ 0.0, 720.0 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "dismemberment"
+[sub_resource type="Animation" id=5]
 length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("vectorBodyParts/Torso/LegR:position")
@@ -417,8 +526,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "warning_suit_integrity"
+[sub_resource type="Animation" id=7]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Damage/Warning:visible")
@@ -559,20 +667,21 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "float"
-anims/asphyxiation = SubResource( 7 )
-anims/compression = SubResource( 3 )
-anims/dismemberment = SubResource( 4 )
+anims/asphyxiation = SubResource( 3 )
+anims/breathe_deep = SubResource( 8 )
+anims/compression = SubResource( 4 )
+anims/dismemberment = SubResource( 5 )
 anims/float = ExtResource( 19 )
 anims/panic = ExtResource( 20 )
 anims/warning_oxygen_low = SubResource( 6 )
-anims/warning_suit_integrity = SubResource( 5 )
+anims/warning_suit_integrity = SubResource( 7 )
 
 [node name="vectorBodyParts" type="Node2D" parent="."]
 position = Vector2( -0.0467377, 0.868683 )
 scale = Vector2( 0.33, 0.33 )
 
 [node name="Torso" type="Sprite" parent="vectorBodyParts"]
-position = Vector2( 0, 0.513336 )
+position = Vector2( 0, -1.55067 )
 texture = ExtResource( 21 )
 region_enabled = true
 region_rect = Rect2( 44, 284.317, 170, 154 )
@@ -599,7 +708,7 @@ region_enabled = true
 region_rect = Rect2( 243, 267.699, 104, 96.5 )
 
 [node name="ArmR" type="Sprite" parent="vectorBodyParts/Torso"]
-position = Vector2( 66.0772, -18.1695 )
+position = Vector2( 72.2692, -17.1375 )
 texture = ExtResource( 21 )
 offset = Vector2( 34.9219, 23.871 )
 region_enabled = true
@@ -607,15 +716,13 @@ region_rect = Rect2( 363, 268.915, 104.5, 97.288 )
 
 [node name="Head" type="Sprite" parent="vectorBodyParts/Torso"]
 position = Vector2( -2.57668, -53.9204 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 21 )
 offset = Vector2( -0.101959, -78.0822 )
 region_enabled = true
 region_rect = Rect2( 307, 52.144, 160, 152 )
 
 [node name="Helmet" type="Sprite" parent="vectorBodyParts/Torso"]
-position = Vector2( -2.57669, -53.9204 )
-scale = Vector2( 1, 1 )
+position = Vector2( -0.512736, -49.7924 )
 texture = ExtResource( 21 )
 offset = Vector2( -0.101959, -86.2273 )
 region_enabled = true

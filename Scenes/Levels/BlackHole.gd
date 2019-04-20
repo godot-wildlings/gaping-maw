@@ -22,7 +22,10 @@ func deferred_ready() -> void:
 
 func move_toward_player(delta : float) -> void:
 	var my_pos : Vector2 = get_global_position()
-	var player_pos : Vector2 = game.player.get_global_position()
+	var player_pos : Vector2 = Vector2(0,0)
+	if game.player != null and is_instance_valid(game.player):
+
+		player_pos = game.player.get_transform().origin
 	var dist_sq_to_player : float = (player_pos - my_pos).length_squared()
 
 	# move faster if you're far away from player
