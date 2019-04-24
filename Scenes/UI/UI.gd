@@ -111,3 +111,8 @@ func _on_EndlessOxygenToggle_toggled(button_pressed):
 		game.options["Endless_Oxygen"] = true
 	else:
 		game.options["Endless_Oxygen"] = false
+
+
+func _on_MouseSpeedSlider_value_changed(value):
+	game.options["mouse_drag_speed"] = value
+

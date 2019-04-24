@@ -1,10 +1,14 @@
 extends RigidBody2D
 class_name Draggable
 
-export var mouse_drag_speed : float = 6.0
+#export var mouse_drag_speed : float = 6.0
 #var gravity_radius : float
 var is_picked : bool = false
 var drag_velocity : Vector2 = Vector2(0,0)
+
+# only set these during phsyics_process, because you need a fixed framerate.
+var last_mouse_pos : Vector2
+var current_mouse_pos : Vector2
 
 signal dropped(velocity)
 
@@ -20,13 +24,20 @@ func deferred_ready() -> void:
 
 func _integrate_forces(state : Physics2DDirectBodyState) -> void:
 	if is_picked:
-		var mouse_pos : Vector2 = get_global_mouse_position()
+		#var mouse_pos : Vector2 = get_global_mouse_position()
+		var mouse_pos = last_mouse_pos
 		var x_form : Transform2D = state.get_transform()
 		var my_pos : Vector2 = x_form.get_origin()
 
-		drag_velocity = mouse_pos - my_pos
+		drag_velocity = current_mouse_pos - last_mouse_pos
+
 		x_form.origin = mouse_pos
 		state.set_transform(x_form)
+
+func _physics_process(delta):
+	last_mouse_pos = current_mouse_pos
+	current_mouse_pos = get_global_mouse_position()
+
 
 
 func choose_random_image() -> void:
@@ -45,7 +56,7 @@ func pickup() -> void:
 
 func drop() -> void:
 	# stop following the mouse
-	linear_velocity = drag_velocity * mouse_drag_speed
+	linear_velocity = drag_velocity * game.options["mouse_drag_speed"]
 	is_picked = false
 	$WooshNoise.play()
 
