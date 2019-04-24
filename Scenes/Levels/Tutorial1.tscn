@@ -14,15 +14,15 @@
 [node name="walls" parent="." instance=ExtResource( 1 )]
 
 [node name="Draggable" parent="." instance=ExtResource( 2 )]
-position = Vector2( 567.863, 249.649 )
+position = Vector2( 425.365, 216.338 )
 rotation = -1.5708
 
 [node name="Draggable2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 575.796, 438.464 )
+position = Vector2( 324.111, 401.451 )
 rotation = -1.5708
 
 [node name="Draggable3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 95.033, 416.25 )
+position = Vector2( 254.187, 284.856 )
 rotation = -1.5708
 
 [node name="Antimatter" parent="." instance=ExtResource( 3 )]
@@ -38,7 +38,7 @@ position = Vector2( 355.134, 314.698 )
 
 [node name="Cursor" parent="." instance=ExtResource( 6 )]
 position = Vector2( 471.168, 370.957 )
-max_range = 800.0
+max_range = 200.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

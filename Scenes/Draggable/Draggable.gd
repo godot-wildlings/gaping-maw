@@ -9,6 +9,7 @@ var drag_velocity : Vector2 = Vector2(0,0)
 # only set these during phsyics_process, because you need a fixed framerate.
 var last_mouse_pos : Vector2
 var current_mouse_pos : Vector2
+var framerate_adjusted_mouse_vec : Vector2
 
 signal dropped(velocity)
 
@@ -25,18 +26,27 @@ func deferred_ready() -> void:
 func _integrate_forces(state : Physics2DDirectBodyState) -> void:
 	if is_picked:
 		#var mouse_pos : Vector2 = get_global_mouse_position()
-		var mouse_pos = last_mouse_pos
+		#var mouse_pos = last_mouse_pos
 		var x_form : Transform2D = state.get_transform()
-		var my_pos : Vector2 = x_form.get_origin()
+		#var my_pos : Vector2 = x_form.get_origin()
+		var cursor_pos = game.cursor.get_global_position()
 
-		drag_velocity = current_mouse_pos - last_mouse_pos
+		drag_velocity = framerate_adjusted_mouse_vec
 
-		x_form.origin = mouse_pos
+		x_form.origin = cursor_pos
 		state.set_transform(x_form)
 
 func _physics_process(delta):
+	# physics process is supposed to progress at a fixed frame rate, but it's possible it might slow down
+
 	last_mouse_pos = current_mouse_pos
 	current_mouse_pos = get_global_mouse_position()
+
+	var mouse_vec = current_mouse_pos - last_mouse_pos
+	var framerate_factor = 1/delta
+	framerate_adjusted_mouse_vec = mouse_vec.normalized()*framerate_factor
+	# we might need to get the vector length and multiply it by delta
+
 
 
 

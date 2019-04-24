@@ -19,11 +19,27 @@
 position = Vector2( 303.569, 274.183 )
 
 [node name="Draggable" parent="." instance=ExtResource( 3 )]
-position = Vector2( 215.859, 472.26 )
+position = Vector2( 229.495, 343.691 )
 rotation = -1.5708
 
 [node name="Draggable2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 129.94, 360.716 )
+position = Vector2( 211.757, 216.563 )
+rotation = -1.5708
+
+[node name="Draggable3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 383.182, 179.55 )
+rotation = -1.5708
+
+[node name="Draggable4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -592.881, 726.146 )
+rotation = -1.5708
+
+[node name="Draggable5" parent="." instance=ExtResource( 3 )]
+position = Vector2( -521.303, -191.354 )
+rotation = -1.5708
+
+[node name="Draggable6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 601.17, -204.368 )
 rotation = -1.5708
 
 [node name="Creature" parent="." instance=ExtResource( 4 )]
@@ -46,6 +62,7 @@ position = Vector2( 32.6883, 661.901 )
 
 [node name="Cursor" parent="." instance=ExtResource( 8 )]
 position = Vector2( 471.168, 370.957 )
+max_range = 200.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
