@@ -16,7 +16,7 @@
 [node name="walls" parent="." instance=ExtResource( 1 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 355.134, 314.698 )
+position = Vector2( 303.569, 274.183 )
 
 [node name="Draggable" parent="." instance=ExtResource( 3 )]
 position = Vector2( 215.859, 472.26 )

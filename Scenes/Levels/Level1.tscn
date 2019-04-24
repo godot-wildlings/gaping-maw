@@ -4,16 +4,16 @@
 [ext_resource path="res://Sprites/starfield.jpg" type="Texture" id=2]
 [ext_resource path="res://Scenes/Levels/Planets.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Planets/Planet.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=8]
-[ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=9]
-[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Player/Cursor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Levels/BlackHole.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Themes/Fonts/Tarzan Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Scenes/Levels/WarningLabel.gd" type="Script" id=9]
+[ext_resource path="res://BGMusic/flying-flames.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
-font_data = ExtResource( 7 )
+font_data = ExtResource( 8 )
 
 [node name="Level1" type="Node2D"]
 pause_mode = 1
@@ -55,10 +55,12 @@ autostart = true
 
 [node name="SpawnedObjects" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 5 )]
+[node name="Cursor" parent="." instance=ExtResource( 5 )]
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 503.191, 1376.75 )
 
-[node name="BlackHole" parent="." instance=ExtResource( 6 )]
+[node name="BlackHole" parent="." instance=ExtResource( 7 )]
 position = Vector2( 512, 80 )
 gravity_distance_scale = 0.01
 gravity = 750.0
@@ -79,16 +81,14 @@ margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.870588, 0.458824, 0.0588235, 0.94902 )
 text = "Save Yourself!"
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Tween" type="Tween" parent="CanvasLayer/WarningLabel"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 volume_db = -9.0
 autoplay = true
 bus = "Music"
-
-[node name="Cursor" parent="." instance=ExtResource( 10 )]
 
 [connection signal="timeout" from="NewObjectSpawnTimer" to="." method="_on_NewObjectSpawnTimer_timeout"]

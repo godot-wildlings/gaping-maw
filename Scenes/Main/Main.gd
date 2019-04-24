@@ -62,6 +62,13 @@ func lose(cause_of_death : String = "") -> void:
 	score_container.get_node("Creatures/CreaturesDestroyed").set_text(str(game.score["Creatures_Destroyed"]))
 	score_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Time_Elapsed"]*100)/100))
 
+	var progress_bar = find_node("ProgressIndicatorBar")
+
+	var progress = game.score["Time_Elapsed"]/220*100
+	progress_bar.set_value(progress)
+
+	progress_bar.get_children()[0].position.x = progress_bar.get_rect().size.x * progress/100
+
 	var highscore_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HighScore
 	highscore_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Best_Time"]*100)/100))
 	if cause_of_death != "":
