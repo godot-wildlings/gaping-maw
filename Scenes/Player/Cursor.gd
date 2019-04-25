@@ -22,6 +22,14 @@ var time_elapsed : float = 0.0
 func _init() -> void:
 	game.cursor = self
 
+func _ready() ->void:
+	if OS.get_name() == "Android":
+		$Sprite.hide()
+		$AndroidSprite.show()
+	else:
+		$Sprite.show()
+		$AndroidSprite.hide()
+
 #warning-ignore:unused_argument
 func _process(delta : float) -> void:
 	time_elapsed += delta
@@ -58,10 +66,17 @@ func _input(event : InputEvent) -> void:
 	else:
 		desktop_input(event)
 
-func touch_input(event):
+func touch_input(event) -> void:
+	"""
+	There's a bug: on mobile device, single tap doesn't grab the object. Need to double-tap to grab objects.
+	I don't know why.
+	"""
 	if state == states.IDLE:
-		#if event.type == InputEvent.SCREEN_TOUCH and event.pressed:
 		if event is InputEventScreenTouch and event.is_pressed():
+
+			# VVVV Maybe the problem was the cursor lagging behind in the previous location?
+			follow_mouse(1.0)
+			# ^^^^ I thought this would solve the double-tap problem, but it doesn't
 
 			var potential_bodies : Array = get_overlapping_bodies()
 			potential_bodies.erase(game.player)
@@ -73,12 +88,12 @@ func touch_input(event):
 					grab(potential_areas)
 
 	elif state == states.HOOKED and object_hooked != null:
-		#if event.type == InputEvent.SCREEN_TOUCH and event.released:
-		if event is InputEventScreenTouch and event.is_pressed() == false:
+		if event.is_pressed() == false:
 			drop(object_hooked)
 
+	# consider using InputEventScreenDrag to set the drag velocity. It's probably better than grabbing the delta of the final frame before release
 
-func desktop_input(event):
+func desktop_input(event) -> void:
 	if state == states.IDLE:
 		if Input.is_action_pressed("BUTTON_LEFT"):
 			var potential_bodies : Array = get_overlapping_bodies()

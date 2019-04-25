@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Player/Cursor.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/reticle.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Player/raygun.wav" type="AudioStream" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 72.4961
@@ -21,4 +22,7 @@ shape = SubResource( 1 )
 stream = ExtResource( 3 )
 volume_db = -9.0
 bus = "SFX"
+
+[node name="AndroidSprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
 
