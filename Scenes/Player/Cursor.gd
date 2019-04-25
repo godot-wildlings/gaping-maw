@@ -52,8 +52,17 @@ func unhook_freed_nodes() -> void:
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
-	if Input.is_action_just_pressed("BUTTON_LEFT"):
-		if state == states.IDLE:
+	# any way to figure out if OS is windows or android?
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		touch_input(event)
+	else:
+		desktop_input(event)
+
+func touch_input(event):
+	if state == states.IDLE:
+		#if event.type == InputEvent.SCREEN_TOUCH and event.pressed:
+		if event is InputEventScreenTouch and event.is_pressed():
+
 			var potential_bodies : Array = get_overlapping_bodies()
 			potential_bodies.erase(game.player)
 			if potential_bodies.size() > 0:
@@ -63,8 +72,26 @@ func _input(event : InputEvent) -> void:
 				if potential_areas.size() > 0:
 					grab(potential_areas)
 
-	elif Input.is_action_just_released("BUTTON_LEFT"):
-		if state == states.HOOKED and object_hooked != null:
+	elif state == states.HOOKED and object_hooked != null:
+		#if event.type == InputEvent.SCREEN_TOUCH and event.released:
+		if event is InputEventScreenTouch and event.is_pressed() == false:
+			drop(object_hooked)
+
+
+func desktop_input(event):
+	if state == states.IDLE:
+		if Input.is_action_pressed("BUTTON_LEFT"):
+			var potential_bodies : Array = get_overlapping_bodies()
+			potential_bodies.erase(game.player)
+			if potential_bodies.size() > 0:
+				grab(potential_bodies)
+			else:
+				var potential_areas = get_overlapping_areas()
+				if potential_areas.size() > 0:
+					grab(potential_areas)
+
+	elif state == states.HOOKED and object_hooked != null:
+		if Input.is_action_just_released("BUTTON_LEFT"):
 			drop(object_hooked)
 
 func grab(potential_objects : Array):
