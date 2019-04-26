@@ -67,6 +67,14 @@ func _input(event : InputEvent) -> void:
 		desktop_input(event)
 
 func touch_input(event) -> void:
+	# Let's change how it works..
+		# mouse over autograbs
+		# if the mouse passes a certain range, it autoflings
+		# then, no mouse-clicks will be required
+		# we might need a stunlock on the draggable objects, so they don't get grabbed right after flinging.
+
+
+
 	"""
 	There's a bug: on mobile device, single tap doesn't grab the object. Need to double-tap to grab objects.
 	I don't know why.
@@ -75,7 +83,7 @@ func touch_input(event) -> void:
 		if event is InputEventScreenTouch and event.is_pressed():
 
 			# VVVV Maybe the problem was the cursor lagging behind in the previous location?
-			follow_mouse(1.0)
+			#follow_mouse(1.0)
 			# ^^^^ I thought this would solve the double-tap problem, but it doesn't
 
 			var potential_bodies : Array = get_overlapping_bodies()
@@ -88,7 +96,7 @@ func touch_input(event) -> void:
 					grab(potential_areas)
 
 	elif state == states.HOOKED and object_hooked != null:
-		if event.is_pressed() == false:
+		if event is InputEventScreenTouch and event.is_pressed() == false:
 			drop(object_hooked)
 
 	# consider using InputEventScreenDrag to set the drag velocity. It's probably better than grabbing the delta of the final frame before release
