@@ -12,6 +12,8 @@ extends Area2D
 #var mouse_over_node : Node2D = null
 var object_hooked : Node2D = null
 var hook_origin : Vector2
+#var fling_velocity : Vector2 = Vector2.ZERO
+var recent_mouse_speeds : Array = []
 
 export var max_range : float = 1500.0
 
@@ -83,6 +85,8 @@ func _input(event : InputEvent) -> void:
 func touch_input(event) -> void:
 
 	if state == states.IDLE and event is InputEventScreenDrag:
+		record_mouse_speed(event.get_speed())
+
 		#player is dragging finger onscreen. if the hook is open, grab whatever you can.
 		var potential_bodies : Array = get_overlapping_bodies()
 		potential_bodies.erase(game.player)
@@ -95,6 +99,10 @@ func touch_input(event) -> void:
 				grab(potential_areas)
 
 	elif state == states.HOOKED and object_hooked != null:
+		if event is InputEventScreenDrag:
+			record_mouse_speed(event.get_speed())
+
+
 		# player lifted finger off screen
 		if event is InputEventScreenTouch and event.is_pressed() == false:
 			drop(object_hooked)
@@ -114,8 +122,31 @@ func desktop_input(event) -> void:
 					grab(potential_areas)
 
 	elif state == states.HOOKED and object_hooked != null:
+		if event is InputEventMouseMotion:
+			record_mouse_speed(event.get_speed())
+
 		if Input.is_action_just_released("BUTTON_LEFT"):
 			drop(object_hooked)
+
+func record_mouse_speed(speed: Vector2):
+	var max_list_size = 5
+	recent_mouse_speeds.push_front(speed)
+	if recent_mouse_speeds.size() > max_list_size:
+		recent_mouse_speeds.pop_back()
+
+func get_average_vector(list_of_vectors : Array):
+	if list_of_vectors.size() > 0:
+		var total = Vector2.ZERO
+		for vector in list_of_vectors:
+			total += vector
+		var average_vector = total / list_of_vectors.size()
+		return average_vector
+	else:
+		return Vector2.ZERO
+
+
+
+
 
 func grab(potential_objects : Array):
 	for object in potential_objects:
@@ -132,7 +163,8 @@ func drop(object : Object):
 	$RayGunNoise.stop()
 	if is_instance_valid(object):
 		if object.has_method("drop"):
-			object.drop()
+			object.drop(get_average_vector(recent_mouse_speeds))
+			recent_mouse_speeds = []
 		object_hooked = null
 		state = states.IDLE
 

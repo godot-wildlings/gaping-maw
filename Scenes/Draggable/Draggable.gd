@@ -4,7 +4,7 @@ class_name Draggable
 #export var mouse_drag_speed : float = 6.0
 #var gravity_radius : float
 var is_picked : bool = false
-var drag_velocity : Vector2 = Vector2(0,0)
+#var drag_velocity : Vector2 = Vector2(0,0)
 
 # only set these during phsyics_process, because you need a fixed framerate.
 var last_mouse_pos : Vector2
@@ -31,7 +31,8 @@ func _integrate_forces(state : Physics2DDirectBodyState) -> void:
 		#var my_pos : Vector2 = x_form.get_origin()
 		var cursor_pos = game.cursor.get_global_position()
 
-		drag_velocity = framerate_adjusted_mouse_vec
+		# **** We're probably going to start getting velocity from the cursor.
+		#drag_velocity = framerate_adjusted_mouse_vec
 
 		x_form.origin = cursor_pos
 		state.set_transform(x_form)
@@ -64,9 +65,13 @@ func pickup() -> void:
 	$SquishNoise.play()
 	$AnimationPlayer.play("bounce")
 
-func drop() -> void:
-	# stop following the mouse
-	linear_velocity = drag_velocity * game.options["mouse_drag_speed"]
+func drop(fling_velocity : Vector2) -> void:
+	#if fling_velocity == Vector2.ZERO or fling_velocity == null:
+		#linear_velocity = drag_velocity * game.options["mouse_drag_speed"]
+	#else:
+		#linear_velocity = fling_velocity
+	linear_velocity = fling_velocity
+
 	is_picked = false
 	$WooshNoise.play()
 

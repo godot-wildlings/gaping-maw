@@ -190,12 +190,16 @@ func pickup() -> void:
 
 
 
-func drop() -> void:
+func drop(fling_velocity : Vector2) -> void:
+	if fling_velocity == Vector2.ZERO or fling_velocity == null:
+		velocity = drag_velocity * mouse_drag_speed
+	else:
+		velocity = fling_velocity
+
 	# player has a limited time to fling a creature.
 	if state == states.TETHERED:
 		state = states.FLYING
 		$AnimationPlayer.play("idle")
-		velocity = drag_velocity * mouse_drag_speed
 
 	#warning-ignore:return_value_discarded
 	connect("dropped", game.player, "_on_creature_dropped")
