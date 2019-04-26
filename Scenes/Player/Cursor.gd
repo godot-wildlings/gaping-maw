@@ -38,6 +38,12 @@ func _ready() ->void:
 func _process(delta : float) -> void:
 	time_elapsed += delta
 	game.score["Time_Elapsed"] = time_elapsed
+
+	# VVVV HACK ALERT: This logic should be handled elsewhere. VVVV
+	if game.main.get_level_name() == "Level1" and time_elapsed > game.options["Level_Duration"]:
+		game.main.win("escaped")
+	# ^^^^ HACK ALERT ^^^^
+
 	follow_mouse(delta)
 
 #	if OS.get_name() == "Android":
@@ -77,7 +83,7 @@ func follow_mouse(delta : float):
 
 
 func is_mouse_outside_window():
-	var border_margin = 10.0 # pixels
+	var border_margin = 15.0 # pixels
 	var mouse_pos = get_viewport().get_mouse_position()
 
 	var margin_rect : Rect2 = get_viewport_rect()

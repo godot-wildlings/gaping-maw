@@ -22,7 +22,8 @@ var options : Dictionary = {
 	"Endless_Oxygen" : false,
 	"Indestructable_Suit" : false,
 	#"mouse_drag_speed" : 6.0,
-	"autograb" : true
+	#"autograb" : true
+	"Level_Duration" : 220
 }
 
 #warning-ignore:unused_class_variable

@@ -62,7 +62,7 @@ position = Vector2( 32.6883, 661.901 )
 
 [node name="Cursor" parent="." instance=ExtResource( 8 )]
 position = Vector2( 471.168, 370.957 )
-max_range = 200.0
+max_range = 300.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -82,14 +82,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -78.0
 
-[node name="Instructions" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-margin_right = 1072.0
-margin_bottom = 78.0
+[node name="Reminder" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+margin_top = 27.0
+margin_right = 816.0
+margin_bottom = 51.0
 size_flags_horizontal = 3
 theme = ExtResource( 9 )
-text = "Uh oh... Something's gone wrong.
-Fling an Object into the Creature,
-then stuff something into the anomaly to close it."
+text = "Reminder: Your carbon attractor ray only works on organic material."
 align = 1
 
 [node name="SkipTutorialButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 10 )]
@@ -97,12 +96,21 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1076.0
+margin_left = 820.0
 margin_top = 25.0
-margin_right = 1200.0
+margin_right = 944.0
 margin_bottom = 53.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Instructions" type="Label" parent="CanvasLayer/Control"]
+margin_left = 39.4508
+margin_top = 35.3697
+margin_right = 505.451
+margin_bottom = 113.37
+text = "Uh oh... Something's gone wrong.
+Fling an Object into the Creature,
+then stuff something into the anomaly to close it."
 
 
 [editable path="Antimatter"]

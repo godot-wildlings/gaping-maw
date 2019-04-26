@@ -1,7 +1,9 @@
 extends Node
 
 onready var IntroScreen : PopupPanel = $CanvasLayer/IntroScreen
-onready var EndScreen : PopupPanel = $CanvasLayer/EndScreen
+onready var WinScreen : PopupPanel = $CanvasLayer/WinScreen
+onready var LoseScreen : PopupPanel = $CanvasLayer/LoseScreen
+
 onready var QuitScreen : PopupPanel = $CanvasLayer/QuitScreen
 
 var level_idx : int = -1
@@ -11,6 +13,8 @@ var level_scenes = [
 		"res://Scenes/Levels/Countdown.tscn",
 		"res://Scenes/Levels/Level1.tscn"
 	]
+
+var level_names = [ "Tutorial1", "Tutorial2", "Countdown", "Level1" ]
 
 func _init() -> void:
 	game.main = self
@@ -55,9 +59,9 @@ func lose(cause_of_death : String = "") -> void:
 	if game.score["Time_Elapsed"] > game.score["Best_Time"]:
 		game.score["Best_Time"] = game.score["Time_Elapsed"]
 
-	var textbox = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/CenterContainer/WinLoseText
+	var textbox = $CanvasLayer/LoseScreen/MarginContainer/VBoxContainer/CenterContainer/WinLoseText
 
-	var score_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/Score
+	var score_container = $CanvasLayer/LoseScreen/MarginContainer/VBoxContainer/Score
 	score_container.get_node("Planets/PlanetsLost").set_text(str(game.score["Planets_Lost"]))
 	score_container.get_node("Creatures/CreaturesDestroyed").set_text(str(game.score["Creatures_Destroyed"]))
 	score_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Time_Elapsed"]*100)/100))
@@ -69,12 +73,24 @@ func lose(cause_of_death : String = "") -> void:
 
 	progress_bar.get_children()[0].position.x = progress_bar.get_rect().size.x * progress/100
 
-	var highscore_container = $CanvasLayer/EndScreen/MarginContainer/VBoxContainer/HighScore
+	var highscore_container = $CanvasLayer/LoseScreen/MarginContainer/VBoxContainer/HighScore
 	highscore_container.get_node("Time/TimeElapsed").set_text(str(floor(game.score["Best_Time"]*100)/100))
 	if cause_of_death != "":
 		textbox.set_text("Death by " + cause_of_death)
-	EndScreen.show()
+	LoseScreen.show()
 	$AudioStreamPlayer.play()
+
+func win(reason_for_win : String = "") -> void:
+	# VVVV HACK ALERT. This is unsustainable VVVV
+	if level_idx != 3:
+		return # abort. You're not supposed to "win" the tutorials
+	# ^^^^ HACK ALERT. This is unsustainable ^^^^
+
+	remove_all_levels()
+	WinScreen.show()
+
+func get_level_name():
+	return level_names[level_idx]
 
 func quit_game() -> void:
 	QuitScreen.show()
@@ -89,7 +105,8 @@ func restart() -> void:
 		get_tree().paused = false
 
 	$AudioStreamPlayer.stop()
-	EndScreen.hide()
+	LoseScreen.hide()
+	WinScreen.hide()
 	IntroScreen.hide()
 	level_idx = -1
 	next_level()

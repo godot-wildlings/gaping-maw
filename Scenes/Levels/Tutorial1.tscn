@@ -59,14 +59,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -78.0
 
-[node name="Instructions" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
-margin_right = 1072.0
-margin_bottom = 78.0
+[node name="Beam" type="Label" parent="CanvasLayer/Control/HBoxContainer"]
+margin_top = 13.0
+margin_right = 816.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 theme = ExtResource( 7 )
 text = "Your suit is equipped with a carbon - attractor - beam. 
-It works on any Organic Matter. 
-Fling an Object into the Antimatter to test it out."
+It works on any Organic Matter. "
 align = 1
 
 [node name="SkipTutorialButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 8 )]
@@ -74,10 +74,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1076.0
+margin_left = 820.0
 margin_top = 25.0
-margin_right = 1200.0
+margin_right = 944.0
 margin_bottom = 53.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Instructions" type="Label" parent="CanvasLayer/Control"]
+margin_left = 59.22
+margin_top = 74.025
+margin_right = 584.22
+margin_bottom = 98.025
+text = "Fling an Object into the Antimatter to test out your suit."
 
