@@ -40,9 +40,9 @@ func set_option_toggles() -> void:
 		endless_oxygen_button.pressed = false
 
 func set_sliders() -> void:
-	var mouse_speed_slider = find_node("MouseSpeedSlider")
+	#var mouse_speed_slider = find_node("MouseSpeedSlider")
 	var vol_slider = find_node("VolSlider")
-	mouse_speed_slider.set_value(game.options["mouse_drag_speed"])
+	#mouse_speed_slider.set_value(game.options["mouse_drag_speed"])
 	vol_slider.set_value(db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))))
 
 

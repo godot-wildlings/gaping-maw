@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Themes/hud_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/UI/UI.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/UI/VolumeSlider.gd" type="Script" id=10]
 [ext_resource path="res://BGMusic/aftermath.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Scenes/UI/FullscreenButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/UI/DebugInfo.gd" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -34,8 +35,8 @@ custom_constants/separation = 25
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TopPanel"]
-margin_left = 493.0
-margin_right = 651.0
+margin_left = 365.0
+margin_right = 523.0
 margin_bottom = 60.0
 
 [node name="OxygenLabel" type="Label" parent="TopPanel/VBoxContainer"]
@@ -56,8 +57,8 @@ step = 1.0
 script = ExtResource( 3 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="TopPanel"]
-margin_left = 676.0
-margin_right = 787.0
+margin_left = 548.0
+margin_right = 659.0
 margin_bottom = 60.0
 
 [node name="SuitIntegrityLabel" type="Label" parent="TopPanel/VBoxContainer2"]
@@ -118,26 +119,24 @@ text = "Options"
 [node name="GameOptionsPopupPanel" type="PopupPanel" parent="."]
 visible = true
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -268.0
-margin_top = -300.0
-margin_bottom = 300.0
+anchor_bottom = 1.0
+margin_left = -275.0
 mouse_filter = 1
 size_flags_horizontal = 5
 theme = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOptionsPopupPanel"]
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
+margin_left = -265.0
+margin_top = 11.2924
 margin_right = -10.0
-margin_bottom = -10.0
+margin_bottom = -8.70764
 mouse_filter = 2
 size_flags_horizontal = 5
-custom_constants/separation = 50
+custom_constants/separation = 25
 
 [node name="OptionsTitle" type="Label" parent="GameOptionsPopupPanel/VBoxContainer"]
 margin_right = 255.0
@@ -147,9 +146,9 @@ text = "Options"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer"]
-margin_top = 113.0
+margin_top = 88.0
 margin_right = 255.0
-margin_bottom = 137.0
+margin_bottom = 112.0
 alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer/HBoxContainer"]
@@ -181,9 +180,10 @@ ticks_on_borders = true
 script = ExtResource( 10 )
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer"]
-margin_top = 187.0
+visible = false
+margin_top = 137.0
 margin_right = 255.0
-margin_bottom = 238.0
+margin_bottom = 188.0
 alignment = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer/HBoxContainer4"]
@@ -214,9 +214,9 @@ tick_count = 10
 ticks_on_borders = true
 
 [node name="HBoxContainer2" type="VBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer"]
-margin_top = 288.0
+margin_top = 137.0
 margin_right = 255.0
-margin_bottom = 422.0
+margin_bottom = 271.0
 custom_constants/separation = 25
 
 [node name="QuitButton" type="Button" parent="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2"]
@@ -246,9 +246,9 @@ size_flags_horizontal = 4
 text = "Resume Game"
 
 [node name="HBoxContainer3" type="VBoxContainer" parent="GameOptionsPopupPanel/VBoxContainer"]
-margin_top = 472.0
+margin_top = 296.0
 margin_right = 255.0
-margin_bottom = 630.0
+margin_bottom = 454.0
 custom_constants/separation = 25
 
 [node name="ConfineMouseToggle" type="CheckButton" parent="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3"]
@@ -288,6 +288,20 @@ size_flags_vertical = 4
 shortcut_in_tooltip = false
 action_mode = 0
 
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+
+[node name="DebugInfo" type="Label" parent="MarginContainer2"]
+margin_right = 51.0
+margin_bottom = 47.0
+text = "Debug
+"
+script = ExtResource( 13 )
+
 [connection signal="mouse_entered" from="OptionsButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="visibility_changed" from="GameOptionsPopupPanel" to="." method="_on_GameOptionsPanel_visibility_changed"]
@@ -301,8 +315,11 @@ action_mode = 0
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer2/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/ConfineMouseToggle" to="." method="_on_button_hover"]
 [connection signal="toggled" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/ConfineMouseToggle" to="." method="_on_ConfineMouseButton_toggled"]
+[connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/InorganicEnemiesToggle" to="." method="_on_button_hover"]
 [connection signal="toggled" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/InorganicEnemiesToggle" to="." method="_on_InorganicEnemiesCheckbox_toggled"]
+[connection signal="mouse_entered" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/EndlessOxygenToggle" to="." method="_on_button_hover"]
 [connection signal="toggled" from="GameOptionsPopupPanel/VBoxContainer/HBoxContainer3/EndlessOxygenToggle" to="." method="_on_EndlessOxygenToggle_toggled"]
 [connection signal="mouse_entered" from="MarginContainer/FullscreenButton" to="." method="_on_button_hover"]
 [connection signal="pressed" from="MarginContainer/FullscreenButton" to="." method="_on_generic_button_pressed"]

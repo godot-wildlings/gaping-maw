@@ -11,7 +11,7 @@ extends Area2D
 
 #var mouse_over_node : Node2D = null
 var object_hooked : Node2D = null
-var hook_origin : Vector2
+#var hook_origin : Vector2
 #var fling_velocity : Vector2 = Vector2.ZERO
 var recent_mouse_speeds : Array = []
 
@@ -21,7 +21,7 @@ enum states { IDLE, HOOKED }
 var state = states.IDLE
 
 var time_elapsed : float = 0.0
-export var fling_radius : float = 100.0
+#export var fling_radius : float = 100.0
 
 func _init() -> void:
 	game.cursor = self
@@ -45,14 +45,20 @@ func _process(delta : float) -> void:
 
 	unhook_freed_nodes()
 
+
+
 	update() # calls _draw()
 
-func check_fling_distance():
-	if state == states.HOOKED and is_instance_valid(object_hooked):
 
-		if object_hooked.get_global_position().distance_squared_to(hook_origin) > fling_radius * fling_radius:
-			if object_hooked.has_method("drop"):
-				object_hooked.drop()
+
+
+
+#func check_fling_distance():
+#	if state == states.HOOKED and is_instance_valid(object_hooked):
+#
+#		if object_hooked.get_global_position().distance_squared_to(hook_origin) > fling_radius * fling_radius:
+#			if object_hooked.has_method("drop"):
+#				object_hooked.drop()
 
 
 func follow_mouse(delta : float):
@@ -66,6 +72,24 @@ func follow_mouse(delta : float):
 		var vector_to_cursor = (mouse_pos - player_pos).normalized() * max_range
 		set_global_position(lerp(my_pos, player_pos + vector_to_cursor, 0.8))
 
+	if state == states.HOOKED and is_mouse_outside_window():
+		drop(object_hooked)
+
+
+func is_mouse_outside_window():
+	var border_margin = 10.0 # pixels
+	var mouse_pos = get_viewport().get_mouse_position()
+
+	var margin_rect : Rect2 = get_viewport_rect()
+	margin_rect.position += Vector2(border_margin, border_margin)
+	margin_rect.size -= Vector2(2*border_margin, 2*border_margin)
+
+	if margin_rect.has_point(mouse_pos):
+		return false
+	else:
+		return true
+
+
 
 func unhook_freed_nodes() -> void:
 	if object_hooked != null and is_instance_valid(object_hooked) == false:
@@ -76,6 +100,9 @@ func unhook_freed_nodes() -> void:
 
 #warning-ignore:unused_argument
 func _input(event : InputEvent) -> void:
+	if is_mouse_outside_window():
+		return
+
 	# any way to figure out if OS is windows or android?
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		touch_input(event)
@@ -129,20 +156,19 @@ func desktop_input(event) -> void:
 			drop(object_hooked)
 
 func record_mouse_speed(speed: Vector2):
-	var max_list_size = 5
+	var max_list_size = 2
 	recent_mouse_speeds.push_front(speed)
 	if recent_mouse_speeds.size() > max_list_size:
 		recent_mouse_speeds.pop_back()
 
 func get_average_vector(list_of_vectors : Array):
+	var average_vector : Vector2 = Vector2.ZERO
 	if list_of_vectors.size() > 0:
 		var total = Vector2.ZERO
 		for vector in list_of_vectors:
 			total += vector
-		var average_vector = total / list_of_vectors.size()
-		return average_vector
-	else:
-		return Vector2.ZERO
+		average_vector = total / list_of_vectors.size()
+	return average_vector
 
 
 
@@ -151,12 +177,13 @@ func get_average_vector(list_of_vectors : Array):
 func grab(potential_objects : Array):
 	for object in potential_objects:
 		if object.has_method("pickup"):
+			recent_mouse_speeds = []
 			object.pickup()
 			state = states.HOOKED
 			object_hooked = object
 			$RayGunNoise.play()
+			#hook_origin = object.get_global_position()
 			return object
-			hook_origin = object.get_global_position()
 	return null
 
 func drop(object : Object):
