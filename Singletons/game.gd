@@ -21,7 +21,8 @@ var options : Dictionary = {
 	"Creatures_Walk_The_Line" : false,
 	"Endless_Oxygen" : false,
 	"Indestructable_Suit" : false,
-	"mouse_drag_speed" : 6.0
+	"mouse_drag_speed" : 6.0,
+	"autograb" : true
 }
 
 #warning-ignore:unused_class_variable

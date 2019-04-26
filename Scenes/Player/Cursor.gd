@@ -11,6 +11,7 @@ extends Area2D
 
 #var mouse_over_node : Node2D = null
 var object_hooked : Node2D = null
+var hook_origin : Vector2
 
 export var max_range : float = 1500.0
 
@@ -18,6 +19,7 @@ enum states { IDLE, HOOKED }
 var state = states.IDLE
 
 var time_elapsed : float = 0.0
+export var fling_radius : float = 100.0
 
 func _init() -> void:
 	game.cursor = self
@@ -35,8 +37,20 @@ func _process(delta : float) -> void:
 	time_elapsed += delta
 	game.score["Time_Elapsed"] = time_elapsed
 	follow_mouse(delta)
+
+#	if OS.get_name() == "Android":
+#		check_fling_distance()
+
 	unhook_freed_nodes()
+
 	update() # calls _draw()
+
+func check_fling_distance():
+	if state == states.HOOKED and is_instance_valid(object_hooked):
+
+		if object_hooked.get_global_position().distance_squared_to(hook_origin) > fling_radius * fling_radius:
+			if object_hooked.has_method("drop"):
+				object_hooked.drop()
 
 
 func follow_mouse(delta : float):
@@ -67,35 +81,21 @@ func _input(event : InputEvent) -> void:
 		desktop_input(event)
 
 func touch_input(event) -> void:
-	# Let's change how it works..
-		# mouse over autograbs
-		# if the mouse passes a certain range, it autoflings
-		# then, no mouse-clicks will be required
-		# we might need a stunlock on the draggable objects, so they don't get grabbed right after flinging.
 
+	if state == states.IDLE and event is InputEventScreenDrag:
+		#player is dragging finger onscreen. if the hook is open, grab whatever you can.
+		var potential_bodies : Array = get_overlapping_bodies()
+		potential_bodies.erase(game.player)
+		if potential_bodies.size() > 0:
+			grab(potential_bodies)
 
-
-	"""
-	There's a bug: on mobile device, single tap doesn't grab the object. Need to double-tap to grab objects.
-	I don't know why.
-	"""
-	if state == states.IDLE:
-		if event is InputEventScreenTouch and event.is_pressed():
-
-			# VVVV Maybe the problem was the cursor lagging behind in the previous location?
-			#follow_mouse(1.0)
-			# ^^^^ I thought this would solve the double-tap problem, but it doesn't
-
-			var potential_bodies : Array = get_overlapping_bodies()
-			potential_bodies.erase(game.player)
-			if potential_bodies.size() > 0:
-				grab(potential_bodies)
-			else:
-				var potential_areas = get_overlapping_areas()
-				if potential_areas.size() > 0:
-					grab(potential_areas)
+		else:
+			var potential_areas = get_overlapping_areas()
+			if potential_areas.size() > 0:
+				grab(potential_areas)
 
 	elif state == states.HOOKED and object_hooked != null:
+		# player lifted finger off screen
 		if event is InputEventScreenTouch and event.is_pressed() == false:
 			drop(object_hooked)
 
@@ -125,6 +125,7 @@ func grab(potential_objects : Array):
 			object_hooked = object
 			$RayGunNoise.play()
 			return object
+			hook_origin = object.get_global_position()
 	return null
 
 func drop(object : Object):
@@ -172,3 +173,18 @@ func draw_tether():
 
 func _on_creature_escaped() -> void:
 	object_hooked = null
+
+#func _on_Cursor_body_entered(body):
+#	_on_Cursor_entity_entered(body)
+#
+#
+#func _on_Cursor_area_entered(area): # creatures
+#	_on_Cursor_entity_entered(area)
+#
+#func _on_Cursor_entity_entered(entity):
+#	if OS.get_name == "Android":
+#		if state == states.IDLE:
+#			if entity.is_in_group("draggable"):
+#				if entity.has_method("pickup"):
+#					grab(entity)
+
